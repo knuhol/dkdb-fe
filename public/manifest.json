@@ -1,0 +1,6 @@
+{
+  "short_name": "DKDB",
+  "name": "Česká databáze duhových knih",
+  "start_url": ".",
+  "display": "standalone"
+}
