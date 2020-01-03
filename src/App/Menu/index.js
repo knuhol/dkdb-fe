@@ -14,7 +14,7 @@ const Menu = () => (
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav>
         <Nav.Link as={NavLink} to={ROUTE.BOOKS}>
-          Knihy
+          <span>Knihy</span>
         </Nav.Link>
       </Nav>
     </Navbar.Collapse>

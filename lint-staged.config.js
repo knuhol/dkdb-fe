@@ -1,3 +1,3 @@
 module.exports = {
-  '*.js': ['npm run lint', 'jest --findRelatedTests'],
+  '*.js': ['npm run lint', 'npm run test -- --findRelatedTests'],
 };
