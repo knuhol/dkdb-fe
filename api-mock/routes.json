@@ -1,5 +1,7 @@
 {
     "/api/*": "/$1",
+    "/books/total": "/details/1",
+    "/books\\?order=DESC": "/books?_sort=title&_order=desc",
     "/books\\?orderBy=TITLE": "/books?_sort=title&_order=asc",
     "/books\\?orderBy=TITLE&from=:from&to=:to": "/books?_sort=title&_order=asc&_start=:from&_end=:to",
     "/books\\?orderBy=AUTHOR": "/books?_sort=author.lastName&_order=asc",
