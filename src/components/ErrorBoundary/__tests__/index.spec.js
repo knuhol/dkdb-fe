@@ -1,43 +1,27 @@
 import React from 'react';
 import ErrorBoundary from '../index';
 
-import { render } from '@testing-library/react';
-import { RedirectionTestingRouter } from '../../../utils/testUtils';
+import { renderWithRedirectionRouter } from '../../../utils/testUtils';
+import { ROUTE } from '../../../App/routes';
 
 describe('ErrorBoundary', () => {
   it('renders children when no error is presented', () => {
-    const redirectUrl = '/error-500';
-    const NoErrorComponent = () => <>No error</>;
-    const { container } = render(
-      <RedirectionTestingRouter
-        ComponentWithRedirection={() => (
-          <ErrorBoundary>
-            <NoErrorComponent />
-          </ErrorBoundary>
-        )}
-        RedirectUrl={redirectUrl}
-      />
-    );
+    const noError = 'No error';
+    const { container } = renderWithRedirectionRouter(<ErrorBoundary>{noError}</ErrorBoundary>);
 
-    expect(container.textContent).toEqual('No error');
+    expect(container.textContent).toBe(noError);
   });
 
   it('redirects to page 500 in case of error', () => {
-    const redirectUrl = '/error-500';
     const ErrorComponent = () => {
       throw new Error();
     };
-    const { container } = render(
-      <RedirectionTestingRouter
-        ComponentWithRedirection={() => (
-          <ErrorBoundary>
-            <ErrorComponent />
-          </ErrorBoundary>
-        )}
-        RedirectUrl={redirectUrl}
-      />
+    const { history } = renderWithRedirectionRouter(
+      <ErrorBoundary>
+        <ErrorComponent />
+      </ErrorBoundary>
     );
 
-    expect(container.textContent).toEqual(redirectUrl);
+    expect(history.location.pathname).toBe(ROUTE.ERROR_500);
   });
 });

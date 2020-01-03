@@ -1,31 +1,24 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
-import { MemoryRouter } from 'react-router';
+import { fireEvent } from '@testing-library/react';
 
 import App from '..';
+import { renderWithRouter } from '../../utils/testUtils';
+import { ROUTE } from '../routes';
 
 describe('App', () => {
   it('navigates properly to existing routes', () => {
-    const { getByText, getAllByText } = render(<App />, { wrapper: MemoryRouter });
+    const { getByText, history } = renderWithRouter(<App />);
 
     fireEvent.click(getByText('DKDB'));
-    expect(getByText('Welcome')).toBeInTheDocument();
+    expect(history.location.pathname).toBe(ROUTE.HOME);
 
     fireEvent.click(getByText('Knihy'));
-    expect(getAllByText('Knihy').length).toBe(1);
+    expect(history.location.pathname).toBe(ROUTE.BOOKS);
   });
 
   it('navigates properly to non existing routes', () => {
-    const history = createMemoryHistory();
-    history.push('/some/bad/route');
-    const { getByText } = render(
-      <Router history={history}>
-        <App />
-      </Router>
-    );
+    const { history } = renderWithRouter(<App />, { route: '/non/existing/route' });
 
-    expect(getByText('Chyba 404')).toBeInTheDocument();
+    expect(history.location.pathname).toBe(ROUTE.ERROR_404);
   });
 });

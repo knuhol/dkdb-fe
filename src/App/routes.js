@@ -1,8 +1,8 @@
 const ROUTE = {
   HOME: '/',
-  BOOKS: '/books',
-  ERROR_404: '/error-404',
-  ERROR_500: '/error-500',
+  BOOKS: '/knihy',
+  ERROR_404: '/chyba-404',
+  ERROR_500: '/chyba-500',
 };
 
 export { ROUTE };
