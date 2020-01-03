@@ -53,7 +53,7 @@
     "release": "npm run bundle && standard-version",
     "release:beta": "npm run release -- -p beta",
     "zip": "mkdir dist && bestzip dist/bundle.zip build/*",
-    "api-mock": "json-server --watch api-mock/books.json --routes api-mock/routes.json -p 3001"
+    "api-mock": "node api-mock/server.js"
   },
   "config": {
     "commitizen": {

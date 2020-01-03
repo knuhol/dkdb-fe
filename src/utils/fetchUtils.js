@@ -2,6 +2,7 @@ import { buildUrl } from './urlUtils';
 
 const appendToUri = (uri, paramName, text) => `${uri}${uri.includes('?') ? '&' : '?'}${paramName}=${text}`;
 
+// TODO: Use some library for this?
 const validateAndAppendParam = ({ param, paramValue, condition, errorMessage, endpoint }) => {
   if (condition) {
     endpoint = appendToUri(endpoint, param, paramValue);
