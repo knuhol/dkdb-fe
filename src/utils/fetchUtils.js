@@ -1,30 +1,31 @@
+// @flow
 import { buildBaseUrl } from './configUtils';
-
-const ORDER_BY = {
-  AUTHOR: 'AUTHOR',
-  TITLE: 'TITLE',
-  DATE_OF_ADDITION: 'DATE_OF_ADDITION',
-  YEAR_OF_ISSUE: 'YEAR_OF_ISSUE',
-};
-
-const ORDER = {
-  ASC: 'ASC',
-  DESC: 'DESC',
-};
 
 const getTotalBooksUrl = () => {
   return buildBaseUrl('/books/total');
 };
 
-const getBookDetailsUrl = ({ id }) => {
+const getBookDetailsUrl = ({ id }: { id: number }) => {
   return buildBaseUrl(`/books/${id}`);
 };
 
-const getBooksUrl = params => {
+type OrderBy = 'AUTHOR' | 'TITLE' | 'DATE_OF_ADDITION' | 'YEAR_OF_ISSUE';
+type Order = 'ASC' | 'DESC';
+
+interface GetBooksParams {
+  orderBy?: OrderBy;
+  order?: Order;
+  from?: number;
+  to?: number;
+}
+
+const getBooksUrl = (params: GetBooksParams = {}) => {
   const endpoint = '/books';
+  // $flow-disable-next-line
   const query = new URLSearchParams(params).toString();
 
   return buildBaseUrl(`${endpoint}${query ? '?' + query : ''}`);
 };
 
-export { ORDER_BY, ORDER, getTotalBooksUrl, getBookDetailsUrl, getBooksUrl };
+export { getTotalBooksUrl, getBookDetailsUrl, getBooksUrl };
+export type { GetBooksParams };

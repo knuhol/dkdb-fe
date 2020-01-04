@@ -1,8 +1,10 @@
+// @flow
 import React from 'react';
-import { string, node } from 'prop-types';
 import { Col, Container, Row } from 'react-bootstrap';
 
-const Page = ({ title, text, children }) => (
+import type { Node } from 'react';
+
+const Page = ({ title, text, children }: { title: string, text?: string, children: Node }) => (
   <Container>
     <Row>
       <Col>
@@ -17,11 +19,5 @@ const Page = ({ title, text, children }) => (
     {children}
   </Container>
 );
-
-Page.propTypes = {
-  title: string.isRequired,
-  text: string,
-  children: node,
-};
 
 export default Page;

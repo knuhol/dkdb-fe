@@ -1,9 +1,10 @@
+// @flow
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { ROUTE } from '../App/routes';
 
-const useFetch = ({ endpoint, initialValue }) => {
+const useFetch = ({ endpoint, initialValue }: { endpoint: string, initialValue: any }) => {
   const history = useHistory();
   const [data, setData] = useState(initialValue);
 

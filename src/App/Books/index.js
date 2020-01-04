@@ -1,15 +1,15 @@
+// @flow
 import React from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
 
 import Page from '../../components/Page';
 import useBook from '../../hooks/useBook';
 import useBooks from '../../hooks/useBooks';
-import { ORDER } from '../../utils/fetchUtils';
 import useTotalBooks from '../../hooks/useTotalBooks';
 
 const Books = () => {
   const book = useBook(3);
-  const books = useBooks({ order: ORDER.DESC }, []);
+  const books = useBooks({ order: 'DESC' }, []);
   const total = useTotalBooks(0);
 
   console.log(books[0]);
