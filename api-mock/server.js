@@ -1,15 +1,24 @@
 const jsonServer = require('json-server');
-const path = require('path');
+
+const { books } = require('./fakeData');
 
 const server = jsonServer.create();
-const router = jsonServer.router(path.join(__dirname, 'books.json'));
+const router = jsonServer.router({
+  details: [
+    {
+      id: 1,
+      total: books.length,
+    },
+  ],
+  books,
+});
 const middlewares = jsonServer.defaults();
 
 const QUERY_VALUES_MAP = {
   ASC: 'asc',
   DESC: 'desc',
   TITLE: 'title',
-  AUTHOR: 'author.lastName',
+  AUTHOR: 'authors.0.lastName',
   YEAR_OF_ISSUE: 'yearOfIssue',
   DATE_OF_ADDITION: 'dateOfAddition',
 };
