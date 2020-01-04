@@ -1,9 +1,9 @@
-import { buildUrl } from '../urlUtils';
+import { buildBaseUrl } from '../configUtils';
 
-describe('urlUtils', () => {
-  it('builds URL properly', () => {
+describe('configUtils', () => {
+  it('builds base URL properly', () => {
     expect(
-      buildUrl(null, {
+      buildBaseUrl(null, {
         protocol: 'http',
         domain: 'localhost',
         port: 3001,
@@ -11,21 +11,17 @@ describe('urlUtils', () => {
       })
     ).toBe('http://localhost:3001/api');
     expect(
-      buildUrl('/endpoint', {
+      buildBaseUrl('/endpoint', {
         protocol: 'https',
         domain: 'localhost',
         port: 3001,
       })
     ).toBe('https://localhost:3001/endpoint');
     expect(
-      buildUrl('/endpoint', {
+      buildBaseUrl('/endpoint', {
         protocol: 'http',
         domain: 'localhost',
       })
     ).toBe('http://localhost/endpoint');
-
-    expect(() => buildUrl(null, { protocol: 'invalid' })).toThrow();
-    expect(() => buildUrl(null, { domain: 1 })).toThrow();
-    expect(() => buildUrl(null, { port: 'invalid' })).toThrow();
   });
 });
