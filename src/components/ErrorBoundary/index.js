@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 
 import { ROUTE } from '../../App/routes';
 
-class ErrorBoundary extends Component {
+class ErrorBoundary extends Component<{ children: Node }> {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
@@ -14,11 +14,14 @@ class ErrorBoundary extends Component {
   }
 
   render() {
-    if (this.state.hasError) {
+    const { hasError } = this.state;
+    const { children } = this.props;
+
+    if (hasError) {
       return <Redirect to={ROUTE.ERROR_500} />;
     }
 
-    return this.props.children;
+    return children;
   }
 }
 

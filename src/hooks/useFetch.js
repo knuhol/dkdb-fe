@@ -12,9 +12,9 @@ const useFetch = ({ endpoint, initialValue }: { endpoint: string, initialValue: 
     const fetchData = async () => {
       try {
         const response = await fetch(endpoint);
-        const data = await response.json();
+        const responseData = await response.json();
 
-        setData(data);
+        setData(responseData);
       } catch (e) {
         history.push(ROUTE.ERROR_500);
       }

@@ -20,4 +20,8 @@ const Page = ({ title, text, children }: { title: string, text?: string, childre
   </Container>
 );
 
+Page.defaultProps = {
+  text: undefined,
+};
+
 export default Page;

@@ -21,10 +21,9 @@ interface GetBooksParams {
 
 const getBooksUrl = (params: GetBooksParams = {}) => {
   const endpoint = '/books';
-  // $flow-disable-next-line
   const query = new URLSearchParams(params).toString();
 
-  return buildBaseUrl(`${endpoint}${query ? '?' + query : ''}`);
+  return buildBaseUrl(`${endpoint}${query ? `?${query}` : ''}`);
 };
 
 export { getTotalBooksUrl, getBookDetailsUrl, getBooksUrl };
