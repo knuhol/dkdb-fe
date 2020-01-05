@@ -15,8 +15,8 @@ type Order = 'ASC' | 'DESC';
 interface GetBooksParams {
   orderBy?: OrderBy;
   order?: Order;
-  from?: number;
-  to?: number;
+  page?: number;
+  size?: number;
 }
 
 const getBooksUrl = (params: GetBooksParams = {}) => {

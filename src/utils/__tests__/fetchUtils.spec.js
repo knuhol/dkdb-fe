@@ -24,15 +24,15 @@ describe('fetchUtils', () => {
     expect(getBooksUrl({ order: 'ASC' })).toBe('uri/books?order=ASC');
     expect(getBooksUrl({ order: 'DESC' })).toBe('uri/books?order=DESC');
 
-    expect(getBooksUrl({ from: 1 })).toBe('uri/books?from=1');
-    expect(getBooksUrl({ to: 2 })).toBe('uri/books?to=2');
+    expect(getBooksUrl({ page: 1 })).toBe('uri/books?page=1');
+    expect(getBooksUrl({ size: 2 })).toBe('uri/books?size=2');
 
     expect(getBooksUrl()).toBe('uri/books');
-    expect(getBooksUrl({ orderBy: 'AUTHOR', order: 'ASC', from: 1, to: 2 })).toBe(
-      'uri/books?orderBy=AUTHOR&order=ASC&from=1&to=2'
+    expect(getBooksUrl({ orderBy: 'AUTHOR', order: 'ASC', page: 1, size: 2 })).toBe(
+      'uri/books?orderBy=AUTHOR&order=ASC&page=1&size=2'
     );
-    expect(getBooksUrl({ order: 'ASC', from: 1, to: 2 })).toBe('uri/books?order=ASC&from=1&to=2');
-    expect(getBooksUrl({ from: 1, to: 2 })).toBe('uri/books?from=1&to=2');
-    expect(getBooksUrl({ order: 'ASC', from: 1 })).toBe('uri/books?order=ASC&from=1');
+    expect(getBooksUrl({ order: 'ASC', page: 1, size: 2 })).toBe('uri/books?order=ASC&page=1&size=2');
+    expect(getBooksUrl({ page: 1, size: 2 })).toBe('uri/books?page=1&size=2');
+    expect(getBooksUrl({ order: 'ASC', page: 1 })).toBe('uri/books?order=ASC&page=1');
   });
 });

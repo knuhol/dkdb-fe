@@ -12,7 +12,7 @@ import DesktopBooksLayout from './desktop';
 import './style.scss';
 
 const Books = () => {
-  const books = useBooks({ order: 'ASC', from: 1, to: 50 }, []);
+  const books = useBooks({ order: 'ASC', page: 0, size: 20 }, []);
   const dateFormatter = new Intl.DateTimeFormat('cs-CZ');
   const tagColors = ['red', 'orange', 'yellow', 'green', 'blue', 'violet'];
   const generateTags = book =>
