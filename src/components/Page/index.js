@@ -4,8 +4,8 @@ import { Col, Container, Row } from 'react-bootstrap';
 
 import type { Node } from 'react';
 
-const Page = ({ title, text, children }: { title: string, text?: string, children: Node }) => (
-  <Container>
+const Page = ({ id, title, text, children }: { id?: string, title: string, text?: string, children: Node }) => (
+  <Container id={id}>
     <Row>
       <Col>
         <h1>{title}</h1>
@@ -21,6 +21,7 @@ const Page = ({ title, text, children }: { title: string, text?: string, childre
 );
 
 Page.defaultProps = {
+  id: undefined,
   text: undefined,
 };
 

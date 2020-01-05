@@ -1,0 +1,36 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+#books {
+  #mobile {
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+
+    img {
+      width: 50%;
+      margin-bottom: $spacer / 2;
+
+      @include media-breakpoint-only(sm) {
+        width: 40%;
+      }
+
+      @include media-breakpoint-only(md) {
+        width: 30%;
+      }
+    }
+
+    .tags {
+      margin-bottom: $spacer;
+    }
+
+    .added {
+      color: $gray-500;
+    }
+
+    button {
+      margin-bottom: $spacer / 2;
+    }
+  }
+}

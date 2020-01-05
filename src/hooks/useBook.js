@@ -5,7 +5,7 @@ import { getBookDetailsUrl } from '../utils/fetchUtils';
 interface Book {
   id: number;
   title: string;
-  author: Array<{
+  authors: Array<{
     firstName: string,
     lastName: string,
   }>;

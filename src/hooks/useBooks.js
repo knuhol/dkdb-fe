@@ -7,7 +7,7 @@ import type { GetBooksParams } from '../utils/fetchUtils';
 interface Book {
   id: number;
   title: string;
-  author: Array<{
+  authors: Array<{
     firstName: string,
     lastName: string,
   }>;
@@ -37,3 +37,4 @@ const useBooks = (params: GetBooksParams, initialValue?: Book[]): Book[] =>
   });
 
 export default useBooks;
+export type { Book };

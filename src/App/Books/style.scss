@@ -1,0 +1,54 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+#books {
+  table {
+    h2 {
+      font-size: $font-size-base * 1.3;
+    }
+
+    h3 {
+      font-size: $font-size-base * 1.1;
+    }
+
+    th:nth-child(1) {
+      width: 2.5rem;
+    }
+
+    .tags {
+      display: block;
+
+      .badge {
+        margin-right: 0.4rem;
+
+        &:last-child {
+          margin-left: 0;
+        }
+      }
+
+      .badge.red {
+        background-color: $red;
+      }
+
+      .badge.orange {
+        background-color: $orange;
+      }
+
+      .badge.yellow {
+        background-color: $yellow;
+      }
+
+      .badge.green {
+        background-color: $green;
+      }
+
+      .badge.blue {
+        background-color: $blue;
+      }
+
+      .badge.violet {
+        background-color: $purple;
+      }
+    }
+  }
+}

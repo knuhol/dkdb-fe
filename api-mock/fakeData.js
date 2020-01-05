@@ -5,6 +5,8 @@ const cloneDeep = require('lodash/cloneDeep');
 
 const { TOTAL, YEARS } = require('./fakeDataConfig');
 
+faker.locale = 'cz';
+
 const capitalize = s => {
   if (typeof s !== 'string') return '';
   return s.charAt(0).toUpperCase() + s.slice(1);
@@ -40,7 +42,7 @@ const book = index => ({
     .between(new Date(YEARS.MIN_YEAR_OF_ADDITION, 1), new Date())
     .toISOString()
     .substring(0, 10),
-  imageURL: 'https://picsum.photos/75/100',
+  imageURL: `https://loremflickr.com/375/500?random=${index}`,
   tags: tags(),
   description: faker.lorem.paragraphs(random(1, 5)),
   ISBN: faker.random.uuid(),

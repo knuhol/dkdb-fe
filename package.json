@@ -8,6 +8,9 @@
   },
   "repository": "github:knuhol/dkdb-fe",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@fortawesome/free-solid-svg-icons": "^5.12.0",
+    "@fortawesome/react-fontawesome": "^0.1.8",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -29,6 +32,7 @@
     "json-server": "^0.15.1",
     "lint-staged": "^9.5.0",
     "lodash": "^4.17.15",
+    "node-sass": "^4.13.0",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",

@@ -1,0 +1,50 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+#desktop {
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+
+  height: 0; // hack to div inside cell can grow to 100% https://stackoverflow.com/a/7600749/3780766
+
+  img {
+    width: 100%;
+  }
+
+  .tags {
+    margin-top: $spacer/2;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    div:nth-child(2) {
+      flex-grow: 1;
+    }
+
+    button {
+      margin-top: $spacer;
+      margin-right: auto;
+    }
+  }
+
+  th:nth-child(2) {
+    width: 12rem;
+  }
+
+  th:nth-child(4) {
+    width: 15rem;
+  }
+
+  th:nth-child(5) {
+    width: 7rem;
+  }
+
+  th:nth-child(6) {
+    width: 7rem;
+  }
+}
