@@ -18,7 +18,7 @@ const Books = () => {
 
   const [pageWidth, setPageWidth] = useState(0);
   const [active, setActive] = useState(1);
-  const books = useBooks({ order: 'ASC', page: 1, size: PAGE_SIZE }, []);
+  const books = useBooks({ order: 'ASC', page: active, size: PAGE_SIZE }, []);
   const totalBooks = useTotalBooks(0);
 
   const dateFormatter = new Intl.DateTimeFormat('cs-CZ');
@@ -69,6 +69,16 @@ const Books = () => {
           </Col>
         </Row>
       )}
+      <Row>
+        <Col xs={12}>
+          <EllipsisPagination
+            total={totalBooks / PAGE_SIZE}
+            active={active}
+            maxWidth={pageWidth}
+            onPageClick={onPageClick}
+          />
+        </Col>
+      </Row>
     </Page>
   );
 };

@@ -1,6 +1,6 @@
 module.exports = {
-  extends: ['react-app', 'airbnb', 'prettier', 'prettier/react', 'plugin:flowtype/recommended'],
-  plugins: ['prettier', 'flowtype'],
+  extends: ['react-app', 'airbnb', 'plugin:flowtype/recommended', 'prettier', 'prettier/react'],
+  plugins: ['flowtype', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],

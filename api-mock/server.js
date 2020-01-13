@@ -35,7 +35,7 @@ server.use((req, res, next) => {
   Object.keys(req.query).forEach(param => {
     // index pages from 0, not from 1
     if (param === 'page') {
-      req.query[param] = (parseInt(req.query[param], 10) + 1).toString();
+      req.query[param] = parseInt(req.query[param], 10).toString();
     }
     if (QUERY_VALUES_MAP[req.query[param]]) {
       req.query[param] = QUERY_VALUES_MAP[req.query[param]];
