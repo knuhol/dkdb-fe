@@ -3,21 +3,24 @@ import React, { useEffect } from 'react';
 import { Button, Col, Image, Row, Table } from 'react-bootstrap';
 import useDimensions from 'react-use-dimensions';
 
-import type { Node } from 'react';
 import type { Book } from '../../../hooks/useBooks';
+import { dateFormatter } from '../../../utils/formatterUtils';
 
 import './style.scss';
+import Tags from '../../../components/Tags';
 
 const MobileBooksLayout = ({
   books,
-  generateTags,
-  dateFormatter,
   onPageResize,
+  onBookDetailClick,
+  active,
+  pageSize,
 }: {
   books: Book[],
-  generateTags: (book: Book) => Node,
-  dateFormatter: Intl$DateTimeFormat,
-  onPageResize: (width: number) => void,
+  onPageResize: number => void,
+  onBookDetailClick: number => () => void,
+  active: number,
+  pageSize: number,
 }) => {
   const [ref, { width }] = useDimensions();
 
@@ -36,7 +39,7 @@ const MobileBooksLayout = ({
       <tbody>
         {books.map((book, bookIndex) => (
           <tr key={book.id}>
-            <td>{bookIndex + 1}</td>
+            <td>{bookIndex + 1 + (active - 1) * pageSize}</td>
             <td>
               <Row>
                 <Col xs={12}>
@@ -50,11 +53,13 @@ const MobileBooksLayout = ({
                 <Col xs={12}>
                   <Image src={book.imageURL} thumbnail />
                 </Col>
-                <Col xs={12} className="tags">
-                  {generateTags(book)}
+                <Col xs={12}>
+                  <Tags book={book} />
                 </Col>
                 <Col xs={12}>
-                  <Button variant="outline-dark">Více informací</Button>
+                  <Button variant="outline-dark" onClick={onBookDetailClick(book.id)}>
+                    Více informací
+                  </Button>
                 </Col>
                 <Col xs={12} className="added">
                   Přidáno: {dateFormatter.format(new Date(book.dateOfAddition))}

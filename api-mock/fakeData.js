@@ -47,8 +47,8 @@ const book = index => ({
   description: faker.lorem.paragraphs(random(1, 5)),
   ISBN: faker.random.uuid(),
   numberOfPages: random(150, 600),
-  originalLanguage: fakeLanguages[random(0, fakeLanguages.length)],
-  publisher: fakePublishers[random(0, fakePublishers.length)],
+  originalLanguage: fakeLanguages[random(1, fakeLanguages.length)],
+  publisher: fakePublishers[random(1, fakePublishers.length)],
   links: {
     goodreads: `https://www.goodreads.com/${random(10000, 99999)}`,
     cbdb: `https://cbdb.cz/${random(10000, 99999)}`,

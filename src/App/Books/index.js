@@ -1,8 +1,7 @@
 // @flow
 import React, { useState } from 'react';
-import { Badge, Col, Row } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTag } from '@fortawesome/free-solid-svg-icons';
+import { Col, Row } from 'react-bootstrap';
+import { useHistory } from 'react-router';
 
 import Page from '../../components/Page';
 import useBooks from '../../hooks/useBooks';
@@ -12,6 +11,7 @@ import DesktopBooksLayout from './desktop';
 import EllipsisPagination from '../../components/EllipsisPagination';
 
 import './style.scss';
+import { PARAMS, ROUTE } from '../routes';
 
 const Books = () => {
   const PAGE_SIZE = 5;
@@ -20,24 +20,17 @@ const Books = () => {
   const [active, setActive] = useState(1);
   const books = useBooks({ order: 'ASC', page: active, size: PAGE_SIZE }, []);
   const totalBooks = useTotalBooks(0);
-
-  const dateFormatter = new Intl.DateTimeFormat('cs-CZ');
-  const tagColors = ['red', 'orange', 'yellow', 'green', 'blue', 'violet'];
+  const history = useHistory();
 
   const onPageResize = newPageWidth => {
     if (newPageWidth > 0) {
       setPageWidth(newPageWidth);
     }
   };
-  const generateTags = book =>
-    book.tags.map(tag => (
-      <Badge key={tag.id} className={tagColors[tag.id % tagColors.length]} variant="primary">
-        <FontAwesomeIcon icon={faTag} /> {tag.name}
-      </Badge>
-    ));
   const onPageClick = pageNumber => () => {
     setActive(pageNumber);
   };
+  const onBookDetailClick = bookId => () => history.push(ROUTE.BOOK_DETAIL.replace(PARAMS.BOOK_DETAIL.ID, bookId));
 
   return (
     <Page id="books" title="Knihy">
@@ -55,16 +48,18 @@ const Books = () => {
         <Row>
           <Col>
             <MobileBooksLayout
+              active={active}
+              pageSize={PAGE_SIZE}
               books={books}
-              dateFormatter={dateFormatter}
-              generateTags={generateTags}
               onPageResize={onPageResize}
+              onBookDetailClick={onBookDetailClick}
             />
             <DesktopBooksLayout
+              active={active}
+              pageSize={PAGE_SIZE}
               books={books}
-              dateFormatter={dateFormatter}
-              generateTags={generateTags}
               onPageResize={onPageResize}
+              onBookDetailClick={onBookDetailClick}
             />
           </Col>
         </Row>

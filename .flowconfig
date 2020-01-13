@@ -1,16 +1,8 @@
 [ignore]
 .*/__tests__/.*
 
-[include]
-
-[libs]
-
-[lints]
-
 [options]
 suppress_comment= \\(.\\|\n\\)*\\$flow-disable-next-line
 module.file_ext=.js
 module.file_ext=.scss
-module.system=haste
-
-[strict]
+module.name_mapper.extension='scss' -> 'empty/object'

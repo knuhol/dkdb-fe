@@ -18,16 +18,6 @@ interface Book {
     id: number,
     name: string,
   }>;
-  description: string;
-  ISBN: string;
-  numberOfPages: number;
-  originalLanguage: string;
-  publisher: string;
-  links: {
-    cbdb: string,
-    goodreads: string,
-    dtabazeKnih: string,
-  };
 }
 
 const useBooks = (params: GetBooksParams, initialValue?: Book[]): Book[] =>

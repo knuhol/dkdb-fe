@@ -54,7 +54,7 @@
     "test:watch": "npm run test -- --watchAll=true",
     "test:coverage": "npm run test -- --coverage",
     "eject": "react-scripts eject",
-    "lint": "eslint src --ext js",
+    "lint": "eslint . --ext js",
     "flow": "flow",
     "commit": "git-cz",
     "clean": "rimraf build dist",

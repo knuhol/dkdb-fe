@@ -2,9 +2,7 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
-import type { Node } from 'react';
-
-const Page = ({ id, title, text, children }: { id?: string, title: string, text?: string, children: Node }) => (
+const Page = ({ id, title, text, children }: { id?: string, title: string, text?: string, children?: React$Node }) => (
   <Container id={id}>
     <Row>
       <Col>
@@ -23,6 +21,7 @@ const Page = ({ id, title, text, children }: { id?: string, title: string, text?
 Page.defaultProps = {
   id: undefined,
   text: undefined,
+  children: undefined,
 };
 
 export default Page;

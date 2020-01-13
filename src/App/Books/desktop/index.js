@@ -3,21 +3,24 @@ import React, { useEffect } from 'react';
 import { Button, Image, Table } from 'react-bootstrap';
 import useDimensions from 'react-use-dimensions';
 
-import type { Node } from 'react';
 import type { Book } from '../../../hooks/useBooks';
+import { dateFormatter } from '../../../utils/formatterUtils';
 
 import './style.scss';
+import Tags from '../../../components/Tags';
 
 const DesktopBooksLayout = ({
   books,
-  generateTags,
-  dateFormatter,
   onPageResize,
+  onBookDetailClick,
+  active,
+  pageSize,
 }: {
   books: Book[],
-  generateTags: (book: Book) => Node,
-  dateFormatter: Intl$DateTimeFormat,
-  onPageResize: (width: number) => void,
+  onPageResize: number => void,
+  onBookDetailClick: number => () => void,
+  active: number,
+  pageSize: number,
 }) => {
   const [ref, { width }] = useDimensions();
 
@@ -40,7 +43,7 @@ const DesktopBooksLayout = ({
       <tbody>
         {books.map((book, bookIndex) => (
           <tr key={book.id}>
-            <td>{bookIndex + 1}</td>
+            <td>{bookIndex + 1 + (active - 1) * pageSize}</td>
             <td>
               <Image src={book.imageURL} thumbnail />
             </td>
@@ -49,8 +52,10 @@ const DesktopBooksLayout = ({
                 <div>
                   <h2>{book.title}</h2>
                 </div>
-                <div className="tags">{generateTags(book)}</div>
-                <Button variant="outline-dark">Více informací</Button>
+                <Tags book={book} />
+                <Button variant="outline-dark" onClick={onBookDetailClick(book.id)}>
+                  Více informací
+                </Button>
               </div>
             </td>
             <td>
