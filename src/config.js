@@ -1,16 +1,16 @@
 // @flow
-interface ApiConfig {
-  protocol: string;
-  domain: string;
-  port: number;
-  uri?: string;
-}
+type ApiConfig = {|
+  protocol: string,
+  domain: string,
+  port?: ?string,
+  uri?: ?string,
+|};
 
 const API: ApiConfig = {
-  protocol: 'http',
-  domain: 'localhost',
-  port: 3001,
-  uri: 'api',
+  protocol: process.env.REACT_APP_PROTOCOL || 'http',
+  domain: process.env.REACT_APP_DOMAIN || 'localhost',
+  port: process.env.REACT_APP_PORT,
+  uri: process.env.REACT_APP_URI,
 };
 
 export { API };
