@@ -8,5 +8,10 @@
     "/**": {
       "Strict-Transport-Security": "max-age=31557600"
     }
+  },
+  "proxies": {
+    "/api/": {
+      "origin": "${API_URL}"
+    }
   }
 }

@@ -1,12 +1,10 @@
 // @flow
-import { buildBaseUrl } from './configUtils';
-
 const getTotalBooksUrl = () => {
-  return buildBaseUrl('/books/total');
+  return '/api/books/total';
 };
 
 const getBookDetailsUrl = ({ id }: { id: number }) => {
-  return buildBaseUrl(`/books/${id}`);
+  return `/api/books/${id}`;
 };
 
 type OrderBy = 'AUTHOR' | 'TITLE' | 'DATE_OF_ADDITION' | 'YEAR_OF_ISSUE';
@@ -20,10 +18,10 @@ interface GetBooksParams {
 }
 
 const getBooksUrl = (params: GetBooksParams = {}) => {
-  const endpoint = '/books';
+  const endpoint = '/api/books';
   const query = new URLSearchParams(params).toString();
 
-  return buildBaseUrl(`${endpoint}${query ? `?${query}` : ''}`);
+  return `${endpoint}${query ? `?${query}` : ''}`;
 };
 
 export { getTotalBooksUrl, getBookDetailsUrl, getBooksUrl };
