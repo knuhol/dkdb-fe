@@ -61,7 +61,7 @@
     "pipeline:build": "CI=true npm run build",
     "pipeline:test": "CI=true npm run flow && npm run lint && npm run test:coverage",
     "release": "npm run bundle && standard-version",
-    "release:beta": "npm run release -- -p beta",
+    "release:prerelease": "npm run release -- -p",
     "zip": "mkdir dist && bestzip dist/bundle.zip build/*",
     "api-mock": "node api-mock/server.js"
   },
