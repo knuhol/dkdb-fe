@@ -18,7 +18,7 @@ const Books = () => {
 
   const [pageWidth, setPageWidth] = useState(0);
   const [active, setActive] = useState(1);
-  const books = useBooks({ order: 'ASC', page: active, size: PAGE_SIZE }, []);
+  const books = useBooks({ order: 'ASC', page: active - 1, size: PAGE_SIZE }, []);
   const totalBooks = useTotalBooks(0);
   const history = useHistory();
 

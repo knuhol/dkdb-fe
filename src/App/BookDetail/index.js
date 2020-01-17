@@ -32,13 +32,13 @@ const BookDetail = () => {
           <h2>{book.authors.map(author => `${author.firstName} ${author.lastName}`).join(', ')}</h2>
         </Col>
         <Col className="links">
-          <Button variant="light" size="sm" href={book.links?.goodreads}>
+          <Button variant="light" size="sm" href={book.links?.goodreads || '#'}>
             <Image src={goodreads} /> Goodreads
           </Button>
-          <Button variant="light" size="sm" href={book.links?.cbdb}>
+          <Button variant="light" size="sm" href={book.links?.cbdb || '#'}>
             <Image src={cbdb} /> ČBDB
           </Button>
-          <Button variant="light" size="sm" href={book.links?.databazeKnih}>
+          <Button variant="light" size="sm" href={book.links?.databazeKnih || '#'}>
             <Image src={databazeKnih} /> Databáze knih
           </Button>
         </Col>

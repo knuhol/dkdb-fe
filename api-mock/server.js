@@ -33,9 +33,9 @@ const QUERY_PARAMS_MAP = {
 // rewrite URL query from original API to JSON server API
 server.use((req, res, next) => {
   Object.keys(req.query).forEach(param => {
-    // index pages from 0, not from 1
+    // index pages from 1, not from 0
     if (param === 'page') {
-      req.query[param] = parseInt(req.query[param], 10).toString();
+      req.query[param] = parseInt(req.query[param], 10) + 1;
     }
     if (QUERY_VALUES_MAP[req.query[param]]) {
       req.query[param] = QUERY_VALUES_MAP[req.query[param]];
