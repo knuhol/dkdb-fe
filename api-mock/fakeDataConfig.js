@@ -1,5 +1,5 @@
 const TOTAL = {
-  BOOKS: 200,
+  BOOKS: 202,
   AUTHORS: 500,
   CO_AUTHORS: 2,
   TAGS: 8,

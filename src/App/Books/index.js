@@ -37,7 +37,7 @@ const Books = () => {
       <Row>
         <Col xs={12}>
           <EllipsisPagination
-            total={totalBooks / PAGE_SIZE}
+            total={Math.ceil(totalBooks / PAGE_SIZE)}
             active={active}
             maxWidth={pageWidth}
             onPageClick={onPageClick}
@@ -67,7 +67,7 @@ const Books = () => {
       <Row>
         <Col xs={12}>
           <EllipsisPagination
-            total={totalBooks / PAGE_SIZE}
+            total={Math.ceil(totalBooks / PAGE_SIZE)}
             active={active}
             maxWidth={pageWidth}
             onPageClick={onPageClick}
