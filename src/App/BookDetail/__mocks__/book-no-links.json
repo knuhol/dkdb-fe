@@ -1,0 +1,28 @@
+{
+  "id": 1,
+  "title": "Mock book title 1",
+  "authors": [
+    {
+      "firstName": "Mock author first name 1",
+      "lastName": "Mock author last name 1"
+    }
+  ],
+  "yearOfIssue": 1959,
+  "dateOfAddition": "2018-03-16",
+  "imageURL": "https://loremflickr.com/375/500?random=56",
+  "tags": [
+    {
+      "id": 1,
+      "name": "Tag 1"
+    },
+    {
+      "id": 2,
+      "name": "Tag 2"
+    }
+  ],
+  "description": "Suscipit ea exercitationem qui quidem deserunt aspernatur cumque.",
+  "isbn": "c46001f0-d500-4f2a-b7f8-3dd9ad2d2f88",
+  "numberOfPages": 301,
+  "publisher": "Mock publisher 1",
+  "originalLanguage": "mock language"
+}

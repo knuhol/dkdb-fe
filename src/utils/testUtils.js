@@ -6,6 +6,7 @@ import { render } from '@testing-library/react';
 import { ROUTE } from '../App/routes';
 
 const DEFAULT_ROUTE = ROUTE.HOME;
+const PREVIOUS_ROUTE = '/prev-route';
 
 const renderWithRedirectionRouter = (
   component,
@@ -20,7 +21,10 @@ const renderWithRedirectionRouter = (
 
 const renderWithRouter = (
   component,
-  { route = DEFAULT_ROUTE, history = createMemoryHistory({ initialEntries: [route] }) } = {}
+  {
+    route = DEFAULT_ROUTE,
+    history = createMemoryHistory({ initialEntries: [PREVIOUS_ROUTE, route], initialIndex: 1 }),
+  } = {}
 ) => {
   const Wrapper = ({ children }) => <Router history={history}>{children}</Router>;
   return {
@@ -29,4 +33,4 @@ const renderWithRouter = (
   };
 };
 
-export { renderWithRedirectionRouter, renderWithRouter };
+export { renderWithRedirectionRouter, renderWithRouter, PREVIOUS_ROUTE };

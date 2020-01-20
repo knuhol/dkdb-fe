@@ -24,8 +24,8 @@ const Books = () => {
   };
 
   const getQueryParam = (query, paramName: 'ORDER' | 'ORDER_BY') => {
-    const invertedParam = invert(PARAMS[paramName])[query.get(PARAMS.BOOKS[paramName])];
-    return invertedParam || DEFAULT[paramName];
+    const queryParam = query.get(PARAMS.BOOKS[paramName]);
+    return invert(PARAMS[paramName])[queryParam || DEFAULT[paramName]];
   };
 
   const pageSize = DEFAULT.PAGE_SIZE;

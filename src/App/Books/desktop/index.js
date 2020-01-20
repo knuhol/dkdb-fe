@@ -45,7 +45,7 @@ const DesktopBooksLayout = ({
           <tr key={book.id}>
             <td>{bookIndex + 1 + (active - 1) * pageSize}</td>
             <td>
-              <Image src={book.imageURL} thumbnail />
+              <Image src={book.imageURL} alt={`Obálka knihy ${book.title}`} thumbnail />
             </td>
             <td>
               <div className="details">

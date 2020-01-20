@@ -51,7 +51,7 @@ const MobileBooksLayout = ({
                   <h3>{book.authors.map(author => `${author.firstName} ${author.lastName}`).join(', ')}</h3>
                 </Col>
                 <Col xs={12}>
-                  <Image src={book.imageURL} thumbnail />
+                  <Image src={book.imageURL} alt={`Obálka knihy ${book.title}`} thumbnail />
                 </Col>
                 <Col xs={12}>
                   <Tags book={book} />

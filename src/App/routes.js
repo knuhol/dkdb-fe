@@ -4,10 +4,10 @@ const PARAMS = {
     ID: ':id',
   },
   BOOKS: {
-    PAGE: 'strana',
+    PAGE: 'stranka',
     ORDER: 'poradi',
-    ORDER_BY: 'podle',
-    SIZE: 'velikost',
+    ORDER_BY: 'seraditPodle',
+    SIZE: 'knihNaStranku',
   },
   ORDER_BY: {
     TITLE: 'NAZEV',
@@ -28,12 +28,12 @@ const ROUTE = {
   ERROR_500: '/chyba/500',
 };
 
-type BooksParams = {|
+type BooksParams = {
   orderBy?: $Keys<typeof PARAMS.ORDER_BY>,
   order?: $Keys<typeof PARAMS.ORDER>,
   page?: number,
   size?: number,
-|};
+};
 
 const BOOKS_PARAMS_MAP = {
   orderBy: PARAMS.BOOKS.ORDER_BY,
@@ -42,10 +42,10 @@ const BOOKS_PARAMS_MAP = {
   size: PARAMS.BOOKS.SIZE,
 };
 
-const booksWithParams = (params: BooksParams) => {
+const booksWithParams = (params: BooksParams = {}) => {
   const mappedParams = {};
   Object.keys(params).forEach(param => {
-    if (params[param]) {
+    if (params[param] && BOOKS_PARAMS_MAP[param]) {
       mappedParams[BOOKS_PARAMS_MAP[param]] = params[param].toString();
     }
   });

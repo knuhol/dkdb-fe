@@ -32,17 +32,20 @@ const BookDetail = () => {
         </Col>
         <Col className="links">
           <Button variant="light" size="sm" href={book.links?.goodreads || '#'}>
-            <Image src={goodreads} /> Goodreads
+            <Image src={goodreads} alt="Logo Goodreads" />
+            Goodreads
           </Button>
           <Button variant="light" size="sm" href={book.links?.cbdb || '#'}>
-            <Image src={cbdb} /> ČBDB
+            <Image src={cbdb} alt="Logo ČBDB" />
+            ČBDB
           </Button>
           <Button variant="light" size="sm" href={book.links?.databazeKnih || '#'}>
-            <Image src={databazeKnih} /> Databáze knih
+            <Image src={databazeKnih} alt="Logo Databáze knih" />
+            Databáze knih
           </Button>
         </Col>
         <Col xs={12}>
-          <Image src={book.imageURL} className="cover" thumbnail />
+          <Image src={book.imageURL} className="cover" alt={`Obálka knihy ${book.title}`} thumbnail />
         </Col>
         <Col xs={12} className="meta">
           <div>Rok vydání: {book.yearOfIssue}</div>
@@ -57,7 +60,7 @@ const BookDetail = () => {
         <Col xs={12} className="description">
           <h3>Popis</h3>
           {book.description.split(/(\r\n|\r|\n)/).map(text => (
-            <p>{text}</p>
+            <p key={text}>{text}</p>
           ))}
         </Col>
         <Col xs={12} className="added">
