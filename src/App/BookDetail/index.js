@@ -11,6 +11,7 @@ import { dateFormatter } from '../../utils/formatterUtils';
 import goodreads from '../../logos/goodreads.png';
 import cbdb from '../../logos/cbdb.png';
 import databazeKnih from '../../logos/databazeKnih.png';
+
 import './style.scss';
 
 const BookDetail = () => {
@@ -20,15 +21,11 @@ const BookDetail = () => {
 
   const goBack = () => history.goBack();
 
-  if (!book) {
-    return null;
-  }
-
   return (
-    <Page id="book-detail" title={book.title}>
+    <Page id="book-detail" title={book?.title} conditions={[book.authors != null]}>
       <Row>
         <Col xs={12}>
-          <h2>{book.authors.map(author => `${author.firstName} ${author.lastName}`).join(', ')}</h2>
+          <h2>{book.authors?.map(author => `${author.firstName} ${author.lastName}`).join(', ')}</h2>
         </Col>
         <Col className="links">
           <Button variant="light" size="sm" href={book.links?.goodreads || '#'}>
@@ -59,7 +56,7 @@ const BookDetail = () => {
         </Col>
         <Col xs={12} className="description">
           <h3>Popis</h3>
-          {book.description.split(/(\r\n|\r|\n)/).map(text => (
+          {book.description?.split(/(\r\n|\r|\n)/).map(text => (
             <p key={text}>{text}</p>
           ))}
         </Col>

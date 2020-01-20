@@ -13,7 +13,7 @@ const Tags = ({ book }: { book: Book }) => {
 
   return (
     <div className="tags">
-      {book.tags.map(tag => (
+      {book.tags?.map(tag => (
         <Badge key={tag.id} className={tagColors[tag.id % tagColors.length]} variant="primary">
           <FontAwesomeIcon icon={faTag} /> {tag.name}
         </Badge>

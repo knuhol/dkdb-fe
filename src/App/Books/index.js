@@ -48,7 +48,7 @@ const Books = () => {
     history.push(ROUTE.BOOK_DETAIL.replace(PARAMS.BOOK_DETAIL.ID, bookId.toString()));
 
   return (
-    <Page id="books" title="Knihy">
+    <Page id="books" title="Knihy" conditions={[books.length > 0]}>
       <Row>
         <Col xs={12}>
           <EllipsisPagination
@@ -59,26 +59,24 @@ const Books = () => {
           />
         </Col>
       </Row>
-      {books && (
-        <Row>
-          <Col>
-            <MobileBooksLayout
-              active={activePage}
-              pageSize={pageSize}
-              books={books}
-              onPageResize={onPageResize}
-              onBookDetailClick={onBookDetailClick}
-            />
-            <DesktopBooksLayout
-              active={activePage}
-              pageSize={pageSize}
-              books={books}
-              onPageResize={onPageResize}
-              onBookDetailClick={onBookDetailClick}
-            />
-          </Col>
-        </Row>
-      )}
+      <Row>
+        <Col>
+          <MobileBooksLayout
+            active={activePage}
+            pageSize={pageSize}
+            books={books}
+            onPageResize={onPageResize}
+            onBookDetailClick={onBookDetailClick}
+          />
+          <DesktopBooksLayout
+            active={activePage}
+            pageSize={pageSize}
+            books={books}
+            onPageResize={onPageResize}
+            onBookDetailClick={onBookDetailClick}
+          />
+        </Col>
+      </Row>
       <Row>
         <Col xs={12}>
           <EllipsisPagination

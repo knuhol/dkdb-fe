@@ -4,23 +4,23 @@ import { getBooksUrl } from '../utils/fetchUtils';
 
 import type { GetBooksParams } from '../utils/fetchUtils';
 
-interface Book {
-  id: number;
-  title: string;
+type Book = {
+  id: number,
+  title: string,
   authors: Array<{
     firstName: string,
     lastName: string,
-  }>;
-  yearOfIssue: number;
-  dateOfAddition: string;
-  imageURL: string;
+  }>,
+  yearOfIssue: number,
+  dateOfAddition: string,
+  imageURL: string,
   tags: Array<{
     id: number,
     name: string,
-  }>;
-}
+  }>,
+};
 
-const useBooks = (params: GetBooksParams, initialValue?: Book[]): Book[] =>
+const useBooks = (params: GetBooksParams, initialValue?: Book[] = []): Book[] =>
   useFetch({
     endpoint: getBooksUrl(params),
     initialValue,
