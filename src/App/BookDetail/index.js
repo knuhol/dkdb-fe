@@ -12,14 +12,13 @@ import goodreads from '../../logos/goodreads.png';
 import cbdb from '../../logos/cbdb.png';
 import databazeKnih from '../../logos/databazeKnih.png';
 import './style.scss';
-import { ROUTE } from '../routes';
 
 const BookDetail = () => {
   const { id } = useParams();
   const book = useBook(parseInt(id, 10));
   const history = useHistory();
 
-  const backToBooks = () => history.push(ROUTE.BOOKS);
+  const goBack = () => history.goBack();
 
   if (!book) {
     return null;
@@ -50,7 +49,7 @@ const BookDetail = () => {
           <div>Počet stran: {book.numberOfPages}</div>
           <div>Vydavatel: {book.publisher}</div>
           <div>Originální jazyk: {book.originalLanguage}</div>
-          <div>ISBN: {book.ISBN}</div>
+          <div>ISBN: {book.isbn}</div>
         </Col>
         <Col xs={12}>
           <Tags book={book} />
@@ -65,7 +64,7 @@ const BookDetail = () => {
           Přidáno: {dateFormatter.format(new Date(book.dateOfAddition))}
         </Col>
         <Col className="back">
-          <Button variant="outline-dark" onClick={backToBooks}>
+          <Button variant="outline-dark" onClick={goBack}>
             ← Zpátky na přehled
           </Button>
         </Col>

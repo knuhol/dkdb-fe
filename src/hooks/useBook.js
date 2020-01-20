@@ -17,7 +17,7 @@ interface BookWithDetails {
     name: string,
   }>;
   description: string;
-  ISBN: string;
+  isbn: string;
   numberOfPages: number;
   originalLanguage: string;
   publisher: string;

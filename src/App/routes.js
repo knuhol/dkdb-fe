@@ -1,6 +1,22 @@
+// @flow
 const PARAMS = {
   BOOK_DETAIL: {
     ID: ':id',
+  },
+  BOOKS: {
+    PAGE: 'strana',
+    ORDER: 'poradi',
+    ORDER_BY: 'podle',
+    SIZE: 'velikost',
+  },
+  ORDER_BY: {
+    TITLE: 'NAZEV',
+    DATE_OF_ADDITION: 'DATUM_PRIDANI',
+    YEAR_OF_ISSUE: 'ROK_VYDANI',
+  },
+  ORDER: {
+    ASC: 'VZESTUPNE',
+    DESC: 'SESTUPNE',
   },
 };
 
@@ -12,4 +28,29 @@ const ROUTE = {
   ERROR_500: '/chyba/500',
 };
 
-export { ROUTE, PARAMS };
+type BooksParams = {|
+  orderBy?: $Keys<typeof PARAMS.ORDER_BY>,
+  order?: $Keys<typeof PARAMS.ORDER>,
+  page?: number,
+  size?: number,
+|};
+
+const BOOKS_PARAMS_MAP = {
+  orderBy: PARAMS.BOOKS.ORDER_BY,
+  order: PARAMS.BOOKS.ORDER,
+  page: PARAMS.BOOKS.PAGE,
+  size: PARAMS.BOOKS.SIZE,
+};
+
+const booksWithParams = (params: BooksParams) => {
+  const mappedParams = {};
+  Object.keys(params).forEach(param => {
+    if (params[param]) {
+      mappedParams[BOOKS_PARAMS_MAP[param]] = params[param].toString();
+    }
+  });
+  const query = new URLSearchParams(mappedParams).toString();
+  return `${ROUTE.BOOKS}${query ? `?${query}` : ''}`;
+};
+
+export { ROUTE, PARAMS, booksWithParams };

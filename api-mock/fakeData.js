@@ -45,7 +45,7 @@ const book = index => ({
   imageURL: `https://loremflickr.com/375/500?random=${index}`,
   tags: tags(),
   description: faker.lorem.paragraphs(random(1, 5)),
-  ISBN: faker.random.uuid(),
+  isbn: faker.random.uuid(),
   numberOfPages: random(150, 600),
   originalLanguage: fakeLanguages[random(1, fakeLanguages.length)],
   publisher: fakePublishers[random(1, fakePublishers.length)],

@@ -1,4 +1,5 @@
 // @flow
+
 const getTotalBooksUrl = () => {
   return '/api/books/total';
 };
@@ -7,12 +8,20 @@ const getBookDetailsUrl = ({ id }: { id: number }) => {
   return `/api/books/${id}`;
 };
 
-type OrderBy = 'AUTHOR' | 'TITLE' | 'DATE_OF_ADDITION' | 'YEAR_OF_ISSUE';
-type Order = 'ASC' | 'DESC';
+const ORDER = {
+  ASC: 'ASC',
+  DESC: 'DESC',
+};
+
+const ORDER_BY = {
+  TITLE: 'TITLE',
+  DATE_OF_ADDITION: 'DATE_OF_ADDITION',
+  YEAR_OF_ISSUE: 'YEAR_OF_ISSUE',
+};
 
 interface GetBooksParams {
-  orderBy?: OrderBy;
-  order?: Order;
+  orderBy?: $Keys<typeof ORDER_BY>;
+  order?: $Keys<typeof ORDER>;
   page?: number;
   size?: number;
 }
@@ -24,5 +33,5 @@ const getBooksUrl = (params: GetBooksParams = {}) => {
   return `${endpoint}${query ? `?${query}` : ''}`;
 };
 
-export { getTotalBooksUrl, getBookDetailsUrl, getBooksUrl };
+export { getTotalBooksUrl, getBookDetailsUrl, getBooksUrl, ORDER, ORDER_BY };
 export type { GetBooksParams };
