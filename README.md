@@ -78,7 +78,7 @@ $ npm run mock-api
 ### Releases
 Releases are fully automated by GitHub CI. You only need to do this:
 
-1. Run `npm run release` (or `npm run release:beta` for prerelease) which will bump a version, generate changelog and create git tags.
+1. Run `npm run release` (or `npm run release:release:prerelease` for prerelease) which will bump a version, generate changelog and create git tags.
 2. Push the release commit to GitHub with `--follow-tags` flag.
 
 ### Contribution

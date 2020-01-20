@@ -1,14 +1,18 @@
 import React from 'react';
 
 import { NavLink } from 'react-router-dom';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Image, Nav, Navbar } from 'react-bootstrap';
 
 import { ROUTE } from '../routes';
+import logo from '../../logos/dkdb.svg';
+
+import './style.scss';
 
 const Menu = () => (
   <Navbar bg="dark" variant="dark" expand="sm">
     <Navbar.Brand as={NavLink} to={ROUTE.HOME}>
-      DKDB
+      <Image src={logo} alt="DKDB logo" />
+      <span className="name">DKDB</span>
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
