@@ -1,6 +1,7 @@
 import React from 'react';
-import Page from '../../components/Page';
 
-const Error500 = () => <Page title="Chyba 500" text="Na webu nastala neočekávaná chyba." />;
+import ErrorPage from '../../components/ErrorPage';
+
+const Error500 = () => <ErrorPage title="Chyba 505" text="Na webu nastala neočekávaná chyba." />;
 
 export default Error500;

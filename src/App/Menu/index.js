@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Image, Nav, Navbar } from 'react-bootstrap';
 
 import { ROUTE } from '../routes';
-import logo from '../../logos/dkdb.svg';
+import logo from '../../images/dkdb.svg';
 
 import './style.scss';
 

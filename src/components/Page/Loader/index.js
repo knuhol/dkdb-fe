@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
 
-import logo from '../../../logos/dkdb.svg';
+import logo from '../../../images/dkdb.svg';
 
 import './style.scss';
 

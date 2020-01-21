@@ -14,7 +14,7 @@ const Page = ({
   children,
 }: {
   id?: string,
-  title: string,
+  title?: string,
   text?: string,
   conditions?: [boolean],
   children?: React$Node,
@@ -32,11 +32,13 @@ const Page = ({
   const notLoadedPage = <Loader />;
   const loadedPage = (
     <>
-      <Row>
-        <Col>
-          <h1>{title}</h1>
-        </Col>
-      </Row>
+      {title && (
+        <Row>
+          <Col>
+            <h1>{title}</h1>
+          </Col>
+        </Row>
+      )}
       {text && (
         <Row>
           <Col className="mt-2">{text}</Col>
@@ -58,6 +60,7 @@ const Page = ({
 
 Page.defaultProps = {
   id: undefined,
+  title: undefined,
   text: undefined,
   children: undefined,
   conditions: undefined,

@@ -58,7 +58,7 @@ const MobileBooksLayout = ({
                 </Col>
                 <Col xs={12}>
                   <Button variant="outline-dark" onClick={onBookDetailClick(book.id)}>
-                    Více informací
+                    Více informací →
                   </Button>
                 </Col>
                 <Col xs={12} className="added">

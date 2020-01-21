@@ -54,7 +54,7 @@ const DesktopBooksLayout = ({
                 </div>
                 <Tags book={book} />
                 <Button variant="outline-dark" onClick={onBookDetailClick(book.id)}>
-                  Více informací
+                  Více informací →
                 </Button>
               </div>
             </td>

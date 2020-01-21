@@ -100,7 +100,7 @@ describe('Books', () => {
     const { container, getAllByText, history } = renderWithRouter(<Books />, { route: '/knihy' });
     await waitForDomChange({ container });
 
-    fireEvent.click(getAllByText('Více informací')[0]);
+    fireEvent.click(getAllByText('Více informací →')[0]);
 
     expect(history.location.pathname).toBe('/kniha/1');
   });

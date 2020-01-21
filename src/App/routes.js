@@ -18,14 +18,18 @@ const PARAMS = {
     ASC: 'VZESTUPNE',
     DESC: 'SESTUPNE',
   },
+  REDIRECTION: {
+    REDIRECTED: 'presmerovano',
+    YES: 'ano',
+  },
 };
 
 const ROUTE = {
   HOME: '/',
   BOOKS: '/knihy',
   BOOK_DETAIL: `/kniha/${PARAMS.BOOK_DETAIL.ID}`,
-  ERROR_404: '/chyba/404',
-  ERROR_500: '/chyba/500',
+  ERROR_404: '/chyba/404-stranka-nenalezena',
+  ERROR_500: '/chyba/500-neocekavana-chyba',
 };
 
 type BooksParams = {
@@ -53,4 +57,7 @@ const booksWithParams = (params: BooksParams = {}) => {
   return `${ROUTE.BOOKS}${query ? `?${query}` : ''}`;
 };
 
-export { ROUTE, PARAMS, booksWithParams };
+const routeWithRedirectionParam = (route: string) =>
+  `${route}?${PARAMS.REDIRECTION.REDIRECTED}=${PARAMS.REDIRECTION.YES}`;
+
+export { ROUTE, PARAMS, booksWithParams, routeWithRedirectionParam };

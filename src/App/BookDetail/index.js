@@ -8,9 +8,9 @@ import useBook from '../../hooks/useBook';
 import Tags from '../../components/Tags';
 import { dateFormatter } from '../../utils/formatterUtils';
 
-import goodreads from '../../logos/goodreads.svg';
-import cbdb from '../../logos/cbdb.svg';
-import databazeKnih from '../../logos/databazeKnih.svg';
+import goodreads from '../../images/goodreads.svg';
+import cbdb from '../../images/cbdb.svg';
+import databazeKnih from '../../images/databaze-knih.svg';
 
 import './style.scss';
 
@@ -56,8 +56,8 @@ const BookDetail = () => {
         </Col>
         <Col xs={12} className="description">
           <h3>Popis</h3>
-          {book.description?.split(/(\r\n|\r|\n)/).map(text => (
-            <p key={text}>{text}</p>
+          {book.description?.split(/(\r\n|\r|\n)/).map((text, index) => (
+            <p key={index}>{text}</p>
           ))}
         </Col>
         <Col xs={12} className="added">

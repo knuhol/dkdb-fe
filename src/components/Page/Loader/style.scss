@@ -11,10 +11,10 @@
 
   img {
     position: absolute;
-    animation: rotate-scale-up 0.65s linear infinite both;
+    animation: rotate 0.65s linear infinite both;
   }
 
-  @keyframes rotate-scale-up {
+  @keyframes rotate {
     0% {
       transform: scale(1) rotateZ(0);
     }
