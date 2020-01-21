@@ -8,9 +8,9 @@ import useBook from '../../hooks/useBook';
 import Tags from '../../components/Tags';
 import { dateFormatter } from '../../utils/formatterUtils';
 
-import goodreads from '../../logos/goodreads.png';
-import cbdb from '../../logos/cbdb.png';
-import databazeKnih from '../../logos/databazeKnih.png';
+import goodreads from '../../logos/goodreads.svg';
+import cbdb from '../../logos/cbdb.svg';
+import databazeKnih from '../../logos/databazeKnih.svg';
 
 import './style.scss';
 

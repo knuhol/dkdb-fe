@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Image } from 'react-bootstrap';
 
-import github from '../../../logos/github.png';
+import github from '../../../logos/github.svg';
 
 import './style.scss';
 
