@@ -18,6 +18,11 @@ const useFetch = ({ endpoint, initialValue }: { endpoint: string, initialValue: 
           return;
         }
 
+        if (response.status !== 200) {
+          history.push(routeWithRedirectionParam(ROUTE.ERROR_500));
+          return;
+        }
+
         const responseData = await response.json();
 
         setData(responseData);
