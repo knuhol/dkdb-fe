@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import every from 'lodash/some';
 
-import Loader from '../Loader';
+import Loader from './Loader';
+import Footer from './Footer';
 
 const Page = ({
   id,
@@ -28,12 +29,9 @@ const Page = ({
     }
   }, [conditions]);
 
-  if (!loaded) {
-    return <Loader />;
-  }
-
-  return (
-    <Container id={id}>
+  const notLoadedPage = <Loader />;
+  const loadedPage = (
+    <>
       <Row>
         <Col>
           <h1>{title}</h1>
@@ -41,11 +39,20 @@ const Page = ({
       </Row>
       {text && (
         <Row>
-          <Col className="mt-4 mb-4">{text}</Col>
+          <Col className="mt-2">{text}</Col>
         </Row>
       )}
       {children}
-    </Container>
+    </>
+  );
+
+  return (
+    <>
+      <main role="main" className="flex-shrink-0 pt-3 pb-2 pt-md-4 pb-md-3">
+        <Container id={id}>{loaded ? loadedPage : notLoadedPage}</Container>
+      </main>
+      <Footer />
+    </>
   );
 };
 

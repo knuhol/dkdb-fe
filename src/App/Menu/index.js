@@ -9,7 +9,7 @@ import logo from '../../logos/dkdb.svg';
 import './style.scss';
 
 const Menu = () => (
-  <Navbar bg="dark" variant="dark" expand="sm">
+  <Navbar collapseOnSelect bg="dark" variant="dark" expand="sm">
     <Navbar.Brand as={NavLink} to={ROUTE.HOME}>
       <Image src={logo} alt="DKDB logo" />
       <span className="name">DKDB</span>
@@ -17,7 +17,7 @@ const Menu = () => (
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav>
-        <Nav.Link as={NavLink} to={ROUTE.BOOKS}>
+        <Nav.Link eventKey={1} as={NavLink} to={ROUTE.BOOKS}>
           <span>Knihy</span>
         </Nav.Link>
       </Nav>

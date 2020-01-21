@@ -1,0 +1,37 @@
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins';
+
+.footer {
+  background-color: #f5f5f5;
+  color: $gray-600;
+
+  .separator {
+    margin: 0 0.3rem;
+
+    &--md-up {
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
+  }
+
+  .copyright {
+    @include media-breakpoint-down(sm) {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+
+  .github-link {
+    img {
+      width: 1rem;
+      top: -2px;
+      position: relative;
+    }
+
+    span {
+      margin-left: 0.2rem;
+    }
+  }
+}

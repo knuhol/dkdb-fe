@@ -15,34 +15,32 @@ import Error500 from './Error500';
 const App = () => (
   <>
     <Menu />
-    <div className="mt-3">
-      <Switch>
-        <Route exact path={ROUTE.HOME}>
-          <ErrorBoundary>
-            <Home />
-          </ErrorBoundary>
-        </Route>
-        <Route exact path={ROUTE.BOOKS}>
-          <ErrorBoundary>
-            <Books />
-          </ErrorBoundary>
-        </Route>
-        <Route exact path={ROUTE.BOOK_DETAIL}>
-          <ErrorBoundary>
-            <BookDetail />
-          </ErrorBoundary>
-        </Route>
-        <Route exact path={ROUTE.ERROR_404}>
-          <Error404 />
-        </Route>
-        <Route exact path={ROUTE.ERROR_500}>
-          <Error500 />
-        </Route>
-        <Route>
-          <Redirect to={ROUTE.ERROR_404} />
-        </Route>
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path={ROUTE.HOME}>
+        <ErrorBoundary>
+          <Home />
+        </ErrorBoundary>
+      </Route>
+      <Route exact path={ROUTE.BOOKS}>
+        <ErrorBoundary>
+          <Books />
+        </ErrorBoundary>
+      </Route>
+      <Route exact path={ROUTE.BOOK_DETAIL}>
+        <ErrorBoundary>
+          <BookDetail />
+        </ErrorBoundary>
+      </Route>
+      <Route exact path={ROUTE.ERROR_404}>
+        <Error404 />
+      </Route>
+      <Route exact path={ROUTE.ERROR_500}>
+        <Error500 />
+      </Route>
+      <Route>
+        <Redirect to={ROUTE.ERROR_404} />
+      </Route>
+    </Switch>
   </>
 );
 
