@@ -48,7 +48,12 @@ const Books = () => {
     history.push(ROUTE.BOOK_DETAIL.replace(PARAMS.BOOK_DETAIL.ID, bookId.toString()));
 
   return (
-    <Page id="books" title="Knihy" conditions={[books.length > 0]}>
+    <Page id="books" conditions={[books.length > 0]}>
+      <Row>
+        <Col>
+          <h1>Knihy</h1>
+        </Col>
+      </Row>
       <Row>
         <Col xs={12}>
           <EllipsisPagination

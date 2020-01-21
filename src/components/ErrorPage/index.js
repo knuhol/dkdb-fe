@@ -20,12 +20,12 @@ const ErrorPage = ({ title, text }: { title: string, text: string }) => {
   return (
     <Page id="error-page">
       <Row>
-        <Col className="text-center mt-4">
+        <Col className="text-center mt-4 mb-2">
           <h1>{title}</h1>
         </Col>
       </Row>
       <Row>
-        <Col className="mt-2 text-center">{text}</Col>
+        <Col className="text-center">{text}</Col>
       </Row>
       <Row>
         <Col className="text-center">

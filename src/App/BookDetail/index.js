@@ -22,7 +22,12 @@ const BookDetail = () => {
   const goBack = () => history.goBack();
 
   return (
-    <Page id="book-detail" title={book?.title} conditions={[book.authors != null]}>
+    <Page id="book-detail" conditions={[book.authors != null]}>
+      <Row>
+        <Col>
+          <h1>{book.title}</h1>
+        </Col>
+      </Row>
       <Row>
         <Col xs={12}>
           <h2>{book.authors?.map(author => `${author.firstName} ${author.lastName}`).join(', ')}</h2>

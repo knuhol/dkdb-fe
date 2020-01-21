@@ -4,7 +4,6 @@ import { Switch, Route } from 'react-router-dom';
 import { Redirect } from 'react-router';
 
 import { ROUTE } from './routes';
-import Menu from './Menu';
 import ErrorBoundary from '../components/ErrorBoundary';
 import Home from './Home';
 import Books from './Books';
@@ -14,7 +13,6 @@ import Error500 from './Error500';
 
 const App = () => (
   <>
-    <Menu />
     <Switch>
       <Route exact path={ROUTE.HOME}>
         <ErrorBoundary>

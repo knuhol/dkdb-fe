@@ -1,24 +1,13 @@
 // @flow
 import React, { useState, useEffect } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import every from 'lodash/some';
 
 import Loader from './Loader';
+import Menu from './Menu';
 import Footer from './Footer';
 
-const Page = ({
-  id,
-  title,
-  text,
-  conditions,
-  children,
-}: {
-  id?: string,
-  title?: string,
-  text?: string,
-  conditions?: [boolean],
-  children?: React$Node,
-}) => {
+const Page = ({ id, conditions, children }: { id?: string, conditions?: [boolean], children?: React$Node }) => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -29,29 +18,13 @@ const Page = ({
     }
   }, [conditions]);
 
-  const notLoadedPage = <Loader />;
-  const loadedPage = (
-    <>
-      {title && (
-        <Row>
-          <Col>
-            <h1>{title}</h1>
-          </Col>
-        </Row>
-      )}
-      {text && (
-        <Row>
-          <Col className="mt-2">{text}</Col>
-        </Row>
-      )}
-      {children}
-    </>
-  );
-
   return (
     <>
+      <header>
+        <Menu />
+      </header>
       <main role="main" className="flex-shrink-0 pt-3 pb-2 pt-md-4 pb-md-3">
-        <Container id={id}>{loaded ? loadedPage : notLoadedPage}</Container>
+        <Container id={id}>{loaded ? children : <Loader />}</Container>
       </main>
       <Footer />
     </>
@@ -60,8 +33,6 @@ const Page = ({
 
 Page.defaultProps = {
   id: undefined,
-  title: undefined,
-  text: undefined,
   children: undefined,
   conditions: undefined,
 };

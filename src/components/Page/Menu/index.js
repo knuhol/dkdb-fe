@@ -3,8 +3,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Image, Nav, Navbar } from 'react-bootstrap';
 
-import { ROUTE } from '../routes';
-import logo from '../../images/dkdb.svg';
+import { ROUTE } from '../../../App/routes';
+import logo from '../../../images/dkdb.svg';
 
 import './style.scss';
 
