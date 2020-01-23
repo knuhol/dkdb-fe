@@ -10,8 +10,6 @@ import totalMock from '../__mocks__/total';
 
 const API_BOOKS_REGEX = /^(\/api\/books)(\/?\?{0}|\/?\?.*)$/;
 
-jest.mock('react-use-dimensions', () => () => [undefined, { width: 1280 }]);
-
 describe('Books', () => {
   beforeEach(() => {
     fetchMock.get('/api/books/total', totalMock);

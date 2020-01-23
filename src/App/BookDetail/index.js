@@ -7,6 +7,7 @@ import Page from '../../components/Page';
 import useBook from '../../hooks/useBook';
 import Tags from '../../components/Tags';
 import { dateFormatter } from '../../utils/formatterUtils';
+import BookCover from '../../components/BookCover';
 
 import goodreads from '../../images/goodreads.svg';
 import cbdb from '../../images/cbdb.svg';
@@ -47,7 +48,7 @@ const BookDetail = () => {
           </Button>
         </Col>
         <Col xs={12}>
-          <Image src={book.imageURL} className="cover" alt={`Obálka knihy ${book.title}`} thumbnail />
+          <BookCover book={book} />
         </Col>
         <Col xs={12} className="meta">
           <div>Rok vydání: {book.yearOfIssue}</div>

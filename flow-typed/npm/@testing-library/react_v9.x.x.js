@@ -1,5 +1,5 @@
-// flow-typed signature: e0056fd09a33a332c0ad120f7d50308d
-// flow-typed version: 452cd002ef/@testing-library/react_v9.x.x/flow_>=v0.104.x
+// flow-typed signature: e4ab1596eb6237f83498cc10d0cc4d59
+// flow-typed version: 5556be314c/@testing-library/react_v9.x.x/flow_>=v0.104.x
 
 declare module '@testing-library/react' {
   // This type comes from
@@ -118,35 +118,28 @@ declare module '@testing-library/react' {
     eventProperties?: TInit
   ) => boolean;
 
-  declare type Queries = { ... };
-
-  declare type RenderResult<Q: Queries = GetsAndQueries> = {|
+  declare type RenderResult = {|
     container: HTMLDivElement,
     unmount: () => void,
     baseElement: HTMLElement,
     asFragment: () => DocumentFragment,
     debug: (baseElement?: HTMLElement) => void,
     rerender: (ui: React$Element<*>) => void,
-  |} & Q;
+  |} & GetsAndQueries;
 
-  declare export type RenderOptions<Q: Queries = { ... }> = {|
+  declare export type RenderOptions = {|
     container?: HTMLElement,
     baseElement?: HTMLElement,
     hydrate?: boolean,
-    queries?: Q,
+    queries?: any,
     wrapper?: React.ComponentType,
   |};
 
   declare module.exports: {
     render(
       ui: React.ReactElement<any>,
-      options?: $Diff<RenderOptions<>, {| queries: any |}>
-    ): RenderResult<>,
-
-    render<Q: Queries>(
-      ui: React.ReactElement<any>,
-      options?: RenderOptions<Q>
-    ): RenderResult<Q>,
+      options?: RenderOptions
+    ): RenderResult,
 
     act: ReactDOMTestUtilsAct,
     cleanup: () => void,

@@ -1,6 +1,6 @@
 // @flow
 import React, { useEffect } from 'react';
-import { Button, Image, Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import useDimensions from 'react-use-dimensions';
 
 import type { Book } from '../../../hooks/useBooks';
@@ -8,6 +8,7 @@ import { dateFormatter } from '../../../utils/formatterUtils';
 
 import './style.scss';
 import Tags from '../../../components/Tags';
+import BookCover from '../../../components/BookCover';
 
 const DesktopBooksLayout = ({
   books,
@@ -45,7 +46,7 @@ const DesktopBooksLayout = ({
           <tr key={book.id}>
             <td>{bookIndex + 1 + (active - 1) * pageSize}</td>
             <td>
-              <Image src={book.imageURL} alt={`Obálka knihy ${book.title}`} thumbnail />
+              <BookCover book={book} />
             </td>
             <td>
               <div className="details">

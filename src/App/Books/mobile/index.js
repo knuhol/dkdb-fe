@@ -1,6 +1,6 @@
 // @flow
 import React, { useEffect } from 'react';
-import { Button, Col, Image, Row, Table } from 'react-bootstrap';
+import { Button, Col, Row, Table } from 'react-bootstrap';
 import useDimensions from 'react-use-dimensions';
 
 import type { Book } from '../../../hooks/useBooks';
@@ -8,6 +8,7 @@ import { dateFormatter } from '../../../utils/formatterUtils';
 
 import './style.scss';
 import Tags from '../../../components/Tags';
+import BookCover from '../../../components/BookCover';
 
 const MobileBooksLayout = ({
   books,
@@ -51,7 +52,7 @@ const MobileBooksLayout = ({
                   <h3>{book.authors.map(author => `${author.firstName} ${author.lastName}`).join(', ')}</h3>
                 </Col>
                 <Col xs={12}>
-                  <Image src={book.imageURL} alt={`Obálka knihy ${book.title}`} thumbnail />
+                  <BookCover book={book} />
                 </Col>
                 <Col xs={12}>
                   <Tags book={book} />
