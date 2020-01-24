@@ -48,7 +48,7 @@ const BookDetail = () => {
           </Button>
         </Col>
         <Col xs={12}>
-          <BookCover book={book} />
+          <BookCover book={book} className="cover" />
         </Col>
         <Col xs={12} className="meta">
           <div>Rok vydání: {book.yearOfIssue}</div>
