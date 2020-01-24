@@ -10,6 +10,7 @@ const BookCover = ({ book }: { book: Book }) => (
     src={[book.imageURL, defaultBookCover]}
     className="cover img-thumbnail"
     alt={`Obálka knihy ${book.title}`}
+    decode={false}
   />
 );
 
