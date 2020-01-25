@@ -7,7 +7,7 @@ const PARAMS = {
     PAGE: 'stranka',
     ORDER: 'poradi',
     ORDER_BY: 'seraditPodle',
-    SIZE: 'knihNaStranku',
+    PAGE_SIZE: 'knihNaStranku',
   },
   ORDER_BY: {
     TITLE: 'NAZEV',
@@ -33,17 +33,17 @@ const ROUTE = {
 };
 
 type BooksParams = {
-  orderBy?: $Keys<typeof PARAMS.ORDER_BY>,
-  order?: $Keys<typeof PARAMS.ORDER>,
+  orderBy?: $Values<typeof PARAMS.ORDER_BY>,
+  order?: $Values<typeof PARAMS.ORDER>,
   page?: number,
-  size?: number,
+  pageSize?: number,
 };
 
 const BOOKS_PARAMS_MAP = {
   orderBy: PARAMS.BOOKS.ORDER_BY,
   order: PARAMS.BOOKS.ORDER,
   page: PARAMS.BOOKS.PAGE,
-  size: PARAMS.BOOKS.SIZE,
+  pageSize: PARAMS.BOOKS.PAGE_SIZE,
 };
 
 const booksWithParams = (params: BooksParams = {}) => {

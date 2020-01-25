@@ -6,16 +6,16 @@ describe('routes', () => {
       page: 1,
       order: PARAMS.ORDER.ASC,
       orderBy: PARAMS.ORDER_BY.YEAR_OF_ISSUE,
-      size: 10,
+      pageSize: 10,
     });
     const book2 = booksWithParams({
       orderBy: PARAMS.ORDER_BY.DATE_OF_ADDITION,
-      size: 10,
+      pageSize: 10,
       order: PARAMS.ORDER.DESC,
       page: 1,
     });
     const book3 = booksWithParams({
-      size: 5,
+      pageSize: 5,
       order: PARAMS.ORDER.DESC,
       orderBy: PARAMS.ORDER_BY.TITLE,
       page: 10,

@@ -18,7 +18,6 @@ const QUERY_VALUES_MAP = {
   ASC: 'asc',
   DESC: 'desc',
   TITLE: 'title',
-  AUTHOR: 'authors.0.lastName',
   YEAR_OF_ISSUE: 'yearOfIssue',
   DATE_OF_ADDITION: 'dateOfAddition',
 };

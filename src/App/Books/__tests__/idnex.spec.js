@@ -24,7 +24,7 @@ describe('Books', () => {
     const { container, getAllByText, getAllByAltText } = renderWithRouter(<Books />, { route: '/knihy' });
     await waitForDomChange({ container });
 
-    expect(fetchMock.calls()[0][0]).toBe('/api/books?order=ASC&orderBy=TITLE&page=0&size=5');
+    expect(fetchMock.calls()[0][0]).toBe('/api/books?order=DESC&orderBy=DATE_OF_ADDITION&page=0&size=5');
     expect(getAllByText('Mock book title 1').length).toBe(2);
     expect(getAllByText('Mock book title 2').length).toBe(2);
     expect(getAllByText('Mock author first name 1 Mock author last name 1').length).toBe(2);
@@ -61,7 +61,7 @@ describe('Books', () => {
     const { container } = renderWithRouter(<Books />, { route: '/knihy?poradi=SESTUPNE' });
     await waitForDomChange({ container });
 
-    expect(fetchMock.calls()[0][0]).toBe('/api/books?order=DESC&orderBy=TITLE&page=0&size=5');
+    expect(fetchMock.calls()[0][0]).toBe('/api/books?order=DESC&orderBy=DATE_OF_ADDITION&page=0&size=5');
   });
 
   it('calls correct endpoint for orderBy param', async () => {
@@ -70,7 +70,7 @@ describe('Books', () => {
     const { container } = renderWithRouter(<Books />, { route: '/knihy?seraditPodle=ROK_VYDANI' });
     await waitForDomChange({ container });
 
-    expect(fetchMock.calls()[0][0]).toBe('/api/books?order=ASC&orderBy=YEAR_OF_ISSUE&page=0&size=5');
+    expect(fetchMock.calls()[0][0]).toBe('/api/books?order=DESC&orderBy=YEAR_OF_ISSUE&page=0&size=5');
   });
 
   it('calls correct endpoint for page param', async () => {
@@ -79,17 +79,16 @@ describe('Books', () => {
     const { container } = renderWithRouter(<Books />, { route: '/knihy?stranka=3' });
     await waitForDomChange({ container });
 
-    expect(fetchMock.calls()[0][0]).toBe('/api/books?order=ASC&orderBy=TITLE&page=2&size=5');
+    expect(fetchMock.calls()[0][0]).toBe('/api/books?order=DESC&orderBy=DATE_OF_ADDITION&page=2&size=5');
   });
 
-  // TODO: Don't skip this test once the logic is implemented
-  it.skip('calls correct endpoint for size param', async () => {
+  it('calls correct endpoint for size param', async () => {
     fetchMock.get(API_BOOKS_REGEX, booksMock);
 
     const { container } = renderWithRouter(<Books />, { route: '/knihy?knihNaStranku=10' });
     await waitForDomChange({ container });
 
-    expect(fetchMock.calls()[0][0]).toBe('/api/books?order=ASC&orderBy=TITLE&page=0&size=10');
+    expect(fetchMock.calls()[0][0]).toBe('/api/books?order=DESC&orderBy=DATE_OF_ADDITION&page=0&size=10');
   });
 
   it('redirects to book details correctly', async () => {
