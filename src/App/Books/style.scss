@@ -2,14 +2,9 @@
 @import '~bootstrap/scss/variables';
 
 #books {
-  .filter {
+  button.filter {
     position: relative;
     top: $spacer/3;
-  }
-
-  // TODO: Move to filter scss file?
-  .alert {
-    margin-bottom: $spacer*1.3;
   }
 
   table {

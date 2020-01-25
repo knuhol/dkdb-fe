@@ -1,43 +1,41 @@
 // @flow
 import React, { useState } from 'react';
 import { Alert, Button, Col, Form, Row } from 'react-bootstrap';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
+import invert from 'lodash/invert';
 
-import { booksWithParams, PARAMS } from '../../routes';
-import useQuery from '../../../hooks/useQuery';
+import { PARAMS } from '../../routes';
+import { parseBooksParams, toBooksParams } from '../../../utils/urlUtils';
 
-const DEFAULT_FILTER = {
-  PAGE_SIZE: 5,
-  ORDER: PARAMS.ORDER.DESC,
-  ORDER_BY: PARAMS.ORDER_BY.DATE_OF_ADDITION,
-};
+import './style.scss';
 
 const Filter = ({ setIsFilterOpen }: { setIsFilterOpen: boolean => void }) => {
-  const query = useQuery();
-  const [orderBy, setOrderBy] = useState(query.get(PARAMS.BOOKS.ORDER_BY) || DEFAULT_FILTER.ORDER_BY);
-  const [order, setOrder] = useState(query.get(PARAMS.BOOKS.ORDER) || DEFAULT_FILTER.ORDER);
-  const [pageSize, setPageSize] = useState(query.get(PARAMS.BOOKS.PAGE_SIZE) || DEFAULT_FILTER.PAGE_SIZE);
+  const params = parseBooksParams(useLocation().search);
+  const [orderBy, setOrderBy] = useState(params.orderBy);
+  const [order, setOrder] = useState(params.order);
+  const [pageSize, setPageSize] = useState(params.pageSize);
   const history = useHistory();
 
-  const onOrderByChange = event => setOrderBy(event.target.value);
-  const onOrderChange = event => setOrder(event.target.value);
-  const onPageSizeChange = event => setPageSize(event.target.value);
+  const onOrderByChange = event => setOrderBy(invert(PARAMS.ORDER_BY)[event.target.value]);
+  const onOrderChange = event => setOrder(invert(PARAMS.ORDER)[event.target.value]);
+  const onPageSizeChange = event => {
+    setPageSize(parseInt(event.target.value, 10));
+  };
 
   const onSubmit = () => {
-    // TODO: Add param only if doesn't match default (move defaults to routes?)
-    history.push(booksWithParams({ pageSize, order, orderBy }));
+    history.push(toBooksParams({ orderBy, order, pageSize }));
     setIsFilterOpen(false);
   };
   const onCancel = () => setIsFilterOpen(false);
 
   return (
-    <Alert variant="primary">
+    <Alert variant="primary" className="filter">
       <Form>
         <Row>
           <Col xs={12} md={4}>
             <Form.Group controlId="orderBy">
               <Form.Label>Řadit podle</Form.Label>
-              <Form.Control as="select" value={orderBy} onChange={onOrderByChange}>
+              <Form.Control as="select" value={PARAMS.ORDER_BY[orderBy]} onChange={onOrderByChange}>
                 <option value={PARAMS.ORDER_BY.DATE_OF_ADDITION}>Datum přidání (výchozí)</option>
                 <option value={PARAMS.ORDER_BY.TITLE}>Název</option>
                 <option value={PARAMS.ORDER_BY.YEAR_OF_ISSUE}>Rok vydání</option>
@@ -47,7 +45,7 @@ const Filter = ({ setIsFilterOpen }: { setIsFilterOpen: boolean => void }) => {
           <Col xs={12} md={4}>
             <Form.Group controlId="order">
               <Form.Label>Pořadí</Form.Label>
-              <Form.Control as="select" value={order} onChange={onOrderChange}>
+              <Form.Control as="select" value={PARAMS.ORDER[order]} onChange={onOrderChange}>
                 <option value={PARAMS.ORDER.DESC}>Sestupně (výchozí)</option>
                 <option value={PARAMS.ORDER.ASC}>Vzestupně</option>
               </Form.Control>
@@ -83,4 +81,3 @@ const Filter = ({ setIsFilterOpen }: { setIsFilterOpen: boolean => void }) => {
 };
 
 export default Filter;
-export { DEFAULT_FILTER };

@@ -61,7 +61,7 @@ const DesktopBooksLayout = ({
             </td>
             <td>
               {book.authors.map(author => (
-                <span key={author.firstName}>
+                <span key={`${author.firstName} ${author.lastName}`}>
                   {`${author.firstName} ${author.lastName}`}
                   <br />
                 </span>

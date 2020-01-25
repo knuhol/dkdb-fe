@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { ROUTE, routeWithRedirectionParam } from '../App/routes';
+import { ROUTE } from '../App/routes';
+import { routeWithRedirectionParam } from '../utils/urlUtils';
 
 const useFetch = ({ endpoint, initialValue }: { endpoint: string, initialValue: any }) => {
   const history = useHistory();
