@@ -16,13 +16,13 @@ describe('BookDetail', () => {
   });
 
   it('renders a page correctly', async () => {
-    fetchMock.get('/api/books/1', bookMock);
+    fetchMock.get('/api/books/mock-book-title-1-1959', bookMock);
 
     const { container, getByText, getByAltText } = renderWithRouter(
       <Route path={ROUTE.BOOK_DETAIL}>
         <BookDetail />
       </Route>,
-      { route: '/kniha/1' }
+      { route: '/kniha/mock-book-title-1-1959' }
     );
     await waitForDomChange({ container });
 
@@ -43,13 +43,13 @@ describe('BookDetail', () => {
   });
 
   it('renders a page correctly when a book has no links', async () => {
-    fetchMock.get('/api/books/1', bookNoLinksMock);
+    fetchMock.get('/api/books/mock-book-title-1-1959', bookNoLinksMock);
 
     const { container, getByText } = renderWithRouter(
       <Route path={ROUTE.BOOK_DETAIL}>
         <BookDetail />
       </Route>,
-      { route: '/kniha/1' }
+      { route: '/kniha/mock-book-title-1-1959' }
     );
     await waitForDomChange({ container });
 
@@ -59,13 +59,13 @@ describe('BookDetail', () => {
   });
 
   it('returns back correctly', async () => {
-    fetchMock.get('/api/books/1', bookMock);
+    fetchMock.get('/api/books/mock-book-title-1-1959', bookMock);
 
     const { container, getByText, history } = renderWithRouter(
       <Route path={ROUTE.BOOK_DETAIL}>
         <BookDetail />
       </Route>,
-      { route: '/kniha/1' }
+      { route: '/kniha/mock-book-title-1-1959' }
     );
     await waitForDomChange({ container });
 

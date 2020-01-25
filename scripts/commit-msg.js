@@ -12,6 +12,7 @@ const buildLogger = (iconToDisplay, color) => (input, { icon = true, bold = true
   const prefix = icon ? chalk[color].bold(`${iconToDisplay}  `) : '';
   const msg = bold ? chalk.bold(input) : input;
 
+  // eslint-disable-next-line no-console
   console.log(`${prefix}${chalk[color](msg)}`);
 };
 

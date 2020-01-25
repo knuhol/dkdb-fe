@@ -6,7 +6,7 @@ describe('fetchUtils', () => {
   });
 
   it('construct book details URL properly', () => {
-    expect(getBookDetailsUrl({ id: 1 })).toBe('/api/books/1');
+    expect(getBookDetailsUrl({ slug: 'example-slug' })).toBe('/api/books/example-slug');
   });
 
   it('construct books URL properly', () => {

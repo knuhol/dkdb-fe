@@ -16,8 +16,8 @@ import databazeKnih from '../../images/databaze-knih.svg';
 import './style.scss';
 
 const BookDetail = () => {
-  const { id } = useParams();
-  const book = useBook(parseInt(id, 10));
+  const { slug } = useParams();
+  const book = useBook(slug || 'error');
   const history = useHistory();
 
   const goBack = () => history.goBack();

@@ -19,7 +19,7 @@ const MobileBooksLayout = ({
 }: {
   books: Book[],
   onPageResize: number => void,
-  onBookDetailClick: number => () => void,
+  onBookDetailClick: string => () => void,
   active: number,
   pageSize: number,
 }) => {
@@ -39,7 +39,7 @@ const MobileBooksLayout = ({
       </thead>
       <tbody>
         {books.map((book, bookIndex) => (
-          <tr key={book.id}>
+          <tr key={book.slug}>
             <td>{bookIndex + 1 + (active - 1) * pageSize}</td>
             <td>
               <Row>
@@ -58,7 +58,7 @@ const MobileBooksLayout = ({
                   <Tags book={book} />
                 </Col>
                 <Col xs={12}>
-                  <Button variant="outline-dark" onClick={onBookDetailClick(book.id)}>
+                  <Button variant="outline-dark" onClick={onBookDetailClick(book.slug)}>
                     Více informací →
                   </Button>
                 </Col>

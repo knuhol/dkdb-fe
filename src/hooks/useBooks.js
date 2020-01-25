@@ -5,7 +5,7 @@ import { getBooksUrl } from '../utils/fetchUtils';
 import type { GetBooksParams } from '../utils/fetchUtils';
 
 type Book = {
-  id: number,
+  slug: string,
   title: string,
   authors: Array<{
     firstName: string,
@@ -15,8 +15,9 @@ type Book = {
   dateOfAddition: string,
   imageURL: string,
   tags: Array<{
-    id: number,
+    slug: string,
     name: string,
+    color: 'RED' | 'ORANGE' | 'BLUE' | 'GREEN' | 'YELLOW' | 'VIOLET',
   }>,
 };
 

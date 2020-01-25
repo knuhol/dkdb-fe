@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "slug": "mock-book-title-1-2019",
     "title": "Mock book title 1",
     "authors": [
       {
@@ -13,17 +13,19 @@
     "imageURL": "https://loremflickr.com/375/500?random=1",
     "tags": [
       {
-        "id": 1,
-        "name": "Tag 1"
+        "slug": "tag-1",
+        "name": "Tag 1",
+        "color": "GREEN"
       },
       {
-        "id": 2,
-        "name": "Tag 2"
+        "slug": "tag-2",
+        "name": "Tag 2",
+        "color": "BLUE"
       }
     ]
   },
   {
-    "id": 2,
+    "slug": "mock-book-title-2-1998",
     "title": "Mock book title 2",
     "authors": [
       {
@@ -36,8 +38,9 @@
     "dateOfAddition": "2020-01-01",
     "tags": [
       {
-        "id": 3,
-        "name": "Tag 3"
+        "slug": "tag-3",
+        "name": "Tag 3",
+        "color": "RED"
       }
     ]
   }

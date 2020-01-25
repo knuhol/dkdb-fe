@@ -1,7 +1,7 @@
 // @flow
 const PARAMS = {
   BOOK_DETAIL: {
-    ID: ':id',
+    SLUG: ':slug',
   },
   BOOKS: {
     PAGE: 'stranka',
@@ -27,7 +27,7 @@ const PARAMS = {
 const ROUTE = {
   HOME: '/',
   BOOKS: '/knihy',
-  BOOK_DETAIL: `/kniha/${PARAMS.BOOK_DETAIL.ID}`,
+  BOOK_DETAIL: `/kniha/${PARAMS.BOOK_DETAIL.SLUG}`,
   ERROR_404: '/chyba/404-stranka-nenalezena',
   ERROR_500: '/chyba/500-neocekavana-chyba',
 };

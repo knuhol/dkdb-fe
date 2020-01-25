@@ -99,6 +99,6 @@ describe('Books', () => {
 
     fireEvent.click(getAllByText('Více informací →')[0]);
 
-    expect(history.location.pathname).toBe('/kniha/1');
+    expect(history.location.pathname).toBe('/kniha/mock-book-title-1-2019');
   });
 });

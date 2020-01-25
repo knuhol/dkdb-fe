@@ -36,8 +36,7 @@ const Books = () => {
     }
   };
   const onPageClick = newPage => () => history.push(toBooksParams({ page: newPage, orderBy, order, pageSize }));
-  const onBookDetailClick = bookId => () =>
-    history.push(ROUTE.BOOK_DETAIL.replace(PARAMS.BOOK_DETAIL.ID, bookId.toString()));
+  const onBookDetailClick = slug => () => history.push(ROUTE.BOOK_DETAIL.replace(PARAMS.BOOK_DETAIL.SLUG, slug));
   const onOpenFilterClick = () => setIsFilterOpen(true);
 
   return (

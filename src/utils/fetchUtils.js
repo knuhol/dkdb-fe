@@ -4,8 +4,8 @@ const getTotalBooksUrl = () => {
   return '/api/books/total';
 };
 
-const getBookDetailsUrl = ({ id }: { id: number }) => {
-  return `/api/books/${id}`;
+const getBookDetailsUrl = ({ slug }: { slug: string }) => {
+  return `/api/books/${slug}`;
 };
 
 const ORDER = {

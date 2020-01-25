@@ -2,6 +2,7 @@ const faker = require('faker');
 const times = require('lodash/times');
 const random = require('lodash/random');
 const cloneDeep = require('lodash/cloneDeep');
+const slugify = require('slugify');
 
 const { TOTAL, YEARS } = require('./fakeDataConfig');
 
@@ -26,35 +27,45 @@ const fakeAuthors = times(TOTAL.AUTHORS, () => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
 }));
-const fakeTags = times(8, index => ({ id: index, name: capitalize(faker.lorem.word()) }));
+const colors = ['RED', 'ORANGE', 'BLUE', 'GREEN', 'YELLOW', 'VIOLET'];
+const fakeTags = times(8, index => {
+  const name = capitalize(faker.lorem.word());
+  return { slug: slugify(name.toLocaleLowerCase()), name, color: colors[index % colors.length] };
+});
 const fakePublishers = times(TOTAL.PUBLISHERS, () => faker.company.companyName());
 const fakeLanguages = times(TOTAL.LANGUAGES, () => faker.lorem.word());
 
 const authors = () => generateRandomArray(fakeAuthors, TOTAL.CO_AUTHORS);
 const tags = () => generateRandomArray(fakeTags);
 
-const book = index => ({
-  id: index,
-  title: capitalize(faker.lorem.words(random(1, 5))),
-  authors: authors(),
-  yearOfIssue: faker.date.between(new Date(YEARS.MIN_YEAR_OF_ISSUE, 1), new Date()).getFullYear(),
-  dateOfAddition: faker.date
-    .between(new Date(YEARS.MIN_YEAR_OF_ADDITION, 1), new Date())
-    .toISOString()
-    .substring(0, 10),
-  imageURL: `https://loremflickr.com/375/500?random=${index}`,
-  tags: tags(),
-  description: faker.lorem.paragraphs(random(1, 5)),
-  isbn: faker.random.uuid(),
-  numberOfPages: random(150, 600),
-  originalLanguage: fakeLanguages[random(1, fakeLanguages.length)],
-  publisher: fakePublishers[random(1, fakePublishers.length)],
-  links: {
-    goodreads: `https://www.goodreads.com/${random(10000, 99999)}`,
-    cbdb: `https://cbdb.cz/${random(10000, 99999)}`,
-    databazeKnih: `https://databazeknih.cz/${random(10000, 99999)}`,
-  },
-});
+const book = index => {
+  const title = capitalize(faker.lorem.words(random(1, 5)));
+  const yearOfIssue = faker.date.between(new Date(YEARS.MIN_YEAR_OF_ISSUE, 1), new Date()).getFullYear();
+
+  return {
+    id: index,
+    slug: slugify(`${title.toLocaleLowerCase()}-${yearOfIssue}`),
+    title,
+    authors: authors(),
+    yearOfIssue,
+    dateOfAddition: faker.date
+      .between(new Date(YEARS.MIN_YEAR_OF_ADDITION, 1), new Date())
+      .toISOString()
+      .substring(0, 10),
+    imageURL: `https://loremflickr.com/375/500?random=${index}`,
+    tags: tags(),
+    description: faker.lorem.paragraphs(random(1, 5)),
+    isbn: faker.random.uuid(),
+    numberOfPages: random(150, 600),
+    originalLanguage: fakeLanguages[random(1, fakeLanguages.length)],
+    publisher: fakePublishers[random(1, fakePublishers.length)],
+    links: {
+      goodreads: `https://www.goodreads.com/${random(10000, 99999)}`,
+      cbdb: `https://cbdb.cz/${random(10000, 99999)}`,
+      databazeKnih: `https://databazeknih.cz/${random(10000, 99999)}`,
+    },
+  };
+};
 
 const books = times(TOTAL.BOOKS, index => book(index));
 

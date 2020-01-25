@@ -3,7 +3,7 @@ import useFetch from './useFetch';
 import { getBookDetailsUrl } from '../utils/fetchUtils';
 
 type BookWithDetails = {
-  id: number,
+  slug: string,
   title: string,
   authors: Array<{
     firstName: string,
@@ -13,8 +13,9 @@ type BookWithDetails = {
   dateOfAddition: string,
   imageURL: string,
   tags: Array<{
-    id: number,
+    slug: string,
     name: string,
+    color: 'RED' | 'ORANGE' | 'BLUE' | 'GREEN' | 'YELLOW' | 'VIOLET',
   }>,
   description: string,
   isbn: string,
@@ -28,9 +29,9 @@ type BookWithDetails = {
   },
 };
 
-const useBook = (bookId: number, initialValue?: BookWithDetails = {}): BookWithDetails =>
+const useBook = (slug: string, initialValue?: BookWithDetails = {}): BookWithDetails =>
   useFetch({
-    endpoint: getBookDetailsUrl({ id: bookId }),
+    endpoint: getBookDetailsUrl({ slug }),
     initialValue,
   });
 

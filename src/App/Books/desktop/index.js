@@ -19,7 +19,7 @@ const DesktopBooksLayout = ({
 }: {
   books: Book[],
   onPageResize: number => void,
-  onBookDetailClick: number => () => void,
+  onBookDetailClick: string => () => void,
   active: number,
   pageSize: number,
 }) => {
@@ -43,7 +43,7 @@ const DesktopBooksLayout = ({
       </thead>
       <tbody>
         {books.map((book, bookIndex) => (
-          <tr key={book.id}>
+          <tr key={book.slug}>
             <td>{bookIndex + 1 + (active - 1) * pageSize}</td>
             <td>
               <BookCover book={book} />
@@ -54,7 +54,7 @@ const DesktopBooksLayout = ({
                   <h2>{book.title}</h2>
                 </div>
                 <Tags book={book} />
-                <Button variant="outline-dark" onClick={onBookDetailClick(book.id)}>
+                <Button variant="outline-dark" onClick={onBookDetailClick(book.slug)}>
                   Více informací →
                 </Button>
               </div>
