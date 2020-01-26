@@ -31,7 +31,7 @@ const Home = () => {
                 Celkem knih: <b>{totalBooks}</b>
               </Col>
               <Col xs={12}>
-                Poslední aktualiace: <b>{lastUpdate}</b>
+                Poslední aktualizace: <b>{lastUpdate}</b>
               </Col>
             </Row>
           </Alert>

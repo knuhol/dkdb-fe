@@ -29,7 +29,7 @@ const About = () => (
         <p>
           Účelem tohoto projektu není v žádném případě snaha nahradit klasické knižní databáze jako{' '}
           <a href="https://goodreads.com">Goodreads</a>, <a href="https://www.cbdb.cz">ČBDB</a> nebo{' '}
-          <a href="https://databazeknih.cz">Databáze knih</a>. Naopak, tento projejt má sloužit jako doplněk k výše
+          <a href="https://databazeknih.cz">Databáze knih</a>. Naopak, tento projekt má sloužit jako doplněk k výše
           uvedeným pro snadnější vyhledávání LGBT literatury v českém jazyce. Detail každé knihy na tomto webu obsahuje
           odkazy na uvedené datábaze, kde naleznete o knihách daleko více informací a které nabízí rovněž spoustu další
           funkcionality. Vřele doporučujeme si na jedné z těchto databází vytvořit uživatelský účet a tento web používat
@@ -45,7 +45,7 @@ const About = () => (
     <Row>
       <Col>
         <ul>
-          <li>K vyhledání další LGBT knihy v češtině na základě parametrů, kterou si chcete přečíst</li>
+          <li>K vyhledání další LGBT knihy v češtině, kterou si chcete přečíst, na základě vybraných parametrů</li>
           <li>K rychlému ověření subžánrů knihy, o které již víte, že je tématicky zaměřená na LGBT</li>
           <li>Ke sledování knižních LGBT novinek v češtině</li>
         </ul>
@@ -59,8 +59,8 @@ const About = () => (
     <Row>
       <Col>
         <p>
-          Chybí tady nějaká kniha, která by tady podle vás určitě být měla? Našli jste nějakou chybu? Budeme moc rádi,
-          když nám o tom <a href="mailto:holm.tereza@gmail.com?subject=Připomínka k webu DKDB">dáte vědět</a>.
+          Chybí tu nějaká kniha, která by podle vás v databázi určitě být měla? Našli jste nějakou chybu? Budeme moc
+          rádi, když nám o tom <a href="mailto:holm.tereza@gmail.com?subject=Připomínka k webu DKDB">dáte vědět</a>.
         </p>
       </Col>
     </Row>
