@@ -26,6 +26,7 @@ const PARAMS = {
 const ROUTE = {
   HOME: '/',
   BOOKS: '/knihy',
+  ABOUT: '/o-projektu',
   BOOK_DETAIL: `/kniha/${PARAMS.BOOK_DETAIL.SLUG}`,
   ERROR_404: '/chyba/404-stranka-nenalezena',
   ERROR_500: '/chyba/500-neocekavana-chyba',

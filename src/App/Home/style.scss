@@ -1,0 +1,35 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+#home {
+  img {
+    width: 100%;
+    margin: $spacer * 2 0;
+
+    @include media-breakpoint-up(md) {
+      width: 70%;
+    }
+  }
+
+  .alert {
+    font-size: $font-size-base * 1.1;
+    margin-bottom: 0;
+
+    .row div:first-child {
+      margin-bottom: $spacer/2;
+    }
+  }
+
+  button {
+    padding: $spacer * 2 0;
+    font-size: $font-size-base * 1.1;
+    width: 100%;
+    margin-bottom: $spacer * 1.5;
+
+    @include media-breakpoint-up(md) {
+      width: 30%;
+      margin-bottom: $spacer * 2;
+    }
+  }
+}

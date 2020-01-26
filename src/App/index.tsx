@@ -7,6 +7,7 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import Home from './Home';
 import Books from './Books';
 import BookDetail from './BookDetail';
+import About from './About';
 import Error404 from './Error404';
 import Error500 from './Error500';
 
@@ -26,6 +27,11 @@ const App = () => (
       <Route exact path={ROUTE.BOOK_DETAIL}>
         <ErrorBoundary>
           <BookDetail />
+        </ErrorBoundary>
+      </Route>
+      <Route exact path={ROUTE.ABOUT}>
+        <ErrorBoundary>
+          <About />
         </ErrorBoundary>
       </Route>
       <Route exact path={ROUTE.ERROR_404}>
