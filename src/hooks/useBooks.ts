@@ -14,7 +14,7 @@ export type Book = {
   tags: Array<{
     slug: string;
     name: string;
-    color: 'RED' | 'ORANGE' | 'BLUE' | 'GREEN' | 'YELLOW' | 'VIOLET';
+    color: 'red' | 'orange' | 'blue' | 'green' | 'yellow' | 'purple';
   }>;
 };
 

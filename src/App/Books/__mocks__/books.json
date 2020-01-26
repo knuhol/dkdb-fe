@@ -15,12 +15,12 @@
       {
         "slug": "tag-1",
         "name": "Tag 1",
-        "color": "GREEN"
+        "color": "green"
       },
       {
         "slug": "tag-2",
         "name": "Tag 2",
-        "color": "BLUE"
+        "color": "blue"
       }
     ]
   },
@@ -40,7 +40,7 @@
       {
         "slug": "tag-3",
         "name": "Tag 3",
-        "color": "RED"
+        "color": "red"
       }
     ]
   }

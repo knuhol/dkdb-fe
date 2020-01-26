@@ -27,7 +27,7 @@ const fakeAuthors = times(TOTAL.AUTHORS, () => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
 }));
-const colors = ['RED', 'ORANGE', 'BLUE', 'GREEN', 'YELLOW', 'VIOLET'];
+const colors = ['red', 'orange', 'blue', 'green', 'yellow', 'purple'];
 const fakeTags = times(8, index => {
   const name = capitalize(faker.lorem.word());
   return { slug: slugify(name.toLocaleLowerCase()), name, color: colors[index % colors.length] };

@@ -14,7 +14,7 @@ type TagsProps = {
 const Tags = ({ book }: TagsProps) => (
   <div className="tags">
     {book.tags?.map(tag => (
-      <Badge key={tag.slug} className={tag.color?.toLowerCase()} variant="primary">
+      <Badge key={tag.slug} className={tag.color} variant="primary">
         <FontAwesomeIcon icon={faTag} /> {tag.name}
       </Badge>
     ))}

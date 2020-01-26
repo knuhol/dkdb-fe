@@ -1,21 +1,8 @@
 import useFetch from './useFetch';
 import { getBookDetailsUrl } from '../utils/fetchUtils';
+import { Book } from './useBooks';
 
-export type BookWithDetails = {
-  slug: string;
-  title: string;
-  authors: Array<{
-    firstName: string;
-    lastName: string;
-  }>;
-  yearOfIssue: number;
-  dateOfAddition: string;
-  imageURL: string;
-  tags: Array<{
-    slug: string;
-    name: string;
-    color: 'RED' | 'ORANGE' | 'BLUE' | 'GREEN' | 'YELLOW' | 'VIOLET';
-  }>;
+export type BookWithDetails = Book & {
   description: string;
   isbn: string;
   numberOfPages: number;
