@@ -22,7 +22,7 @@ const Home = () => {
   const onAboutClick = () => history.push(ROUTE.ABOUT);
 
   return (
-    <Page id="home">
+    <Page id="home" conditions={[totalBooks !== 0, lastUpdate !== null]}>
       <Row>
         <Col className="text-center">
           <Alert variant="primary" className="text-center">

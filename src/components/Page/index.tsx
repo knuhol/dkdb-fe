@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactNode } from 'react';
 import { Container } from 'react-bootstrap';
-import every from 'lodash/some';
+import every from 'lodash/every';
 
 import Loader from './Loader';
 import Menu from './Menu';
@@ -8,7 +8,7 @@ import Footer from './Footer';
 
 type PageProps = {
   id?: string;
-  conditions?: [boolean];
+  conditions?: boolean[];
   children?: ReactNode;
 };
 

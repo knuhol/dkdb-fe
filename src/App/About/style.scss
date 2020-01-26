@@ -1,0 +1,25 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+#about {
+  h2 {
+    margin-top: $spacer/2;
+    margin-bottom: $spacer;
+  }
+
+  .authors {
+    h3 {
+      margin-top: $spacer;
+    }
+
+    a {
+      margin-bottom: $spacer;
+    }
+
+    img {
+      width: 50%;
+      display: block;
+      margin: $spacer auto;
+    }
+  }
+}

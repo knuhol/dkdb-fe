@@ -67,7 +67,7 @@ Full API documentation is available in [dkdb-be](https://github.com/terhol/dkdb-
 ### API Mock
 There is a mock API for development purposes which offers all routes supported by official API.
 
-This mock server is automatically start together with `npm start` command and is served at `localhost:3001`, example route is [http://localhost:3001/api/books/3](http://localhost:3001/api/books/3).
+This mock server is automatically start together with `npm start` command and is served at `localhost:3001`, example route is [http://localhost:3001/api/books](http://localhost:3001/api/books).
 
 You can also start the mock API server alone by this command:
 
