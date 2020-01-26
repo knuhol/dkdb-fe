@@ -97,9 +97,11 @@ const EllipsisPagination = ({ total, active, maxWidth, onPageClick }: EllipsisPa
         pagination += 1;
         return item;
       })}
-      <Pagination.Item style={{ width: pageItemWidth }} active={active === total} onClick={onPageClick(total)}>
-        {total}
-      </Pagination.Item>
+      {total > 1 && (
+        <Pagination.Item style={{ width: pageItemWidth }} active={active === total} onClick={onPageClick(total)}>
+          {total}
+        </Pagination.Item>
+      )}
       {areArrowsVisible && (
         <Pagination.Next
           style={{ width: pageItemWidth }}
