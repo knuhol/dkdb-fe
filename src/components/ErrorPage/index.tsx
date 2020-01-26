@@ -16,7 +16,7 @@ const ErrorPage = ({ title, text }: ErrorPageProps) => {
   const query = useQuery();
   const hasBeenRedirected = query.get(PARAMS.REDIRECTION.REDIRECTED) === PARAMS.REDIRECTION.YES;
 
-  const goBack = (): void => history.go(hasBeenRedirected ? -2 : -1);
+  const goBack = () => history.go(hasBeenRedirected ? -2 : -1);
 
   return (
     <Page id="error-page">

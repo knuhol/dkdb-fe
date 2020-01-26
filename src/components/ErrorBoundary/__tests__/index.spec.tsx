@@ -13,7 +13,7 @@ describe('ErrorBoundary', () => {
   });
 
   it('redirects to page 500 in case of error', () => {
-    const ErrorComponent: React.FC = () => {
+    const ErrorComponent = () => {
       throw new Error();
     };
     const { history } = renderWithRedirectionRouter(

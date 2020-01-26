@@ -22,7 +22,7 @@ const BookDetail = () => {
   const goBack = () => history.goBack();
 
   if (!book) {
-    return <Page id="book-detail" conditions={[true]} />;
+    return <Page id="book-detail" conditions={[false]} />;
   }
 
   return (

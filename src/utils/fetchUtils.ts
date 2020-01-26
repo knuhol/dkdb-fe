@@ -2,7 +2,7 @@ const getTotalBooksUrl = () => {
   return '/api/books/total';
 };
 
-const getBookDetailsUrl = ({ slug }: { slug: string }): string => {
+const getBookDetailsUrl = ({ slug }: { slug: string }) => {
   return `/api/books/${slug}`;
 };
 
@@ -24,7 +24,7 @@ export type GetBooksParams = {
   size?: number;
 };
 
-const getBooksUrl = (params: GetBooksParams = {}): string => {
+const getBooksUrl = (params: GetBooksParams = {}) => {
   const endpoint = '/api/books';
   const query = new URLSearchParams(params as any).toString();
 
