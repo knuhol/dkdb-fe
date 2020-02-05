@@ -1,5 +1,5 @@
-const getTotalBooksUrl = () => {
-  return '/api/books/total';
+const getBooksInfoUrl = () => {
+  return '/api/books/info';
 };
 
 const getBookDetailsUrl = ({ slug }: { slug: string }) => {
@@ -31,4 +31,4 @@ const getBooksUrl = (params: GetBooksParams = {}) => {
   return `${endpoint}${query ? `?${query}` : ''}`;
 };
 
-export { getTotalBooksUrl, getBookDetailsUrl, getBooksUrl, ORDER, ORDER_BY };
+export { getBooksInfoUrl, getBookDetailsUrl, getBooksUrl, ORDER, ORDER_BY };

@@ -7,31 +7,32 @@ import Page from '../../components/Page';
 import logo from '../../images/dkdb_full.svg';
 import { ROUTE } from '../routes';
 import { dateFormatter } from '../../utils/formatterUtils';
-import useTotalBooks from '../../hooks/useTotalBooks';
+import useBooksInfo from '../../hooks/useBooksInfo';
 
 import './style.scss';
 
 const Home = () => {
   const history = useHistory();
-
-  // TODO: Fix to use a real last update date when API supports this
-  const totalBooks = useTotalBooks(0);
-  const lastUpdate = dateFormatter.format(new Date());
+  const booksInfo = useBooksInfo();
 
   const onBooksClick = () => history.push(ROUTE.BOOKS);
   const onAboutClick = () => history.push(ROUTE.ABOUT);
 
+  if (booksInfo == null) {
+    return <Page loading />;
+  }
+
   return (
-    <Page id="home" conditions={[totalBooks !== 0, lastUpdate !== null]}>
+    <Page id="home">
       <Row>
         <Col className="text-center">
           <Alert variant="primary" className="text-center">
             <Row>
               <Col xs={12}>
-                Celkem knih: <b>{totalBooks}</b>
+                Celkem knih: <b>{booksInfo.totalBooks}</b>
               </Col>
               <Col xs={12}>
-                Poslední aktualizace: <b>{lastUpdate}</b>
+                Poslední aktualizace: <b>{dateFormatter.format(new Date(booksInfo.dateOfLastBookAddition))}</b>
               </Col>
             </Row>
           </Alert>

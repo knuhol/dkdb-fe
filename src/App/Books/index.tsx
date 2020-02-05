@@ -6,7 +6,7 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 import Page from '../../components/Page';
 import useBooks from '../../hooks/useBooks';
-import useTotalBooks from '../../hooks/useTotalBooks';
+import useBooksInfo from '../../hooks/useBooksInfo';
 import Filter from './Filter';
 import MobileBooksLayout from './mobile';
 import DesktopBooksLayout from './desktop';
@@ -20,7 +20,7 @@ const Books = () => {
   const { orderBy, order, pageSize, page } = parseBooksParams(useLocation().search);
   const [pageWidth, setPageWidth] = useState(0);
   const books = useBooks({ order, orderBy, page: page - 1, size: pageSize }, []);
-  const totalBooks = useTotalBooks(0);
+  const booksInfo = useBooksInfo();
   const history = useHistory();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isFilterDefault, setIsFilterDefault] = useState(true);
@@ -40,8 +40,12 @@ const Books = () => {
     history.push(ROUTE.BOOK_DETAIL.replace(PARAMS.BOOK_DETAIL.SLUG, slug));
   const onOpenFilterClick = () => setIsFilterOpen(true);
 
+  if (books.length === 0 || booksInfo == null) {
+    return <Page loading />;
+  }
+
   return (
-    <Page id="books" conditions={[books.length > 0]}>
+    <Page id="books">
       <Row>
         <Col xs={6}>
           <h1>Knihy</h1>
@@ -66,7 +70,7 @@ const Books = () => {
       <Row>
         <Col xs={12}>
           <EllipsisPagination
-            total={Math.ceil(totalBooks / pageSize)}
+            total={Math.ceil(booksInfo.totalBooks / pageSize)}
             active={page}
             maxWidth={pageWidth}
             onPageClick={onPageClick}
@@ -94,7 +98,7 @@ const Books = () => {
       <Row>
         <Col xs={12}>
           <EllipsisPagination
-            total={Math.ceil(totalBooks / pageSize)}
+            total={Math.ceil(booksInfo.totalBooks / pageSize)}
             active={page}
             maxWidth={pageWidth}
             onPageClick={onPageClick}

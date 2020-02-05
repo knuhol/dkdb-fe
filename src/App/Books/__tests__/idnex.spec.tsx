@@ -6,13 +6,13 @@ import Books from '../index';
 import { renderWithRouter } from '../../../utils/testUtils';
 
 import booksMock from '../__mocks__/books.json';
-import totalMock from '../__mocks__/total.json';
+import infoMock from '../__mocks__/info.json';
 
 const API_BOOKS_REGEX = /^(\/api\/books)(\/?\?{0}|\/?\?.*)$/;
 
 describe('Books', () => {
   beforeEach(() => {
-    fetchMock.get('/api/books/total', totalMock);
+    fetchMock.get('/api/books/info', infoMock);
   });
   afterEach(() => {
     fetchMock.restore();

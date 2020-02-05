@@ -1,8 +1,8 @@
-import { getTotalBooksUrl, getBookDetailsUrl, getBooksUrl } from '../fetchUtils';
+import { getBooksInfoUrl, getBookDetailsUrl, getBooksUrl } from '../fetchUtils';
 
 describe('fetchUtils', () => {
-  it('construct total books URL properly', () => {
-    expect(getTotalBooksUrl()).toBe('/api/books/total');
+  it('construct books info URL properly', () => {
+    expect(getBooksInfoUrl()).toBe('/api/books/info');
   });
 
   it('construct book details URL properly', () => {
