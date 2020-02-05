@@ -1,4 +1,10 @@
-import { getBooksInfoUrl, getBookDetailsUrl, getRandomBook, getBooksUrl } from '../fetchUtils';
+import {
+  getBooksInfoUrl,
+  getBookDetailsUrl,
+  getRandomBookUrl,
+  getBooksUrl,
+  getBooksFilterParamsUrl,
+} from '../fetchUtils';
 
 describe('fetchUtils', () => {
   it('constructs books info URL properly', () => {
@@ -10,7 +16,11 @@ describe('fetchUtils', () => {
   });
 
   it('constructs random book URL properly', () => {
-    expect(getRandomBook()).toBe('/api/books/random');
+    expect(getRandomBookUrl()).toBe('/api/books/random');
+  });
+
+  it('constructs books filter params URL properly', () => {
+    expect(getBooksFilterParamsUrl()).toBe('/api/books/filterParams');
   });
 
   it('constructs books URL properly', () => {

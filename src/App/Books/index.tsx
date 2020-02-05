@@ -3,6 +3,7 @@ import { Col, Row, Button } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import omit from 'lodash/omit';
 
 import Page from '../../components/Page';
 import useBooks from '../../hooks/useBooks';
@@ -12,22 +13,24 @@ import MobileBooksLayout from './mobile';
 import DesktopBooksLayout from './desktop';
 import EllipsisPagination from '../../components/EllipsisPagination';
 import { PARAMS, ROUTE } from '../routes';
-import { areBooksParamsDefault, parseBooksParams, toBooksParams } from '../../utils/urlUtils';
+import { DEFAULT_BOOK_PARAMS, parseBooksParams, toBooksParams } from '../../utils/urlUtils';
 
 import './style.scss';
 
 const Books = () => {
-  const { orderBy, order, pageSize, page } = parseBooksParams(useLocation().search);
+  const bookParams = parseBooksParams(useLocation().search);
+  const page = bookParams.page || DEFAULT_BOOK_PARAMS.page;
+  const pageSize = bookParams.pageSize || DEFAULT_BOOK_PARAMS.pageSize;
   const [pageWidth, setPageWidth] = useState(0);
-  const books = useBooks({ order, orderBy, page: page - 1, size: pageSize }, []);
+  const books = useBooks(bookParams);
   const booksInfo = useBooksInfo();
   const history = useHistory();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isFilterDefault, setIsFilterDefault] = useState(true);
 
   useEffect(() => {
-    setIsFilterDefault(areBooksParamsDefault({ orderBy, order, pageSize }));
-  }, [order, orderBy, page, pageSize]);
+    setIsFilterDefault(Object.keys(omit(bookParams, 'page')).length === 0);
+  }, [bookParams]);
 
   // TODO: Reflect tag, originalLanguage and bookSize in title and description
   const getTitleAndDescription = () => {
@@ -48,13 +51,12 @@ const Books = () => {
       setPageWidth(newPageWidth);
     }
   };
-  const onPageClick = (newPage: number) => () =>
-    history.push(toBooksParams({ page: newPage, orderBy, order, pageSize }));
+  const onPageClick = (newPage: number) => () => history.push(toBooksParams({ ...bookParams, page: newPage }));
   const onBookDetailClick = (slug: string) => () =>
     history.push(ROUTE.BOOK_BY_SLUG.replace(PARAMS.BOOK_DETAIL.SLUG, slug));
   const onOpenFilterClick = () => setIsFilterOpen(true);
 
-  if (books.length === 0 || booksInfo == null) {
+  if (books == null || booksInfo == null) {
     return <Page loading />;
   }
 

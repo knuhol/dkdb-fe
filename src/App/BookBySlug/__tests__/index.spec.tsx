@@ -31,7 +31,7 @@ describe('BookBySlug', () => {
     expect(getByText('Rok vydání: 1959')).toBeInTheDocument();
     expect(getByText('Přidáno: 16. 3. 2018')).toBeInTheDocument();
     expect(getByText('ISBN: c46001f0-d500-4f2a-b7f8-3dd9ad2d2f88')).toBeInTheDocument();
-    expect(getByText('Originální jazyk: mock language')).toBeInTheDocument();
+    expect(getByText('Původní jazyk: mock language')).toBeInTheDocument();
     expect(getByText('Suscipit ea exercitationem qui quidem deserunt aspernatur cumque.')).toBeInTheDocument();
     expect(getByText('Vydavatel: Mock publisher 1')).toBeInTheDocument();
     expect(getByText('Tag 1')).toBeInTheDocument();

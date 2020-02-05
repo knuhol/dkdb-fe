@@ -39,6 +39,13 @@ const QUERY_PARAMS_MAP = {
   size: '_limit',
 };
 
+const QUERY_PARAMS_DEFAULT = {
+  _order: 'desc',
+  _orderBy: 'yearOfIssue',
+  _page: 0,
+  _limit: 5,
+};
+
 // rewrite URL query from original API to JSON server API
 server.use((req, res, next) => {
   Object.keys(req.query).forEach(param => {
@@ -59,6 +66,9 @@ server.use((req, res, next) => {
       delete req.query[param];
     }
   });
+
+  req.query = { ...QUERY_PARAMS_DEFAULT, ...req.query };
+
   next();
 });
 

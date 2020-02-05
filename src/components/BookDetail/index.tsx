@@ -76,7 +76,7 @@ const BookDetail = ({ book, buttonText, onButtonClick }: BookDetailProps) => {
           <div>Rok vydání: {book.yearOfIssue}</div>
           <div>Počet stran: {book.numberOfPages}</div>
           <div>Vydavatel: {book.publisher}</div>
-          <div>Originální jazyk: {book.originalLanguage}</div>
+          <div>Původní jazyk: {book.originalLanguage}</div>
           <div>ISBN: {book.isbn}</div>
         </Col>
         <Col xs={12}>
