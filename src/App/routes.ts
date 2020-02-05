@@ -26,8 +26,9 @@ const PARAMS = {
 const ROUTE = {
   HOME: '/',
   BOOKS: '/knihy',
+  RANDOM_BOOK: '/nahodna-kniha',
   ABOUT: '/o-projektu',
-  BOOK_DETAIL: `/kniha/${PARAMS.BOOK_DETAIL.SLUG}`,
+  BOOK_BY_SLUG: `/kniha/${PARAMS.BOOK_DETAIL.SLUG}`,
   ERROR_404: '/chyba/404-stranka-nenalezena',
   ERROR_500: '/chyba/500-neocekavana-chyba',
 };

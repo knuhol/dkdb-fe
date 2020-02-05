@@ -15,6 +15,9 @@ describe('App', () => {
     fireEvent.click(getByText('Knihy'));
     expect(history.location.pathname).toBe(ROUTE.BOOKS);
 
+    fireEvent.click(getByText('Náhodná kniha'));
+    expect(history.location.pathname).toBe(ROUTE.RANDOM_BOOK);
+
     fireEvent.click(getByText('O projektu'));
     expect(history.location.pathname).toBe(ROUTE.ABOUT);
   });

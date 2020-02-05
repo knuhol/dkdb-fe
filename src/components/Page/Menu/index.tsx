@@ -20,7 +20,10 @@ const Menu = () => (
         <Nav.Link eventKey={1} as={NavLink} to={ROUTE.BOOKS}>
           <span>Knihy</span>
         </Nav.Link>
-        <Nav.Link eventKey={2} as={NavLink} to={ROUTE.ABOUT}>
+        <Nav.Link eventKey={2} as={NavLink} to={ROUTE.RANDOM_BOOK}>
+          <span>Náhodná kniha</span>
+        </Nav.Link>
+        <Nav.Link eventKey={3} as={NavLink} to={ROUTE.ABOUT}>
           <span>O projektu</span>
         </Nav.Link>
       </Nav>

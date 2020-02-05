@@ -1,15 +1,19 @@
-import { getBooksInfoUrl, getBookDetailsUrl, getBooksUrl } from '../fetchUtils';
+import { getBooksInfoUrl, getBookDetailsUrl, getRandomBook, getBooksUrl } from '../fetchUtils';
 
 describe('fetchUtils', () => {
-  it('construct books info URL properly', () => {
+  it('constructs books info URL properly', () => {
     expect(getBooksInfoUrl()).toBe('/api/books/info');
   });
 
-  it('construct book details URL properly', () => {
+  it('constructs book details URL properly', () => {
     expect(getBookDetailsUrl({ slug: 'example-slug' })).toBe('/api/books/example-slug');
   });
 
-  it('construct books URL properly', () => {
+  it('constructs random book URL properly', () => {
+    expect(getRandomBook()).toBe('/api/books/random');
+  });
+
+  it('constructs books URL properly', () => {
     expect(getBooksUrl({ orderBy: 'TITLE' })).toBe('/api/books?orderBy=TITLE');
     expect(getBooksUrl({ orderBy: 'DATE_OF_ADDITION' })).toBe('/api/books?orderBy=DATE_OF_ADDITION');
     expect(getBooksUrl({ orderBy: 'YEAR_OF_ISSUE' })).toBe('/api/books?orderBy=YEAR_OF_ISSUE');

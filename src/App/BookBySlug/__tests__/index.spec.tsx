@@ -3,14 +3,14 @@ import fetchMock from 'fetch-mock';
 import { waitForDomChange, fireEvent } from '@testing-library/react';
 import { Route } from 'react-router-dom';
 
-import BookDetail from '../index';
+import BookBySlug from '../index';
 import { PREVIOUS_ROUTE, renderWithRouter } from '../../../utils/testUtils';
 import { ROUTE } from '../../routes';
 
 import bookMock from '../__mocks__/book.json';
 import bookNoLinksMock from '../__mocks__/book-no-links.json';
 
-describe('BookDetail', () => {
+describe('BookBySlug', () => {
   afterEach(() => {
     fetchMock.restore();
   });
@@ -19,8 +19,8 @@ describe('BookDetail', () => {
     fetchMock.get('/api/books/mock-book-title-1-1959', bookMock);
 
     const { container, getByText, getByAltText } = renderWithRouter(
-      <Route path={ROUTE.BOOK_DETAIL}>
-        <BookDetail />
+      <Route path={ROUTE.BOOK_BY_SLUG}>
+        <BookBySlug />
       </Route>,
       { route: '/kniha/mock-book-title-1-1959' }
     );
@@ -48,8 +48,8 @@ describe('BookDetail', () => {
     fetchMock.get('/api/books/mock-book-title-1-1959', bookNoLinksMock);
 
     const { container, getByText } = renderWithRouter(
-      <Route path={ROUTE.BOOK_DETAIL}>
-        <BookDetail />
+      <Route path={ROUTE.BOOK_BY_SLUG}>
+        <BookBySlug />
       </Route>,
       { route: '/kniha/mock-book-title-1-1959' }
     );
@@ -64,8 +64,8 @@ describe('BookDetail', () => {
     fetchMock.get('/api/books/mock-book-title-1-1959', bookMock);
 
     const { container, getByText, history } = renderWithRouter(
-      <Route path={ROUTE.BOOK_DETAIL}>
-        <BookDetail />
+      <Route path={ROUTE.BOOK_BY_SLUG}>
+        <BookBySlug />
       </Route>,
       { route: '/kniha/mock-book-title-1-1959' }
     );

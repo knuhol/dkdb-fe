@@ -1,9 +1,10 @@
 const jsonServer = require('json-server');
 const filter = require('lodash/filter');
+const random = require('lodash/random');
 const url = require('url');
 
 const { books, filterParams, info } = require('./fakeData');
-const { BOOK_SIZES } = require('./fakeDataConfig');
+const { TOTAL, BOOK_SIZES } = require('./fakeDataConfig');
 
 const server = jsonServer.create();
 const router = jsonServer.router({
@@ -41,8 +42,8 @@ const QUERY_PARAMS_MAP = {
 // rewrite URL query from original API to JSON server API
 server.use((req, res, next) => {
   Object.keys(req.query).forEach(param => {
-    // remove tags and bookSize to prevent original json-mock filter
-    if (param === 'tags' || param === 'bookSize') {
+    // remove tags, bookSize and random params to prevent original json-mock filter
+    if (param === 'tags' || param === 'bookSize' || param === 'random') {
       delete req.query[param];
     }
 
@@ -96,6 +97,12 @@ server.use((req, res, next) => {
       return _send.call(this, JSON.stringify(json));
     }
 
+    // get random book
+    if (query.random) {
+      const json = JSON.parse(body);
+      return _send.call(this, JSON.stringify(json[random(0, TOTAL.BOOKS - 1)]));
+    }
+
     // add support for singular query param https://github.com/typicode/json-server/issues/541
     if (query.singular) {
       const json = JSON.parse(body);
@@ -120,6 +127,7 @@ server.use(
   jsonServer.rewriter({
     '/api/books/info': '/api/info/1',
     '/api/books/filterParams': '/api/filterParams/1',
+    '/api/books/random': '/api/books?random=true',
     '/api/books/:slug': '/api/books?slug=:slug&singular=1',
   })
 );

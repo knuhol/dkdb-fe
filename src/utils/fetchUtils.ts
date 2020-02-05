@@ -6,6 +6,10 @@ const getBookDetailsUrl = ({ slug }: { slug: string }) => {
   return `/api/books/${slug}`;
 };
 
+const getRandomBook = () => {
+  return '/api/books/random';
+};
+
 const ORDER = {
   ASC: 'ASC',
   DESC: 'DESC',
@@ -31,4 +35,4 @@ const getBooksUrl = (params: GetBooksParams = {}) => {
   return `${endpoint}${query ? `?${query}` : ''}`;
 };
 
-export { getBooksInfoUrl, getBookDetailsUrl, getBooksUrl, ORDER, ORDER_BY };
+export { getBooksInfoUrl, getBookDetailsUrl, getRandomBook, getBooksUrl, ORDER, ORDER_BY };

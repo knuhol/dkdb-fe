@@ -1,12 +1,11 @@
 import React from 'react';
-import { useHistory, useParams } from 'react-router';
 import { Button, Col, Image, Row } from 'react-bootstrap';
 
-import Page from '../../components/Page';
-import useBook from '../../hooks/useBook';
-import Tags from '../../components/Tags';
+import Page from '../Page';
+import { BookWithDetails } from '../../hooks/useBook';
+import Tags from '../Tags';
 import { dateFormatter } from '../../utils/formatterUtils';
-import BookCover from '../../components/BookCover';
+import BookCover from '../BookCover';
 
 import goodreads from '../../images/goodreads.svg';
 import cbdb from '../../images/cbdb.svg';
@@ -14,13 +13,13 @@ import databazeKnih from '../../images/databaze-knih.svg';
 
 import './style.scss';
 
-const BookDetail = () => {
-  const { slug } = useParams();
-  const book = useBook(slug || 'error');
-  const history = useHistory();
+type BookDetailProps = {
+  book?: BookWithDetails;
+  buttonText: string;
+  onButtonClick: () => void;
+};
 
-  const goBack = () => history.goBack();
-
+const BookDetail = ({ book, buttonText, onButtonClick }: BookDetailProps) => {
   if (book == null) {
     return <Page loading />;
   }
@@ -73,13 +72,17 @@ const BookDetail = () => {
           Přidáno: {dateFormatter.format(new Date(book.dateOfAddition))}
         </Col>
         <Col className="back">
-          <Button variant="outline-dark" onClick={goBack}>
-            ← Zpátky na přehled
+          <Button variant="outline-dark" onClick={onButtonClick}>
+            {buttonText}
           </Button>
         </Col>
       </Row>
     </Page>
   );
+};
+
+BookDetail.defaultProps = {
+  book: undefined,
 };
 
 export default BookDetail;
