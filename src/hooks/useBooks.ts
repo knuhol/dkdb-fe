@@ -1,5 +1,8 @@
+import mapKeys from 'lodash/mapKeys';
+
 import useFetch from './useFetch';
-import { getBooksUrl, GetBooksParams } from '../utils/fetchUtils';
+import { GetBooksParams, getBooksUrl } from '../utils/fetchUtils';
+import { BooksParams } from '../utils/urlUtils';
 
 export type Book = {
   slug: string;
@@ -18,10 +21,22 @@ export type Book = {
   }>;
 };
 
-const useBooks = (params: GetBooksParams, initialValue: Book[] = []): Book[] =>
-  useFetch({
-    endpoint: getBooksUrl(params),
+const useBooks = (params: BooksParams, initialValue: Book[] = []): Book[] => {
+  const getBooksParams: GetBooksParams = mapKeys(params, (value, key) => {
+    if (key === 'pageSize') {
+      return 'size';
+    }
+    return key;
+  });
+
+  if (getBooksParams.page) {
+    getBooksParams.page -= 1;
+  }
+
+  return useFetch({
+    endpoint: getBooksUrl(getBooksParams),
     initialValue,
   });
+};
 
 export default useBooks;

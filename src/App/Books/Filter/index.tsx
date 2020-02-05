@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Alert, Button, Col, Form, Row } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
 import invert from 'lodash/invert';
+import omitBy from 'lodash/omitBy';
 
 import { Order, OrderBy, PARAMS } from '../../routes';
-import { parseBooksParams, toBooksParams } from '../../../utils/urlUtils';
+import { DEFAULT_BOOK_PARAMS, DefaultBookParam, parseBooksParams, toBooksParams } from '../../../utils/urlUtils';
 
 import './style.scss';
 
@@ -28,7 +29,12 @@ const Filter = ({ setIsFilterOpen }: FilterProps) => {
   };
 
   const onSubmit = () => {
-    history.push(toBooksParams({ orderBy, order, pageSize }));
+    const nonDefaultBooksParams = omitBy(
+      { orderBy, order, pageSize },
+      (value, key) => DEFAULT_BOOK_PARAMS[key as DefaultBookParam] === value
+    );
+
+    history.push(toBooksParams(nonDefaultBooksParams));
     setIsFilterOpen(false);
   };
   const onCancel = () => setIsFilterOpen(false);
@@ -40,7 +46,11 @@ const Filter = ({ setIsFilterOpen }: FilterProps) => {
           <Col xs={12} md={4}>
             <Form.Group controlId="orderBy">
               <Form.Label>Řadit podle</Form.Label>
-              <Form.Control as="select" value={PARAMS.ORDER_BY[orderBy]} onChange={onOrderByChange}>
+              <Form.Control
+                as="select"
+                value={orderBy ? PARAMS.ORDER_BY[orderBy] : PARAMS.ORDER_BY.DATE_OF_ADDITION}
+                onChange={onOrderByChange}
+              >
                 <option value={PARAMS.ORDER_BY.DATE_OF_ADDITION}>Datum přidání (výchozí)</option>
                 <option value={PARAMS.ORDER_BY.TITLE}>Název</option>
                 <option value={PARAMS.ORDER_BY.YEAR_OF_ISSUE}>Rok vydání</option>
@@ -50,7 +60,11 @@ const Filter = ({ setIsFilterOpen }: FilterProps) => {
           <Col xs={12} md={4}>
             <Form.Group controlId="order">
               <Form.Label>Pořadí</Form.Label>
-              <Form.Control as="select" value={PARAMS.ORDER[order]} onChange={onOrderChange}>
+              <Form.Control
+                as="select"
+                value={order ? PARAMS.ORDER[order] : PARAMS.ORDER.DESC}
+                onChange={onOrderChange}
+              >
                 <option value={PARAMS.ORDER.DESC}>Sestupně (výchozí)</option>
                 <option value={PARAMS.ORDER.ASC}>Vzestupně</option>
               </Form.Control>
@@ -59,7 +73,7 @@ const Filter = ({ setIsFilterOpen }: FilterProps) => {
           <Col xs={12} md={4}>
             <Form.Group controlId="pageSize">
               <Form.Label>Knih na stranu</Form.Label>
-              <Form.Control as="select" value={pageSize.toString()} onChange={onPageSizeChange}>
+              <Form.Control as="select" value={(pageSize || 5).toString()} onChange={onPageSizeChange}>
                 <option value={5}>5 (výchozí)</option>
                 <option value={10}>10</option>
                 <option value={15}>15</option>

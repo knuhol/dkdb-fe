@@ -1,22 +1,38 @@
-import { areBooksParamsDefault, parseBooksParams, routeWithRedirectionParam, toBooksParams } from '../urlUtils';
+import { parseBooksParams, routeWithRedirectionParam, toBooksParams } from '../urlUtils';
 
 describe('urlUtils', () => {
   it('builds books URL with params correctly', () => {
-    const book1 = toBooksParams({
-      page: 1,
-      order: 'DESC',
-      orderBy: 'DATE_OF_ADDITION',
-      pageSize: 5,
-    });
+    const book1 = toBooksParams({});
     const book2 = toBooksParams({
       pageSize: 10,
       order: 'ASC',
       orderBy: 'TITLE',
       page: 2,
     });
+    const book3 = toBooksParams({
+      pageSize: 10,
+    });
+    const book4 = toBooksParams({
+      order: 'ASC',
+    });
+    const book5 = toBooksParams({
+      orderBy: 'TITLE',
+    });
+    const book6 = toBooksParams({
+      page: 2,
+    });
+    const book7 = toBooksParams({
+      page: 2,
+      orderBy: 'TITLE',
+    });
 
     expect(book1).toBe('/knihy');
     expect(book2).toBe('/knihy?knihNaStranku=10&poradi=VZESTUPNE&seraditPodle=NAZEV&stranka=2');
+    expect(book3).toBe('/knihy?knihNaStranku=10');
+    expect(book4).toBe('/knihy?poradi=VZESTUPNE');
+    expect(book5).toBe('/knihy?seraditPodle=NAZEV');
+    expect(book6).toBe('/knihy?stranka=2');
+    expect(book7).toBe('/knihy?stranka=2&seraditPodle=NAZEV');
   });
 
   it('parses books URL with params correctly', () => {
@@ -25,7 +41,6 @@ describe('urlUtils', () => {
     const params3 = parseBooksParams('knihNaStranku=10&nonExistingParam=something');
 
     expect(params1).toStrictEqual({
-      orderBy: 'DATE_OF_ADDITION',
       order: 'ASC',
       page: 2,
       pageSize: 10,
@@ -37,41 +52,8 @@ describe('urlUtils', () => {
       pageSize: 10,
     });
     expect(params3).toStrictEqual({
-      orderBy: 'DATE_OF_ADDITION',
-      order: 'DESC',
-      page: 1,
       pageSize: 10,
     });
-  });
-
-  it('checks correctly if books params are default', () => {
-    const params1 = areBooksParamsDefault({
-      orderBy: 'DATE_OF_ADDITION',
-      order: 'DESC',
-      page: 1,
-      pageSize: 5,
-    });
-    const params2 = areBooksParamsDefault({
-      orderBy: 'DATE_OF_ADDITION',
-      order: 'ASC',
-      page: 2,
-      pageSize: 10,
-    });
-    const params3 = areBooksParamsDefault({
-      orderBy: 'DATE_OF_ADDITION',
-      order: 'DESC',
-      pageSize: 5,
-    });
-    const params4 = areBooksParamsDefault({
-      orderBy: 'DATE_OF_ADDITION',
-      order: 'ASC',
-      pageSize: 5,
-    });
-
-    expect(params1).toBe(true);
-    expect(params2).toBe(false);
-    expect(params3).toBe(true);
-    expect(params4).toBe(false);
   });
 
   it('constructs correctly route with redirection parameter', () => {

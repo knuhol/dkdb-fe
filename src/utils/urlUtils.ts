@@ -1,21 +1,16 @@
 import queryString from 'query-string';
 import invert from 'lodash/invert';
-import some from 'lodash/some';
 
 import { Order, OrderBy, PARAMS, ROUTE } from '../App/routes';
 
-type BooksParamsBase = {
-  orderBy: keyof typeof PARAMS.ORDER_BY;
-  order: keyof typeof PARAMS.ORDER;
-  pageSize: number;
-};
-
-type BooksParams = BooksParamsBase & {
-  page: number;
-};
-
-type BooksParamsWithOptionalPage = BooksParamsBase & {
+export type BooksParams = {
+  orderBy?: keyof typeof PARAMS.ORDER_BY;
+  order?: keyof typeof PARAMS.ORDER;
   page?: number;
+  pageSize?: number;
+  tags?: string[];
+  bookSize?: string;
+  originalLanguage?: string;
 };
 
 const BOOKS_PARAMS_MAP = {
@@ -23,18 +18,21 @@ const BOOKS_PARAMS_MAP = {
   order: PARAMS.BOOKS.ORDER,
   page: PARAMS.BOOKS.PAGE,
   pageSize: PARAMS.BOOKS.PAGE_SIZE,
+  tags: PARAMS.BOOKS.TAGS,
+  bookSize: PARAMS.BOOKS.BOOK_SIZE,
+  originalLanguage: PARAMS.BOOKS.ORIGINAL_LANGUAGE,
 };
+type BookParam = keyof typeof BOOKS_PARAMS_MAP;
 
-const DEFAULT_BOOK_PARAMS = {
-  orderBy: PARAMS.ORDER_BY.DATE_OF_ADDITION,
-  order: PARAMS.ORDER.DESC,
+const DEFAULT_BOOK_PARAMS: { orderBy: OrderBy; order: Order; page: number; pageSize: number } = {
+  orderBy: 'DATE_OF_ADDITION',
+  order: 'DESC',
   page: 1,
   pageSize: 5,
 };
+export type DefaultBookParam = keyof typeof DEFAULT_BOOK_PARAMS;
 
-type BookParam = keyof typeof DEFAULT_BOOK_PARAMS;
-
-const getParamValue = (param: any, params: any) => {
+const getParamValue = (param: BookParam, params: BooksParams) => {
   let value = params[param];
 
   if (param === 'orderBy' && params[param]) {
@@ -62,33 +60,22 @@ const parseBooksParams = (query: string) => {
 
   if (params.orderBy && invertedOrderBy[params.orderBy]) {
     params.orderBy = invertedOrderBy[params.orderBy];
-  } else {
-    params.orderBy = invertedOrderBy[DEFAULT_BOOK_PARAMS.orderBy];
   }
 
   if (params.order && invertedOrder[params.order]) {
     params.order = invertedOrder[params.order];
-  } else {
-    params.order = invertedOrder[DEFAULT_BOOK_PARAMS.order];
-  }
-
-  if (!params.page) {
-    params.page = DEFAULT_BOOK_PARAMS.page;
-  }
-
-  if (!params.pageSize) {
-    params.pageSize = DEFAULT_BOOK_PARAMS.pageSize;
   }
 
   return params as BooksParams;
 };
 
-const toBooksParams = (params: BooksParamsWithOptionalPage) => {
+const toBooksParams = (params: BooksParams) => {
   const localizedParams: any = {};
-  Object.keys(params).forEach(param => {
+
+  (Object.keys(params) as Array<BookParam>).forEach(param => {
     const value = getParamValue(param, params);
-    if (value && BOOKS_PARAMS_MAP[param as BookParam] && value !== DEFAULT_BOOK_PARAMS[param as BookParam]) {
-      localizedParams[BOOKS_PARAMS_MAP[param as BookParam]] = value.toString();
+    if (value && BOOKS_PARAMS_MAP[param]) {
+      localizedParams[BOOKS_PARAMS_MAP[param]] = value.toString();
     }
   });
 
@@ -96,14 +83,7 @@ const toBooksParams = (params: BooksParamsWithOptionalPage) => {
   return `${ROUTE.BOOKS}${query ? `?${query}` : ''}`;
 };
 
-const areBooksParamsDefault = (params: BooksParamsWithOptionalPage) => {
-  return !some(Object.keys(params), param => {
-    const value = getParamValue(param, params);
-    return DEFAULT_BOOK_PARAMS[param as BookParam] !== value;
-  });
-};
-
 const routeWithRedirectionParam = (route: string) =>
   `${route}?${PARAMS.REDIRECTION.REDIRECTED}=${PARAMS.REDIRECTION.YES}`;
 
-export { parseBooksParams, toBooksParams, routeWithRedirectionParam, areBooksParamsDefault };
+export { parseBooksParams, toBooksParams, routeWithRedirectionParam, DEFAULT_BOOK_PARAMS };

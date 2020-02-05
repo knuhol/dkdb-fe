@@ -7,6 +7,9 @@ const PARAMS = {
     ORDER: 'poradi',
     ORDER_BY: 'seraditPodle',
     PAGE_SIZE: 'knihNaStranku',
+    TAGS: 'tagy',
+    BOOK_SIZE: 'delkaKnihy',
+    ORIGINAL_LANGUAGE: 'puvodniJazyk',
   },
   ORDER_BY: {
     TITLE: 'NAZEV',
