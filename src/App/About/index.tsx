@@ -60,7 +60,7 @@ const About = () => (
       <Col>
         <p>
           Chybí tu nějaká kniha, která by podle vás v databázi určitě být měla? Našli jste nějakou chybu? Budeme moc
-          rádi, když nám o tom <a href="mailto:holm.tereza@gmail.com?subject=Připomínka k webu DKDB">dáte vědět</a>.
+          rádi, když nám o tom <a href="mailto:info@dkdb.cz?subject=Připomínka k webu DKDB">dáte vědět</a>.
         </p>
       </Col>
     </Row>

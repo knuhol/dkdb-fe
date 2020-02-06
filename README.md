@@ -16,6 +16,10 @@
 &nbsp;
 ![coverage: 70%](https://img.shields.io/badge/coverage-70%25-green)
 
+### BETA: [https://dev.dkdb.cz](https://dev.dkdb.cz)
+
+## Table of Contents
+
 - [About](#about)
 - [Development](#development)
     - [Backend](#backend)
@@ -28,7 +32,9 @@
 - [License](#license)
     
 ## About
-TBD
+We are LGBT couple Knut and Tereza Holm who have thought that there is no such place on Czech internet where you can find LGBT books in Czech language categorized by its sub genres - so we have created it.
+
+The project is still under heavy development phase but you can find a working version at [https://dev.dkdb.cz](https://dev.dkdb.cz). Please note that the web can be very unstable, which is alright and there is no need to report issues.
 
 ## Development
 
