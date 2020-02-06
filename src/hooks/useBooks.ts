@@ -21,7 +21,7 @@ export type Book = {
   }>;
 };
 
-const useBooks = (params: BooksParams, initialValue: Book[] = []): Book[] => {
+const useBooks = (params: BooksParams, initialValue?: Book[]): Book[] | undefined => {
   const getBooksParams: GetBooksParams = mapKeys(params, (value, key) => {
     if (key === 'pageSize') {
       return 'size';

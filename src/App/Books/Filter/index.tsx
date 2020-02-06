@@ -3,34 +3,51 @@ import { Alert, Button, Col, Form, Row } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
 import invert from 'lodash/invert';
 import omitBy from 'lodash/omitBy';
+import map from 'lodash/map';
 
 import { Order, OrderBy, PARAMS } from '../../routes';
 import { DEFAULT_BOOK_PARAMS, DefaultBookParam, parseBooksParams, toBooksParams } from '../../../utils/urlUtils';
+import { BooksFilterParams } from '../../../hooks/useBooksFilterParams';
 
 import './style.scss';
 
 type FilterProps = {
   setIsFilterOpen: (isOpen: boolean) => void;
+  filterParams: BooksFilterParams;
 };
 
-const Filter = ({ setIsFilterOpen }: FilterProps) => {
-  const params = parseBooksParams(useLocation().search);
-  const [orderBy, setOrderBy] = useState(params.orderBy);
-  const [order, setOrder] = useState(params.order);
-  const [pageSize, setPageSize] = useState(params.pageSize);
+const DEFAULT_VALUE = 'DEFAULT_VALUE';
+
+const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
+  const booksParams = parseBooksParams(useLocation().search);
+  const [orderBy, setOrderBy] = useState(booksParams.orderBy);
+  const [order, setOrder] = useState(booksParams.order);
+  const [pageSize, setPageSize] = useState(booksParams.pageSize);
+  const [tags, setTags] = useState<string[]>([]);
+  const [originalLanguage, setOriginalLanguage] = useState();
+  const [bookSize, setBookSize] = useState();
   const history = useHistory();
 
-  const onOrderByChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+  const onOrderByChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
     setOrderBy(invert(PARAMS.ORDER_BY)[event.target.value] as OrderBy);
-  const onOrderChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+  const onOrderChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
     setOrder(invert(PARAMS.ORDER)[event.target.value] as Order);
-  const onPageSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onPageSizeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPageSize(parseInt(event.target.value, 10));
+  };
+  const onTagsChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setTags(map(event.target.selectedOptions, option => option.value));
+  };
+  const onOriginalLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setOriginalLanguage(event.target.value === DEFAULT_VALUE ? undefined : event.target.value);
+  };
+  const onBookSizeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setBookSize(event.target.value === DEFAULT_VALUE ? undefined : event.target.value);
   };
 
   const onSubmit = () => {
     const nonDefaultBooksParams = omitBy(
-      { orderBy, order, pageSize },
+      { orderBy, order, pageSize, tags, originalLanguage, bookSize },
       (value, key) => DEFAULT_BOOK_PARAMS[key as DefaultBookParam] === value
     );
 
@@ -78,6 +95,50 @@ const Filter = ({ setIsFilterOpen }: FilterProps) => {
                 <option value={10}>10</option>
                 <option value={15}>15</option>
                 <option value={20}>20</option>
+              </Form.Control>
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={4}>
+            <Form.Group controlId="tags">
+              <Form.Label>Tagy</Form.Label>
+              <Form.Control as="select" multiple value={tags as any} onChange={onTagsChange}>
+                {filterParams.tags.map(option => (
+                  <option key={option.slug} value={option.slug}>
+                    {option.name} ({option.booksMatchesValue})
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+          </Col>
+          <Col xs={12} md={4}>
+            <Form.Group controlId="originalLanguage">
+              <Form.Label>Původní jazyk</Form.Label>
+              <Form.Control as="select" value={originalLanguage} onChange={onOriginalLanguageChange}>
+                <option key="all" value={DEFAULT_VALUE}>
+                  (všechny)
+                </option>
+                {filterParams.originalLanguage.map(option => (
+                  <option key={option.slug} value={option.slug}>
+                    {option.name} ({option.booksMatchesValue})
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+          </Col>
+          <Col xs={12} md={4}>
+            <Form.Group controlId="bookSize">
+              <Form.Label>Délka knihy</Form.Label>
+              <Form.Control as="select" value={bookSize} onChange={onBookSizeChange}>
+                <option key="all" value={DEFAULT_VALUE}>
+                  (všechny)
+                </option>
+                {filterParams.bookSize.map(option => (
+                  <option key={option.slug} value={option.slug}>
+                    {option.name} ({option.booksMatchesValue})
+                  </option>
+                ))}
               </Form.Control>
             </Form.Group>
           </Col>

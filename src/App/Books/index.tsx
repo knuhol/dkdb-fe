@@ -8,6 +8,7 @@ import omit from 'lodash/omit';
 import Page from '../../components/Page';
 import useBooks from '../../hooks/useBooks';
 import useBooksInfo from '../../hooks/useBooksInfo';
+import useBooksFilterParams from '../../hooks/useBooksFilterParams';
 import Filter from './Filter';
 import MobileBooksLayout from './mobile';
 import DesktopBooksLayout from './desktop';
@@ -24,6 +25,7 @@ const Books = () => {
   const [pageWidth, setPageWidth] = useState(0);
   const books = useBooks(bookParams);
   const booksInfo = useBooksInfo();
+  const booksFilterParams = useBooksFilterParams();
   const history = useHistory();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isFilterDefault, setIsFilterDefault] = useState(true);
@@ -56,7 +58,7 @@ const Books = () => {
     history.push(ROUTE.BOOK_BY_SLUG.replace(PARAMS.BOOK_DETAIL.SLUG, slug));
   const onOpenFilterClick = () => setIsFilterOpen(true);
 
-  if (books == null || booksInfo == null) {
+  if (books == null || booksInfo == null || booksFilterParams == null) {
     return <Page loading />;
   }
 
@@ -81,7 +83,7 @@ const Books = () => {
       {isFilterOpen && (
         <Row>
           <Col>
-            <Filter setIsFilterOpen={setIsFilterOpen} />
+            <Filter setIsFilterOpen={setIsFilterOpen} filterParams={booksFilterParams} />
           </Col>
         </Row>
       )}

@@ -32,7 +32,15 @@ describe('fetchUtils', () => {
     expect(getBooksUrl({ order: 'DESC' })).toBe('/api/books?order=DESC');
 
     expect(getBooksUrl({ page: 1 })).toBe('/api/books?page=1');
+
     expect(getBooksUrl({ size: 2 })).toBe('/api/books?size=2');
+
+    expect(getBooksUrl({ tags: ['test1'] })).toBe('/api/books?tags=test1');
+    expect(getBooksUrl({ tags: ['test1', 'test2'] })).toBe('/api/books?tags=test1%2Ctest2');
+
+    expect(getBooksUrl({ bookSize: 'kratka' })).toBe('/api/books?bookSize=kratka');
+
+    expect(getBooksUrl({ originalLanguage: 'english' })).toBe('/api/books?originalLanguage=english');
 
     expect(getBooksUrl()).toBe('/api/books');
     expect(getBooksUrl({ orderBy: 'YEAR_OF_ISSUE', order: 'ASC', page: 1, size: 2 })).toBe(
@@ -40,6 +48,11 @@ describe('fetchUtils', () => {
     );
     expect(getBooksUrl({ order: 'ASC', page: 1, size: 2 })).toBe('/api/books?order=ASC&page=1&size=2');
     expect(getBooksUrl({ page: 1, size: 2 })).toBe('/api/books?page=1&size=2');
-    expect(getBooksUrl({ order: 'ASC', page: 1 })).toBe('/api/books?order=ASC&page=1');
+    expect(getBooksUrl({ order: 'ASC', originalLanguage: 'english', page: 1 })).toBe(
+      '/api/books?order=ASC&originalLanguage=english&page=1'
+    );
+    expect(getBooksUrl({ order: 'ASC', tags: ['test1', 'test2', 'test3'], page: 1 })).toBe(
+      '/api/books?order=ASC&tags=test1%2Ctest2%2Ctest3&page=1'
+    );
   });
 });
