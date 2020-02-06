@@ -24,11 +24,22 @@ const BOOKS_PARAMS_MAP = {
 };
 type BookParam = keyof typeof BOOKS_PARAMS_MAP;
 
-const DEFAULT_BOOK_PARAMS: { orderBy: OrderBy; order: Order; page: number; pageSize: number } = {
+const DEFAULT_BOOK_PARAMS: {
+  orderBy: OrderBy;
+  order: Order;
+  page: number;
+  pageSize: number;
+  tags: string[];
+  originalLanguage: undefined;
+  bookSize: undefined;
+} = {
   orderBy: 'DATE_OF_ADDITION',
   order: 'DESC',
   page: 1,
   pageSize: 5,
+  tags: [],
+  originalLanguage: undefined,
+  bookSize: undefined,
 };
 export type DefaultBookParam = keyof typeof DEFAULT_BOOK_PARAMS;
 

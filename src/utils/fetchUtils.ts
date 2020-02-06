@@ -30,6 +30,9 @@ export type GetBooksParams = {
   order?: keyof typeof ORDER;
   page?: number;
   size?: number;
+  tags?: string[];
+  bookSize?: string;
+  originalLanguage?: string;
 };
 
 const getBooksUrl = (params: GetBooksParams = {}) => {

@@ -1,0 +1,49 @@
+{
+  "originalLanguage": [
+    {
+      "booksMatchesValue": 34,
+      "slug": "cestina",
+      "name": "čeština"
+    },
+    {
+      "booksMatchesValue": 2,
+      "slug": "anglictina",
+      "name": "angličtina"
+    }
+  ],
+  "bookSize": [
+    {
+      "slug": "kratka",
+      "minPages": null,
+      "maxPages": 100,
+      "booksMatchesValue": 5,
+      "name": "krátká"
+    },
+    {
+      "slug": "stredni",
+      "minPages": 100,
+      "maxPages": 200,
+      "booksMatchesValue": 10,
+      "name": "střední"
+    },
+    {
+      "slug": "stredni",
+      "minPages": 300,
+      "maxPages": null,
+      "booksMatchesValue": 63,
+      "name": "dlouhá"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Gay",
+      "slug": "gay",
+      "booksMatchesValue": 45
+    },
+    {
+      "name": "Zahraniční",
+      "slug": "zahranicni",
+      "booksMatchesValue": 31
+    }
+  ]
+}

@@ -7,12 +7,14 @@ import { renderWithRouter } from '../../../utils/testUtils';
 
 import booksMock from '../__mocks__/books.json';
 import infoMock from '../__mocks__/info.json';
+import filterParams from '../__mocks__/filterParams.json';
 
 const API_BOOKS_REGEX = /^(\/api\/books)(\/?\?{0}|\/?\?.*)$/;
 
 describe('Books', () => {
   beforeEach(() => {
     fetchMock.get('/api/books/info', infoMock);
+    fetchMock.get('/api/books/filterParams', filterParams);
   });
   afterEach(() => {
     fetchMock.restore();
