@@ -1,155 +1,113 @@
-const jsonServer = require('json-server');
-const filter = require('lodash/filter');
-const random = require('lodash/random');
+/* eslint-disable no-console, no-underscore-dangle */
+const express = require('express');
 const url = require('url');
+const chalk = require('chalk');
+const _orderBy = require('lodash/orderBy');
+const _filter = require('lodash/filter');
+const _omit = require('lodash/omit');
+const _map = require('lodash/map');
+const _random = require('lodash/random');
 
 const { books, filterParams, info } = require('./fakeData');
 const { TOTAL, BOOK_SIZES } = require('./fakeDataConfig');
 
-const server = jsonServer.create();
-const router = jsonServer.router({
-  info: [
-    {
-      id: 1,
-      ...info,
-    },
-  ],
-  filterParams: [
-    {
-      id: 1,
-      ...filterParams,
-    },
-  ],
-  books,
-});
-const middlewares = jsonServer.defaults();
-
-const QUERY_VALUES_MAP = {
-  ASC: 'asc',
-  DESC: 'desc',
-  TITLE: 'title',
-  YEAR_OF_ISSUE: 'yearOfIssue',
+const DEFAULT = {
+  PAGE: 0,
+  PAGE_SIZE: 5,
+  ORDER: 'DESC',
+  ORDER_BY: 'DATE_OF_ADDITION',
+};
+const ORDER_BY = {
   DATE_OF_ADDITION: 'dateOfAddition',
+  YEAR_OF_ISSUE: 'yearOfIssue',
+  TITLE: 'title',
+};
+const ONLY_BOOK_DETAIL_PARAMS = ['description', 'isbn', 'numberOfPages', 'originalLanguage', 'publisher', 'links'];
+
+const server = express();
+const router = express.Router();
+const host = process.argv[2];
+const port = process.argv[3];
+const API_ROOT = '/api';
+
+const getTime = () => {
+  const date = new Date();
+  return `[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]`;
 };
 
-const QUERY_PARAMS_MAP = {
-  order: '_order',
-  orderBy: '_sort',
-  page: '_page',
-  size: '_limit',
-};
+router.get('/books/info', (req, res) => {
+  res.json(info);
+});
+router.get('/books/filterParams', (req, res) => {
+  res.json(filterParams);
+});
+router.get('/books/random', (req, res) => {
+  res.json(books[_random(0, TOTAL.BOOKS - 1)]);
+});
+router.get('/books/:slug', (req, res) => {
+  res.json(_filter(books, { slug: req.params.slug })[0]);
+});
+router.get('/books', (req, res) => {
+  const { query } = req;
+  const page = parseInt(query.page, 10) || DEFAULT.PAGE;
+  const pageSize = parseInt(query.size, 10) || DEFAULT.PAGE_SIZE;
+  const order = query.order || DEFAULT.ORDER;
+  const orderBy = query.orderBy || DEFAULT.ORDER_BY;
+  let booksResult = books;
 
-const QUERY_PARAMS_DEFAULT = {
-  _order: 'desc',
-  _orderBy: 'yearOfIssue',
-  _page: 0,
-  _limit: 5,
-};
+  // tags
+  if (query.tags) {
+    query.tags.split(',').forEach(tag => {
+      booksResult = _filter(booksResult, { tags: [{ slug: tag }] });
+    });
+  }
 
-// rewrite URL query from original API to JSON server API
-server.use((req, res, next) => {
-  Object.keys(req.query).forEach(param => {
-    // remove tags, bookSize and random params to prevent original json-mock filter
-    if (param === 'tags' || param === 'bookSize' || param === 'random') {
-      delete req.query[param];
-    }
-
-    if (Object.prototype.hasOwnProperty.call(QUERY_PARAMS_MAP, param)) {
-      // index pages from 1, not from 0
-      if (param === 'page') {
-        req.query[param] = parseInt(req.query[param], 10) + 1;
+  // bookSize
+  if (query.bookSize) {
+    booksResult = _filter(booksResult, book => {
+      const { numberOfPages } = book;
+      if (query.bookSize === BOOK_SIZES.SLUG.SHORT) {
+        return numberOfPages <= BOOK_SIZES.SIZE.SHORT;
       }
-      if (QUERY_VALUES_MAP[req.query[param]]) {
-        req.query[param] = QUERY_VALUES_MAP[req.query[param]];
+      if (query.bookSize === BOOK_SIZES.SLUG.MIDDLE) {
+        return numberOfPages > BOOK_SIZES.SIZE.SHORT && numberOfPages <= BOOK_SIZES.SIZE.MIDDLE;
       }
-      req.query[QUERY_PARAMS_MAP[param]] = req.query[param];
-      delete req.query[param];
-    }
-  });
+      if (query.bookSize === BOOK_SIZES.SLUG.LONG) {
+        return numberOfPages > BOOK_SIZES.SIZE.MIDDLE;
+      }
+      return false;
+    });
+  }
 
-  req.query = { ...QUERY_PARAMS_DEFAULT, ...req.query };
+  // originalLanguage
+  if (query.originalLanguage) {
+    booksResult = _filter(booksResult, { originalLanguage: query.originalLanguage });
+  }
 
-  next();
+  // order and orderBy
+  booksResult = _orderBy(booksResult, [ORDER_BY[orderBy]], [order.toLowerCase()]);
+
+  // save total number of books before pagination
+  const total = booksResult.length;
+
+  // page and size
+  booksResult = booksResult.slice(page * pageSize, page * pageSize + pageSize);
+
+  // omit detail params
+  booksResult = _map(booksResult, book => _omit(book, ONLY_BOOK_DETAIL_PARAMS));
+
+  res.json({ total, books: booksResult });
 });
 
 server.use((req, res, next) => {
-  // eslint-disable-next-line no-underscore-dangle
-  const _send = res.send;
-  // eslint-disable-next-line func-names
-  res.send = function(body) {
-    const { query } = url.parse(req.url, true);
-
-    // filter book size
-    if (query.bookSize) {
-      let json = JSON.parse(body);
-      json = filter(json, book => {
-        const { numberOfPages } = book;
-        if (query.bookSize === BOOK_SIZES.SLUG.SHORT) {
-          return numberOfPages <= BOOK_SIZES.SIZE.SHORT;
-        }
-        if (query.bookSize === BOOK_SIZES.SLUG.MIDDLE) {
-          return numberOfPages > BOOK_SIZES.SIZE.SHORT && numberOfPages <= BOOK_SIZES.SIZE.MIDDLE;
-        }
-        if (query.bookSize === BOOK_SIZES.SLUG.LONG) {
-          return numberOfPages > BOOK_SIZES.SIZE.MIDDLE;
-        }
-        return false;
-      });
-      return _send.call(this, JSON.stringify(json));
-    }
-
-    // filter tags with AND logic
-    if (query.tags) {
-      let json = JSON.parse(body);
-      query.tags.split(',').forEach(tag => {
-        json = filter(json, { tags: [{ slug: tag }] });
-      });
-      return _send.call(this, JSON.stringify(json));
-    }
-
-    // get random book
-    if (query.random) {
-      const json = JSON.parse(body);
-      return _send.call(this, JSON.stringify(json[random(0, TOTAL.BOOKS - 1)]));
-    }
-
-    // add support for singular query param https://github.com/typicode/json-server/issues/541
-    if (query.singular) {
-      const json = JSON.parse(body);
-      if (Array.isArray(json)) {
-        if (json.length === 1) {
-          return _send.call(this, JSON.stringify(json[0]));
-        }
-        if (json.length === 0) {
-          return _send.call(this, '{}', 404);
-        }
-      }
-    }
-
-    return _send.call(this, body);
-  };
-
+  // log all requests
+  const fullUrl = url.format({ protocol: req.protocol, host: req.get('host'), pathname: req.originalUrl });
+  console.log(chalk.green(`${getTime()} GET ${fullUrl}`));
   next();
 });
+server.use(API_ROOT, router);
 
-// rewrite simple routes
-server.use(
-  jsonServer.rewriter({
-    '/api/books/info': '/api/info/1',
-    '/api/books/filterParams': '/api/filterParams/1',
-    '/api/books/random': '/api/books?random=true',
-    '/api/books/:slug': '/api/books?slug=:slug&singular=1',
-  })
-);
-
-// use standard middlewares
-server.use(middlewares);
-
-// prefix all endpoints with /api
-server.use('/api', router);
-
-// start JSON server
-server.listen(3001, () => {
-  // eslint-disable-next-line no-console
-  console.log('JSON Server is running');
+server.listen(port, () => {
+  const apiUrl = `http://${host}:${port}/${API_ROOT}`;
+  console.log(`${chalk.cyan(`${getTime()} API mock server started at ${chalk.underline(apiUrl)}, listening...`)}`);
 });
