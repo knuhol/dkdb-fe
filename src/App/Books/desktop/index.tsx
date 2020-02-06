@@ -41,14 +41,14 @@ const BooksDesktopLayout = ({ books, onPageResize, onBookDetailClick, active, pa
           <tr key={book.slug}>
             <td>{bookIndex + 1 + (active - 1) * pageSize}</td>
             <td>
-              <BookCover book={book} />
+              <BookCover book={book} onClick={onBookDetailClick(book.slug)} className="clickable" />
             </td>
             <td>
               <div className="details">
                 <div>
                   <h2>{book.title}</h2>
                 </div>
-                <Tags book={book} />
+                <Tags book={book} clickable />
                 <Button variant="outline-dark" onClick={onBookDetailClick(book.slug)}>
                   Více informací →
                 </Button>

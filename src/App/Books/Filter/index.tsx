@@ -23,9 +23,9 @@ const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
   const [orderBy, setOrderBy] = useState(booksParams.orderBy);
   const [order, setOrder] = useState(booksParams.order);
   const [pageSize, setPageSize] = useState(booksParams.pageSize);
-  const [tags, setTags] = useState<string[]>([]);
-  const [originalLanguage, setOriginalLanguage] = useState();
-  const [bookSize, setBookSize] = useState();
+  const [tags, setTags] = useState<string[] | undefined>(booksParams.tags);
+  const [originalLanguage, setOriginalLanguage] = useState(booksParams.originalLanguage);
+  const [bookSize, setBookSize] = useState(booksParams.bookSize);
   const history = useHistory();
 
   const onOrderByChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
@@ -36,7 +36,8 @@ const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
     setPageSize(parseInt(event.target.value, 10));
   };
   const onTagsChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setTags(map(event.target.selectedOptions, option => option.value));
+    const newTags = map(event.target.selectedOptions, option => option.value);
+    setTags(newTags.length === 0 ? undefined : newTags);
   };
   const onOriginalLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setOriginalLanguage(event.target.value === DEFAULT_VALUE ? undefined : event.target.value);
@@ -54,11 +55,28 @@ const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
     history.push(toBooksParams(nonDefaultBooksParams));
     setIsFilterOpen(false);
   };
-  const onCancel = () => setIsFilterOpen(false);
+  const onCancel = () => {
+    history.push(toBooksParams({}));
+    setIsFilterOpen(false);
+  };
+  const getBookSizeNumberOfPagesText = (minPages: number | undefined, maxPages: number | undefined) => {
+    if (!minPages) {
+      return `do ${maxPages} stran`;
+    }
+    if (!maxPages) {
+      return `${minPages} stran a více`;
+    }
+    return `od ${minPages} do ${maxPages} stran`;
+  };
 
   return (
     <Alert variant="primary" className="filter">
       <Form>
+        <Row>
+          <Col>
+            <h4>Řazení</h4>
+          </Col>
+        </Row>
         <Row>
           <Col xs={12} md={4}>
             <Form.Group controlId="orderBy">
@@ -100,6 +118,11 @@ const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
           </Col>
         </Row>
         <Row>
+          <Col>
+            <h4>Vyhledávání</h4>
+          </Col>
+        </Row>
+        <Row>
           <Col xs={12} md={4}>
             <Form.Group controlId="tags">
               <Form.Label>Tagy</Form.Label>
@@ -136,7 +159,8 @@ const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
                 </option>
                 {filterParams.bookSize.map(option => (
                   <option key={option.slug} value={option.slug}>
-                    {option.name} ({option.booksMatchesValue})
+                    {option.name}: {getBookSizeNumberOfPagesText(option.minPages, option.maxPages)} (
+                    {option.booksMatchesValue})
                   </option>
                 ))}
               </Form.Control>
@@ -144,14 +168,14 @@ const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
           </Col>
         </Row>
         <Form.Row>
-          <Col xs={6} md={2} xl={1}>
+          <Col xs={6} md={3} xl={2}>
             <Button variant="primary" onClick={onSubmit} block>
               Potvrdit
             </Button>
           </Col>
-          <Col xs={6} md={2} xl={1}>
+          <Col xs={6} md={3} xl={2}>
             <Button variant="outline-primary" onClick={onCancel} block>
-              Zrušit
+              Vše výchozí
             </Button>
           </Col>
         </Form.Row>

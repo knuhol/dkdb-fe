@@ -12,27 +12,28 @@
     }
   }
 
-  .badge.red {
-    background-color: $red;
-  }
+  $colors: (
+    red: $red,
+    orange: $orange,
+    yellow: $yellow,
+    green: $green,
+    blue: $blue,
+    purple: $purple,
+  );
 
-  .badge.orange {
-    background-color: $orange;
-  }
+  @each $color in map-keys($colors) {
+    $color-value: map-get($colors, $color);
 
-  .badge.yellow {
-    background-color: $yellow;
-  }
+    .badge.#{$color} {
+      background-color: $color-value;
 
-  .badge.green {
-    background-color: $green;
-  }
-
-  .badge.blue {
-    background-color: $blue;
-  }
-
-  .badge.purple {
-    background-color: $purple;
+      &.clickable {
+        &:hover,
+        &:active {
+          background-color: lighten($color-value, 30%);
+          color: darken($white, 90%);
+        }
+      }
+    }
   }
 }

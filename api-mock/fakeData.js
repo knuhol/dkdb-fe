@@ -100,7 +100,6 @@ const filterParams = {
   bookSize: [
     {
       slug: BOOK_SIZES.SLUG.SHORT,
-      minPages: null,
       maxPages: BOOK_SIZES.SIZE.SHORT,
       booksMatchesValue: countShortBooks,
       name: 'krátká',
@@ -115,7 +114,6 @@ const filterParams = {
     {
       slug: BOOK_SIZES.SLUG.LONG,
       minPages: BOOK_SIZES.SIZE.MIDDLE,
-      maxPages: null,
       booksMatchesValue: countLongBooks,
       name: 'dlouhá',
     },
