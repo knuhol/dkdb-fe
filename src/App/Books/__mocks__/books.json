@@ -1,47 +1,50 @@
-[
-  {
-    "slug": "mock-book-title-1-2019",
-    "title": "Mock book title 1",
-    "authors": [
-      {
-        "firstName": "Mock author first name 1",
-        "lastName": "Mock author last name 1"
-      }
-    ],
-    "yearOfIssue": 2019,
-    "dateOfAddition": "2019-04-30",
-    "imageURL": "https://loremflickr.com/375/500?random=1",
-    "tags": [
-      {
-        "slug": "tag-1",
-        "name": "Tag 1",
-        "color": "green"
-      },
-      {
-        "slug": "tag-2",
-        "name": "Tag 2",
-        "color": "blue"
-      }
-    ]
-  },
-  {
-    "slug": "mock-book-title-2-1998",
-    "title": "Mock book title 2",
-    "authors": [
-      {
-        "firstName": "Mock author first name 2",
-        "lastName": "Mock author last name 2"
-      }
-    ],
-    "imageURL": "https://loremflickr.com/375/500?random=2",
-    "yearOfIssue": 1998,
-    "dateOfAddition": "2020-01-01",
-    "tags": [
-      {
-        "slug": "tag-3",
-        "name": "Tag 3",
-        "color": "red"
-      }
-    ]
-  }
-]
+{
+  "total": 211,
+  "books": [
+    {
+      "slug": "mock-book-title-1-2019",
+      "title": "Mock book title 1",
+      "authors": [
+        {
+          "firstName": "Mock author first name 1",
+          "lastName": "Mock author last name 1"
+        }
+      ],
+      "yearOfIssue": 2019,
+      "dateOfAddition": "2019-04-30",
+      "imageURL": "https://loremflickr.com/375/500?random=1",
+      "tags": [
+        {
+          "slug": "tag-1",
+          "name": "Tag 1",
+          "color": "green"
+        },
+        {
+          "slug": "tag-2",
+          "name": "Tag 2",
+          "color": "blue"
+        }
+      ]
+    },
+    {
+      "slug": "mock-book-title-2-1998",
+      "title": "Mock book title 2",
+      "authors": [
+        {
+          "firstName": "Mock author first name 2",
+          "lastName": "Mock author last name 2"
+        }
+      ],
+      "imageURL": "https://loremflickr.com/375/500?random=2",
+      "yearOfIssue": 1998,
+      "dateOfAddition": "2020-01-01",
+      "tags": [
+        {
+          "slug": "tag-3",
+          "name": "Tag 3",
+          "color": "red"
+        }
+      ]
+    }
+  ]
+}

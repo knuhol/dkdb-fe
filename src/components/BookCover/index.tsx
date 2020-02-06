@@ -8,9 +8,10 @@ import defaultBookCover from '../../images/default-book-cover.svg';
 type BookCoverProps = {
   book: Book;
   className?: string;
+  onClick?: () => void;
 };
 
-const BookCover = ({ book, className }: BookCoverProps) => {
+const BookCover = ({ book, className, onClick }: BookCoverProps) => {
   const alt = `Obálka knihy ${book.title}`;
   const classNameExtension = className ? ` ${className}` : '';
 
@@ -21,12 +22,14 @@ const BookCover = ({ book, className }: BookCoverProps) => {
       alt={alt}
       decode={false}
       loader={<Image src={defaultBookCover} alt={alt} thumbnail className={classNameExtension} />}
+      onClick={onClick}
     />
   );
 };
 
 BookCover.defaultProps = {
   className: undefined,
+  onClick: undefined,
 };
 
 export default BookCover;

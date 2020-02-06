@@ -77,6 +77,10 @@ const parseBooksParams = (query: string) => {
     params.order = invertedOrder[params.order];
   }
 
+  if (params.tags) {
+    params.tags = params.tags.split(',');
+  }
+
   return params as BooksParams;
 };
 
@@ -90,7 +94,8 @@ const toBooksParams = (params: BooksParams) => {
     }
   });
 
-  const query = new URLSearchParams(localizedParams).toString();
+  const query = queryString.stringify(localizedParams, { arrayFormat: 'comma', encode: false });
+
   return `${ROUTE.BOOKS}${query ? `?${query}` : ''}`;
 };
 

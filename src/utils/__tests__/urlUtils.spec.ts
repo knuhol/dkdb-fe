@@ -32,7 +32,7 @@ describe('urlUtils', () => {
     expect(book4).toBe('/knihy?poradi=VZESTUPNE');
     expect(book5).toBe('/knihy?seraditPodle=NAZEV');
     expect(book6).toBe('/knihy?stranka=2');
-    expect(book7).toBe('/knihy?stranka=2&seraditPodle=NAZEV');
+    expect(book7).toBe('/knihy?seraditPodle=NAZEV&stranka=2');
   });
 
   it('parses books URL with params correctly', () => {

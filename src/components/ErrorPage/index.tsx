@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 
 import Page from '../Page';
 import errorEmoji from '../../images/error-emoji.svg';
-import useQuery from '../../hooks/useQuery';
+import useSearchParams from '../../hooks/useSearchParams';
 import { PARAMS } from '../../App/routes';
 
 import './style.scss';
@@ -13,8 +13,8 @@ type ErrorPageProps = { title: string; text: string };
 
 const ErrorPage = ({ title, text }: ErrorPageProps) => {
   const history = useHistory();
-  const query = useQuery();
-  const hasBeenRedirected = query.get(PARAMS.REDIRECTION.REDIRECTED) === PARAMS.REDIRECTION.YES;
+  const params = useSearchParams();
+  const hasBeenRedirected = params[PARAMS.REDIRECTION.REDIRECTED] === PARAMS.REDIRECTION.YES;
 
   const goBack = () => history.go(hasBeenRedirected ? -2 : -1);
 

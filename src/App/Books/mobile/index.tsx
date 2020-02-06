@@ -47,10 +47,10 @@ const BooksMobileLayout = ({ books, onPageResize, onBookDetailClick, active, pag
                   <h3>{book.authors.map(author => `${author.firstName} ${author.lastName}`).join(', ')}</h3>
                 </Col>
                 <Col xs={12}>
-                  <BookCover book={book} />
+                  <BookCover book={book} onClick={onBookDetailClick(book.slug)} className="clickable" />
                 </Col>
                 <Col xs={12}>
-                  <Tags book={book} />
+                  <Tags book={book} clickable />
                 </Col>
                 <Col xs={12}>
                   <Button variant="outline-dark" onClick={onBookDetailClick(book.slug)}>

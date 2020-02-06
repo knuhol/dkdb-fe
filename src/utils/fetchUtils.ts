@@ -1,3 +1,5 @@
+import queryString from 'query-string';
+
 const getBooksInfoUrl = () => {
   return '/api/books/info';
 };
@@ -37,7 +39,7 @@ export type GetBooksParams = {
 
 const getBooksUrl = (params: GetBooksParams = {}) => {
   const endpoint = '/api/books';
-  const query = new URLSearchParams(params as any).toString();
+  const query = queryString.stringify(params, { arrayFormat: 'comma' });
 
   return `${endpoint}${query ? `?${query}` : ''}`;
 };

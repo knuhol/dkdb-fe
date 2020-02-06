@@ -21,7 +21,12 @@ export type Book = {
   }>;
 };
 
-const useBooks = (params: BooksParams, initialValue?: Book[]): Book[] | undefined => {
+type Books = {
+  total: number;
+  books: Book[];
+};
+
+const useBooks = (params: BooksParams, initialValue?: Books): Books | undefined => {
   const getBooksParams: GetBooksParams = mapKeys(params, (value, key) => {
     if (key === 'pageSize') {
       return 'size';
