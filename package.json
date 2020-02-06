@@ -41,11 +41,11 @@
     "history": "^4.10.1",
     "http-proxy-middleware": "^0.20.0",
     "husky": "^3.1.0",
-    "json-server": "^0.15.1",
     "lint-staged": "^9.5.0",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.13.0",
+    "nodemon": "^2.0.2",
     "prerender-node": "^3.2.5",
     "prettier": "^1.19.1",
     "query-string": "^6.9.0",
@@ -83,7 +83,7 @@
     "release": "npm run bundle && standard-version",
     "release:prerelease": "npm run release -- -p",
     "zip": "mkdir dist && bestzip dist/bundle.zip build/*",
-    "api-mock": "node api-mock/server.js",
+    "api-mock": "nodemon api-mock/server.js localhost 3001",
     "sitemap": "node scripts/sitemap-generator.js"
   },
   "config": {

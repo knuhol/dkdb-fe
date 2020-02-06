@@ -70,7 +70,6 @@ const book = index => {
   find(fakeLanguages, ['name', originalLanguage]).booksMatchesValue += 1;
 
   return {
-    id: index,
     slug: slugify(`${title.toLocaleLowerCase()}-${yearOfIssue}`),
     title,
     authors: authors(),
