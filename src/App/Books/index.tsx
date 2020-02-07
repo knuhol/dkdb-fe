@@ -29,6 +29,20 @@ const Books = () => {
     setIsFilterDefault(areBooksParamsDefault({ orderBy, order, pageSize }));
   }, [order, orderBy, page, pageSize]);
 
+  // TODO: Reflect tag, originalLanguage and bookSize in title and description
+  const getTitleAndDescription = () => {
+    let orderByText = 'názvu';
+    if (orderBy === 'DATE_OF_ADDITION') {
+      orderByText = 'data přidání';
+    } else if (orderBy === 'YEAR_OF_ISSUE') {
+      orderByText = 'roku vydání';
+    }
+    const orderText = order === 'ASC' ? 'vzestupně' : 'sestupně';
+    return {
+      title: `Knihy podle ${orderByText}`,
+      description: `Seznam českých LGBT knih seřazených ${orderText} podle ${orderByText}.`,
+    };
+  };
   const onPageResize = (newPageWidth: number) => {
     if (newPageWidth > 0) {
       setPageWidth(newPageWidth);
@@ -44,8 +58,10 @@ const Books = () => {
     return <Page loading />;
   }
 
+  const { title, description } = getTitleAndDescription();
+
   return (
-    <Page id="books">
+    <Page id="books" title={title} description={description}>
       <Row>
         <Col xs={6}>
           <h1>Knihy</h1>

@@ -19,7 +19,7 @@ const ErrorPage = ({ title, text }: ErrorPageProps) => {
   const goBack = () => history.go(hasBeenRedirected ? -2 : -1);
 
   return (
-    <Page id="error-page">
+    <Page id="error-page" title={title} description={text}>
       <Row>
         <Col className="text-center mt-4 mb-2">
           <h1>{title}</h1>

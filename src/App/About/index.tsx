@@ -10,7 +10,7 @@ import knut from '../../images/knut.jpg';
 import './style.scss';
 
 const About = () => (
-  <Page id="about">
+  <Page id="about" title="O projektu" description="Jak se zrodila česká databáze duhových knih a co nás k tomu vedlo.">
     <Row>
       <Col>
         <h1>O projektu</h1>

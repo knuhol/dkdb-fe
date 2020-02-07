@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Col, Image, Row } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
 
 import Page from '../Page';
 import { BookWithDetails } from '../../hooks/useBook';
@@ -19,13 +20,25 @@ type BookDetailProps = {
   onButtonClick: () => void;
 };
 
+const NEW_LINE_REGEX = /(\r\n|\r|\n)/;
+
 const BookDetail = ({ book, buttonText, onButtonClick }: BookDetailProps) => {
   if (book == null) {
     return <Page loading />;
   }
 
   return (
-    <Page id="book-detail">
+    <Page id="book-detail" title={book.title} description={book.description?.split(NEW_LINE_REGEX)[0]}>
+      <Helmet>
+        <link rel="canonical" href={`${process.env.PUBLIC_URL}/${book.slug}`} />
+        <meta property="og:url" content={`${process.env.PUBLIC_URL}/${book.slug}`} />
+        <meta property="og:image" content={book.imageURL} />
+        <meta property="og:image:width" content="300" />
+        <meta property="og:image:height" content="400" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:type" content="books.book" />
+        <meta property="books:isbn" content={book.isbn} />
+      </Helmet>
       <Row>
         <Col>
           <h1>{book.title}</h1>
@@ -64,7 +77,7 @@ const BookDetail = ({ book, buttonText, onButtonClick }: BookDetailProps) => {
         </Col>
         <Col xs={12} className="description">
           <h3>Popis</h3>
-          {book.description?.split(/(\r\n|\r|\n)/).map((text, index) => (
+          {book.description?.split(NEW_LINE_REGEX).map((text, index) => (
             <p key={index}>{text}</p>
           ))}
         </Col>
