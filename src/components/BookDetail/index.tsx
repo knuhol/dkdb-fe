@@ -11,6 +11,7 @@ import BookCover from '../BookCover';
 import goodreads from '../../images/goodreads.svg';
 import cbdb from '../../images/cbdb.svg';
 import databazeKnih from '../../images/databaze-knih.svg';
+import { ROUTE } from '../../App/routes';
 
 import './style.scss';
 
@@ -30,8 +31,8 @@ const BookDetail = ({ book, buttonText, onButtonClick }: BookDetailProps) => {
   return (
     <Page id="book-detail" title={book.title} description={book.description?.split(NEW_LINE_REGEX)[0]}>
       <Helmet>
-        <link rel="canonical" href={`${process.env.PUBLIC_URL}/${book.slug}`} />
-        <meta property="og:url" content={`${process.env.PUBLIC_URL}/${book.slug}`} />
+        <link rel="canonical" href={`${process.env.PUBLIC_URL}${ROUTE.BOOKS}/${book.slug}`} />
+        <meta property="og:url" content={`${process.env.PUBLIC_URL}${ROUTE.BOOKS}/${book.slug}`} />
         <meta property="og:image" content={book.imageURL} />
         <meta property="og:image:width" content="300" />
         <meta property="og:image:height" content="400" />
