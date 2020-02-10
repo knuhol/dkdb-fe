@@ -42,7 +42,12 @@ The project is still under heavy development phase but you can find a working ve
 Backend of this project is written in Java and is located in separate GitHub repo at [dkdb-be](https://github.com/terhol/dkdb-be).
 
 ### Deployment
-Prod version will be deployed within `*.jar` file on web server. This is going to be handled by backend part of this project so output of the frontend part are just static files which can be downloaded in [Releases](https://github.com/knuhol/dkdb-fe/releases) section.
+Prod version is deployed at Heroku with [standard Node.js app buildpack](https://devcenter.heroku.com/articles/nodejs-support). It runs this sequence of commands:
+```bash
+$ npm install
+$ npm run build
+$ npm run start:heroku
+```
 
 ### Running Locally
 Checkout this repo and install dependencies:
