@@ -1,6 +1,6 @@
 name: Node CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -20,6 +20,9 @@ jobs:
           npm run pipeline:test
         env:
           CI: true
+          PUBLIC_URL: 'https://dkdb.cz'
+          COVERALLS_REPO_TOKEN: "${{ secrets.COVERALLS_REPO_TOKEN }}"
+          COVERALLS_GIT_BRANCH: "${{ github.ref }}"
       - name: Create bundle
         if: startsWith(github.ref, 'refs/tags/')
         run: npm run bundle
@@ -32,7 +35,7 @@ jobs:
           files: |
             dist/bundle.zip
             LICENSE
-          body: "See [CHANGELOG](https://github.com/knuhol/dkdb-fe/blob/master/CHANGELOG.md) for the full list of changes."
+          body: 'See [CHANGELOG](https://github.com/knuhol/dkdb-fe/blob/master/CHANGELOG.md) for the full list of changes.'
           prerelease: ${{ contains(github.ref, '-') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
