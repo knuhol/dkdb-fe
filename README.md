@@ -24,6 +24,7 @@
 - [Development](#development)
     - [Backend](#backend)
     - [Deployment](#deployment)
+        - [Environment Variables](#environment-variables)
     - [Running Locally](#running-locally)
     - [API](#api)
     - [API Mock](#api-mock)
@@ -47,6 +48,15 @@ Prod version is deployed at Heroku with [standard Node.js app buildpack](https:/
 $ npm install
 $ npm run build
 $ npm run start:heroku
+```
+
+#### Environment Variables
+To be able to run app successfully on Heroku, you need to provide several environment variables:
+```
+$ heroku config:set PUBLIC_URL=https://dkdb.cz # URL to instance of this project
+$ heroku config:set API_URL=https://data.dkdb.cz # URL to instance of dkdb-be project
+$ heroku config:set HEROKU_APP_NAME=dkdb-fe # name of the current Heroku app
+$ heroku config:set PRERENDER_TOKEN=xxx # secret to token at prerender.io
 ```
 
 ### Running Locally

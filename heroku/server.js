@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const express = require('express');
 const path = require('path');
 const proxy = require('http-proxy-middleware');
@@ -33,6 +34,5 @@ app.get('*', (request, response) => {
 });
 
 app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
 });
