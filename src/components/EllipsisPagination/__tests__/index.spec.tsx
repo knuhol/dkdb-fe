@@ -26,15 +26,15 @@ describe('EllipsisPagination', () => {
       <EllipsisPagination total={40} maxWidth={MINIMAL_ARROW_WIDTH} active={3} onPageClick={onPageClick} />
     );
 
-    expect(queryByText(PREV_ARROW_CHAR)).toBeDefined();
-    expect(queryByText('1')).toBeDefined();
-    expect(queryByText('2')).toBeDefined();
-    expect(queryByText('3')).toBeDefined();
-    expect(queryByText('4')).toBeDefined();
-    expect(queryByText('5')).toBeDefined();
-    expect(queryByText(ELLIPSIS_CHAR)).toBeDefined();
-    expect(queryByText('40')).toBeDefined();
-    expect(queryByText(NEXT_ARROW_CHAR)).toBeDefined();
+    expect(queryByText(PREV_ARROW_CHAR)).toBeInTheDocument();
+    expect(queryByText('1')).toBeInTheDocument();
+    expect(queryByText('2')).toBeInTheDocument();
+    expect(queryByText('3')).toBeInTheDocument();
+    expect(queryByText('4')).toBeInTheDocument();
+    expect(queryByText('5')).toBeInTheDocument();
+    expect(queryByText(ELLIPSIS_CHAR)).toBeInTheDocument();
+    expect(queryByText('40')).toBeInTheDocument();
+    expect(queryByText(NEXT_ARROW_CHAR)).toBeInTheDocument();
   });
 
   it('contains correctly all items', () => {
@@ -42,8 +42,8 @@ describe('EllipsisPagination', () => {
       <EllipsisPagination total={40} maxWidth={MINIMAL_WIDTH} active={16} onPageClick={onPageClick} />
     );
 
-    expect(queryByText('1')).toBeDefined();
-    expect(queryByText('40')).toBeDefined();
+    expect(queryByText('1')).toBeInTheDocument();
+    expect(queryByText('40')).toBeInTheDocument();
   });
 
   it('should render without arrows on small screens for lot of items', () => {
@@ -60,8 +60,8 @@ describe('EllipsisPagination', () => {
       <EllipsisPagination total={3} maxWidth={MINIMAL_WIDTH} active={1} onPageClick={onPageClick} />
     );
 
-    expect(queryByText(PREV_ARROW_CHAR)).toBeDefined();
-    expect(queryByText(NEXT_ARROW_CHAR)).toBeDefined();
+    expect(queryByText(PREV_ARROW_CHAR)).toBeInTheDocument();
+    expect(queryByText(NEXT_ARROW_CHAR)).toBeInTheDocument();
   });
 
   it('should render with arrows on bigger screens for lot of items', () => {
@@ -69,8 +69,8 @@ describe('EllipsisPagination', () => {
       <EllipsisPagination total={40} maxWidth={MINIMAL_ARROW_WIDTH} active={1} onPageClick={onPageClick} />
     );
 
-    expect(queryByText(PREV_ARROW_CHAR)).toBeDefined();
-    expect(queryByText(NEXT_ARROW_CHAR)).toBeDefined();
+    expect(queryByText(PREV_ARROW_CHAR)).toBeInTheDocument();
+    expect(queryByText(NEXT_ARROW_CHAR)).toBeInTheDocument();
   });
 
   it('perform correctly click on item', () => {

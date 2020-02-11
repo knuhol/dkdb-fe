@@ -11,8 +11,8 @@ export type BooksFilterParams = {
     booksMatchesValue: number;
     slug: string;
     name: string;
-    minPages: number | undefined;
-    maxPages: number | undefined;
+    minPages?: number;
+    maxPages?: number;
   }>;
   tags: Array<{
     booksMatchesValue: number;
