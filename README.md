@@ -6,15 +6,19 @@
 &nbsp;
 ![React version](https://img.shields.io/github/package-json/dependency-version/knuhol/dkdb-fe/react?color=%2361DBFB&label=React&logo=React)
 &nbsp;
+![TypeScript version](https://img.shields.io/github/package-json/dependency-version/knuhol/dkdb-fe/typescript?color=%23007acc&label=TypeScript&logo=typescript)
+&nbsp;
 [![commitizen: friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen)](http://commitizen.github.io/cz-cli/)
 &nbsp;
 [![ESLint](https://img.shields.io/badge/ESLint-supported-blueviolet?logo=eslint)](https://eslint.org/)
 &nbsp;
-[![Prettier](https://img.shields.io/badge/Prettier-supported-violet)](https://github.com/prettier/prettier)
+[![Prettier](https://img.shields.io/badge/Prettier-supported-violet?logo=prettier)](https://github.com/prettier/prettier)
+&nbsp;
+![Coveralls](https://img.shields.io/coveralls/github/knuhol/dkdb-fe?logo=coveralls)
+&nbsp;
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fdev.dkdb.cz&logo=heroku&label=Heroku)
 &nbsp;
 [![license](https://img.shields.io/github/license/knuhol/dkdb-fe)](https://github.com/knuhol/dkdb-fe/blob/master/LICENSE)
-&nbsp;
-![coverage: 70%](https://img.shields.io/badge/coverage-70%25-green)
 
 ### BETA: [https://dev.dkdb.cz](https://dev.dkdb.cz)
 
