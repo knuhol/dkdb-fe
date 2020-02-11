@@ -4,18 +4,67 @@ import { useHistory, useLocation } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import omit from 'lodash/omit';
+import find from 'lodash/find';
 
 import Page from '../../components/Page';
 import useBooks from '../../hooks/useBooks';
-import useBooksFilterParams from '../../hooks/useBooksFilterParams';
-import Filter from './Filter';
+import useBooksFilterParams, { BooksFilterParams } from '../../hooks/useBooksFilterParams';
+import Filter, { getBookSizeNumberOfPagesText } from './Filter';
 import MobileBooksLayout from './mobile';
 import DesktopBooksLayout from './desktop';
 import EllipsisPagination from '../../components/EllipsisPagination';
 import { PARAMS, ROUTE } from '../routes';
-import { DEFAULT_BOOK_PARAMS, parseBooksParams, toBooksParams } from '../../utils/urlUtils';
+import { BooksParams, DEFAULT_BOOK_PARAMS, parseBooksParams, toBooksParams } from '../../utils/urlUtils';
 
 import './style.scss';
+
+const getTitleAndDescription = (bookParams: BooksParams, booksFilterParams: BooksFilterParams) => {
+  let title;
+  let extra;
+
+  // orderBy and order
+  let orderByText = 'data přidání';
+  if (bookParams.orderBy === 'TITLE') {
+    orderByText = 'názvu';
+  } else if (bookParams.orderBy === 'YEAR_OF_ISSUE') {
+    orderByText = 'roku vydání';
+  }
+  const orderText = bookParams.order === 'ASC' ? 'vzestupně' : 'sestupně';
+  title = `Knihy podle ${orderByText}`;
+
+  // bookSize
+  if (booksFilterParams?.bookSize && bookParams.bookSize) {
+    const bookSize = find(booksFilterParams.bookSize, { slug: bookParams.bookSize });
+    if (bookSize) {
+      const bookSizeText = getBookSizeNumberOfPagesText(bookSize.minPages, bookSize.maxPages);
+      title = `Knihy mající ${bookSizeText}`;
+      extra = `majících ${bookSizeText}`;
+    }
+  }
+
+  // originalLanguage
+  if (booksFilterParams?.bookSize && bookParams.originalLanguage) {
+    const originalLanguage = find(booksFilterParams.originalLanguage, { slug: bookParams.originalLanguage });
+    if (originalLanguage) {
+      title = `Knihy v původním jazyce ${originalLanguage.name}`;
+      extra = `v původním jazyce ${originalLanguage.name}`;
+    }
+  }
+
+  // tags
+  if (booksFilterParams?.bookSize && bookParams.tags?.length === 1) {
+    const tag = find(booksFilterParams.tags, { slug: bookParams.tags[0] });
+    if (tag) {
+      title = `Knihy s tagem ${tag.name}`;
+      extra = `s tagem ${tag.name}`;
+    }
+  }
+
+  return {
+    title,
+    description: `Seznam českých LGBT knih${extra ? ` ${extra}` : ''} seřazených ${orderText} podle ${orderByText}.`,
+  };
+};
 
 const Books = () => {
   const bookParams = parseBooksParams(useLocation().search);
@@ -32,20 +81,6 @@ const Books = () => {
     setIsFilterDefault(Object.keys(omit(bookParams, 'page')).length === 0);
   }, [bookParams]);
 
-  // TODO: Reflect tag, originalLanguage and bookSize in title and description
-  const getTitleAndDescription = () => {
-    let orderByText = 'názvu';
-    if (bookParams.orderBy === 'DATE_OF_ADDITION') {
-      orderByText = 'data přidání';
-    } else if (bookParams.orderBy === 'YEAR_OF_ISSUE') {
-      orderByText = 'roku vydání';
-    }
-    const orderText = bookParams.order === 'ASC' ? 'vzestupně' : 'sestupně';
-    return {
-      title: `Knihy podle ${orderByText}`,
-      description: `Seznam českých LGBT knih seřazených ${orderText} podle ${orderByText}.`,
-    };
-  };
   const onPageResize = (newPageWidth: number) => {
     if (newPageWidth > 0) {
       setPageWidth(newPageWidth);
@@ -56,11 +91,11 @@ const Books = () => {
     history.push(ROUTE.BOOK_BY_SLUG.replace(PARAMS.BOOK_DETAIL.SLUG, slug));
   const onOpenFilterClick = () => setIsFilterOpen(!isFilterOpen);
 
-  if (books == null || booksFilterParams == null) {
+  if (books?.books == null || books?.total == null || booksFilterParams == null) {
     return <Page loading />;
   }
 
-  const { title, description } = getTitleAndDescription();
+  const { title, description } = getTitleAndDescription(bookParams, booksFilterParams);
 
   return (
     <Page id="books" title={title} description={description}>
@@ -138,3 +173,4 @@ const Books = () => {
 };
 
 export default Books;
+export { getTitleAndDescription };

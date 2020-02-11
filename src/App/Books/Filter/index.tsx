@@ -11,12 +11,22 @@ import { BooksFilterParams } from '../../../hooks/useBooksFilterParams';
 
 import './style.scss';
 
+const DEFAULT_VALUE = 'DEFAULT_VALUE';
+
+const getBookSizeNumberOfPagesText = (minPages: number | undefined, maxPages: number | undefined) => {
+  if (!minPages) {
+    return `do ${maxPages} stran`;
+  }
+  if (!maxPages) {
+    return `${minPages} stran a více`;
+  }
+  return `od ${minPages} do ${maxPages} stran`;
+};
+
 type FilterProps = {
   setIsFilterOpen: (isOpen: boolean) => void;
   filterParams: BooksFilterParams;
 };
-
-const DEFAULT_VALUE = 'DEFAULT_VALUE';
 
 const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
   const booksParams = parseBooksParams(useLocation().search);
@@ -58,15 +68,6 @@ const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
   const onCancel = () => {
     history.push(toBooksParams({}));
     setIsFilterOpen(false);
-  };
-  const getBookSizeNumberOfPagesText = (minPages: number | undefined, maxPages: number | undefined) => {
-    if (!minPages) {
-      return `do ${maxPages} stran`;
-    }
-    if (!maxPages) {
-      return `${minPages} stran a více`;
-    }
-    return `od ${minPages} do ${maxPages} stran`;
   };
 
   return (
@@ -185,3 +186,4 @@ const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
 };
 
 export default Filter;
+export { DEFAULT_VALUE, getBookSizeNumberOfPagesText };

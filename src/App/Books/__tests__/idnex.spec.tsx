@@ -2,7 +2,7 @@ import React from 'react';
 import fetchMock from 'fetch-mock';
 import { fireEvent, waitForDomChange } from '@testing-library/react';
 
-import Books from '../index';
+import Books, { getTitleAndDescription } from '../index';
 import { renderWithRouter } from '../../../utils/testUtils';
 
 import booksMock from '../__mocks__/books.json';
@@ -21,7 +21,7 @@ describe('Books', () => {
   it('renders a page correctly with default params', async () => {
     fetchMock.get(API_BOOKS_REGEX, booksMock);
 
-    const { container, getAllByText, getAllByAltText } = renderWithRouter(<Books />, { route: '/knihy' });
+    const { container, getAllByText, getAllByAltText, queryByText } = renderWithRouter(<Books />, { route: '/knihy' });
     await waitForDomChange({ container });
 
     expect(fetchMock.calls()[0][0]).toBe('/api/books');
@@ -48,6 +48,28 @@ describe('Books', () => {
     expect(getAllByAltText('Obálka knihy Mock book title 2')[1].getAttribute('src')).toBe(
       'https://loremflickr.com/375/500?random=2'
     );
+    expect(queryByText('Řazení')).not.toBeInTheDocument();
+    expect(queryByText('Vyhledávání')).not.toBeInTheDocument();
+  });
+
+  it('opens filter correctly', async () => {
+    fetchMock.get(API_BOOKS_REGEX, booksMock);
+
+    const { container, getByText } = renderWithRouter(<Books />, { route: '/knihy' });
+    await waitForDomChange({ container });
+    fireEvent.click(getByText('Filtr'));
+
+    expect(getByText('Řazení')).toBeInTheDocument();
+    expect(getByText('Vyhledávání')).toBeInTheDocument();
+  });
+
+  it('displays page correctly for no books', async () => {
+    fetchMock.get(API_BOOKS_REGEX, { books: [], total: 0 });
+
+    const { container, getByText } = renderWithRouter(<Books />, { route: '/knihy' });
+    await waitForDomChange({ container });
+
+    expect(getByText('Pro zadané parametry nebyla nalezena žádná kniha.')).toBeInTheDocument();
   });
 
   it('calculates total number of pages correctly', async () => {
@@ -62,10 +84,10 @@ describe('Books', () => {
   it('calls correct endpoint for order param', async () => {
     fetchMock.get(API_BOOKS_REGEX, booksMock);
 
-    const { container } = renderWithRouter(<Books />, { route: '/knihy?poradi=SESTUPNE' });
+    const { container } = renderWithRouter(<Books />, { route: '/knihy?poradi=VZESTUPNE' });
     await waitForDomChange({ container });
 
-    expect(fetchMock.calls()[0][0]).toBe('/api/books?order=DESC');
+    expect(fetchMock.calls()[0][0]).toBe('/api/books?order=ASC');
   });
 
   it('calls correct endpoint for orderBy param', async () => {
@@ -104,5 +126,35 @@ describe('Books', () => {
     fireEvent.click(getAllByText('Více informací →')[0]);
 
     expect(history.location.pathname).toBe('/kniha/mock-book-title-1-2019');
+  });
+
+  it('generates title and description correctly for order and orderBy', async () => {
+    expect(getTitleAndDescription({ order: 'ASC', orderBy: 'TITLE' }, filterParams)).toMatchObject({
+      description: 'Seznam českých LGBT knih seřazených vzestupně podle názvu.',
+      title: 'Knihy podle názvu',
+    });
+  });
+
+  it('generates title and description correctly for one tag', async () => {
+    expect(
+      getTitleAndDescription({ tags: ['zahranicni'], bookSize: 'kratka', originalLanguage: 'cestina' }, filterParams)
+    ).toMatchObject({
+      description: 'Seznam českých LGBT knih s tagem Zahraniční seřazených sestupně podle data přidání.',
+      title: 'Knihy s tagem Zahraniční',
+    });
+  });
+
+  it('generates title and description correctly for original language', async () => {
+    expect(getTitleAndDescription({ bookSize: 'kratka', originalLanguage: 'cestina' }, filterParams)).toMatchObject({
+      description: 'Seznam českých LGBT knih v původním jazyce čeština seřazených sestupně podle data přidání.',
+      title: 'Knihy v původním jazyce čeština',
+    });
+  });
+
+  it('generates title and description correctly for book size', async () => {
+    expect(getTitleAndDescription({ bookSize: 'kratka' }, filterParams)).toMatchObject({
+      description: 'Seznam českých LGBT knih majících do 100 stran seřazených sestupně podle data přidání.',
+      title: 'Knihy mající do 100 stran',
+    });
   });
 });

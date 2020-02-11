@@ -14,7 +14,6 @@
   "bookSize": [
     {
       "slug": "kratka",
-      "minPages": null,
       "maxPages": 100,
       "booksMatchesValue": 5,
       "name": "krátká"
@@ -27,9 +26,8 @@
       "name": "střední"
     },
     {
-      "slug": "stredni",
+      "slug": "dlouha",
       "minPages": 300,
-      "maxPages": null,
       "booksMatchesValue": 63,
       "name": "dlouhá"
     }
