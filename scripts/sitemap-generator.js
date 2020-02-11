@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+
 const { SitemapStream, streamToPromise } = require('sitemap');
 const path = require('path');
 const fs = require('fs');

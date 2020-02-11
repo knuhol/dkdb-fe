@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 export type ApiConfig = {
   protocol: string;
   domain: string;

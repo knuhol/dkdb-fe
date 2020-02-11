@@ -57,10 +57,17 @@ $ npm run start:heroku
 #### Environment Variables
 To be able to run app successfully on Heroku, you need to provide several environment variables:
 ```
-$ heroku config:set PUBLIC_URL=https://dkdb.cz # URL to instance of this project
-$ heroku config:set API_URL=https://data.dkdb.cz # URL to instance of dkdb-be project
-$ heroku config:set HEROKU_APP_NAME=dkdb-fe # name of the current Heroku app
-$ heroku config:set PRERENDER_TOKEN=xxx # secret to token at prerender.io
+# URL to instance of this project
+$ heroku config:set PUBLIC_URL=https://dkdb.cz
+
+# URL to instance of dkdb-be project
+$ heroku config:set API_URL=https://data.dkdb.cz
+
+# name of the current Heroku app
+$ heroku config:set HEROKU_APP_NAME=dkdb-fe
+
+# secret for prerender.io
+$ heroku config:set PRERENDER_TOKEN=xxx
 ```
 
 ### Running Locally
@@ -68,8 +75,6 @@ Checkout this repo and install dependencies:
 
 ```bash
 $ npm i
-# or
-$ yarn
 ```
 
 To start dev server with api-mock run this command:
