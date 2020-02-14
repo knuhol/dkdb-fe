@@ -3,7 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 import { Redirect } from 'react-router';
 
 import { ROUTE } from './routes';
-import ErrorBoundary from '../components/ErrorBoundary';
+import withErrorBoundary from '../hoc/withErrorBoundary';
+import withTracker from '../hoc/withTracker';
 import Home from './Home';
 import Books from './Books';
 import BookBySlug from './BookBySlug';
@@ -15,37 +16,13 @@ import Error500 from './Error500';
 const App = () => (
   <>
     <Switch>
-      <Route exact path={ROUTE.HOME}>
-        <ErrorBoundary>
-          <Home />
-        </ErrorBoundary>
-      </Route>
-      <Route exact path={ROUTE.BOOKS}>
-        <ErrorBoundary>
-          <Books />
-        </ErrorBoundary>
-      </Route>
-      <Route exact path={ROUTE.BOOK_BY_SLUG}>
-        <ErrorBoundary>
-          <BookBySlug />
-        </ErrorBoundary>
-      </Route>
-      <Route exact path={ROUTE.RANDOM_BOOK}>
-        <ErrorBoundary>
-          <RandomBook />
-        </ErrorBoundary>
-      </Route>
-      <Route exact path={ROUTE.ABOUT}>
-        <ErrorBoundary>
-          <About />
-        </ErrorBoundary>
-      </Route>
-      <Route exact path={ROUTE.ERROR_404}>
-        <Error404 />
-      </Route>
-      <Route exact path={ROUTE.ERROR_500}>
-        <Error500 />
-      </Route>
+      <Route component={withErrorBoundary(withTracker(Home))} exact path={ROUTE.HOME} />
+      <Route component={withErrorBoundary(withTracker(Books))} exact path={ROUTE.BOOKS} />
+      <Route component={withErrorBoundary(withTracker(BookBySlug))} exact path={ROUTE.BOOK_BY_SLUG} />
+      <Route component={withErrorBoundary(withTracker(RandomBook))} exact path={ROUTE.RANDOM_BOOK} />
+      <Route component={withErrorBoundary(withTracker(About))} exact path={ROUTE.ABOUT} />
+      <Route component={withTracker(Error404)} exact path={ROUTE.ERROR_404} />
+      <Route component={withTracker(Error500)} exact path={ROUTE.ERROR_500} />
       <Route>
         <Redirect to={ROUTE.ERROR_404} />
       </Route>
