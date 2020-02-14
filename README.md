@@ -56,7 +56,7 @@ $ npm run start:heroku
 
 #### Environment Variables
 To be able to run app successfully on Heroku, you need to provide several environment variables:
-```
+```bash
 # URL to instance of this project
 $ heroku config:set PUBLIC_URL=https://dkdb.cz
 
@@ -68,6 +68,9 @@ $ heroku config:set HEROKU_APP_NAME=dkdb-fe
 
 # secret for prerender.io
 $ heroku config:set PRERENDER_TOKEN=xxx
+
+# Google Analytcs tracking ID
+$ heroku config:set REACT_APP_GA_TRACKING_ID=xxx
 ```
 
 ### Running Locally
