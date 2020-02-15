@@ -57,7 +57,7 @@ const BooksDesktopLayout = ({ books, onPageResize, onBookDetailClick, active, pa
             <td>
               {book.authors.map(author => (
                 <span key={`${author.firstName} ${author.lastName}`}>
-                  {`${author.firstName} ${author.lastName}`}
+                  {`${author.firstName} ${author.lastName}`.trim()}
                   <br />
                 </span>
               ))}

@@ -65,7 +65,7 @@ const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
     history.push(toBooksParams(nonDefaultBooksParams));
     setIsFilterOpen(false);
   };
-  const onCancel = () => {
+  const onReset = () => {
     history.push(toBooksParams({}));
     setIsFilterOpen(false);
   };
@@ -108,7 +108,7 @@ const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
           </Col>
           <Col xs={12} md={4}>
             <Form.Group controlId="pageSize">
-              <Form.Label>Knih na stranu</Form.Label>
+              <Form.Label>Knih na stránku</Form.Label>
               <Form.Control as="select" value={(pageSize || 5).toString()} onChange={onPageSizeChange}>
                 <option value={5}>5 (výchozí)</option>
                 <option value={10}>10</option>
@@ -175,7 +175,7 @@ const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
             </Button>
           </Col>
           <Col xs={6} md={3} xl={2}>
-            <Button variant="outline-primary" onClick={onCancel} block>
+            <Button variant="outline-primary" onClick={onReset} block>
               Vše výchozí
             </Button>
           </Col>
