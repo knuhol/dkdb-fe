@@ -90,6 +90,7 @@ const Books = () => {
   const onBookDetailClick = (slug: string) => () =>
     history.push(ROUTE.BOOK_BY_SLUG.replace(PARAMS.BOOK_DETAIL.SLUG, slug));
   const onOpenFilterClick = () => setIsFilterOpen(!isFilterOpen);
+  const onReset = () => history.push(toBooksParams({}));
 
   if (books?.books == null || books?.total == null || booksFilterParams == null) {
     return <Page loading />;
@@ -123,7 +124,18 @@ const Books = () => {
       {books.books.length === 0 ? (
         <Row>
           <Col>
-            <Alert variant="warning">Pro zadané parametry nebyla nalezena žádná kniha.</Alert>
+            <Alert variant="warning">
+              <Row>
+                <Col>Pro zadané parametry nebyla nalezena žádná kniha.</Col>
+              </Row>
+              <Row>
+                <Col className="mt-2">
+                  <Button variant="warning" onClick={onReset}>
+                    Zrušit filtr
+                  </Button>
+                </Col>
+              </Row>
+            </Alert>
           </Col>
         </Row>
       ) : (

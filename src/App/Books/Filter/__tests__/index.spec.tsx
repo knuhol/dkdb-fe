@@ -43,7 +43,7 @@ describe('Filter', () => {
 
     expect(getByLabelText('Řadit podle')).toHaveValue('DATUM_PRIDANI');
     expect(getByLabelText('Pořadí')).toHaveValue('SESTUPNE');
-    expect(getByLabelText('Knih na stranu')).toHaveValue('5');
+    expect(getByLabelText('Knih na stránku')).toHaveValue('5');
     expect(getByLabelText('Tagy')).toHaveValue([]);
     expect(getByLabelText('Původní jazyk')).toHaveValue(DEFAULT_VALUE);
     expect(getByLabelText('Délka knihy')).toHaveValue(DEFAULT_VALUE);
@@ -125,7 +125,7 @@ describe('Filter', () => {
 
     fireEvent.change(getByLabelText('Řadit podle'), { target: { value: 'NAZEV' } });
     fireEvent.change(getByLabelText('Pořadí'), { target: { value: 'VZESTUPNE' } });
-    fireEvent.change(getByLabelText('Knih na stranu'), { target: { value: '10' } });
+    fireEvent.change(getByLabelText('Knih na stránku'), { target: { value: '10' } });
     fireEvent.change(getByLabelText('Tagy'), { target: { value: 'gay' } });
     fireEvent.change(getByLabelText('Původní jazyk'), { target: { value: 'cestina' } });
     fireEvent.change(getByLabelText('Délka knihy'), { target: { value: 'kratka' } });
@@ -163,7 +163,7 @@ describe('Filter', () => {
 
     fireEvent.change(getByLabelText('Řadit podle'), { target: { value: 'DATUM_PRIDANI' } });
     fireEvent.change(getByLabelText('Pořadí'), { target: { value: 'SESTUPNE' } });
-    fireEvent.change(getByLabelText('Knih na stranu'), { target: { value: '5' } });
+    fireEvent.change(getByLabelText('Knih na stránku'), { target: { value: '5' } });
     fireEvent.change(getByLabelText('Tagy'), { target: { value: null } });
     fireEvent.change(getByLabelText('Původní jazyk'), { target: { value: DEFAULT_VALUE } });
     fireEvent.change(getByLabelText('Délka knihy'), { target: { value: DEFAULT_VALUE } });

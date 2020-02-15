@@ -53,7 +53,7 @@ const BookDetail = ({ book, buttonText, onButtonClick }: BookDetailProps) => {
       </Row>
       <Row>
         <Col xs={12}>
-          <h2>{book.authors?.map(author => `${author.firstName} ${author.lastName}`).join(', ')}</h2>
+          <h2>{book.authors?.map(author => `${author.firstName} ${author.lastName}`.trim()).join(', ')}</h2>
         </Col>
         <Col className="links">
           <Button variant="light" size="sm" href={book.links?.goodreads || '/#'}>
