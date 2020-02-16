@@ -7,9 +7,9 @@ import { ROUTE } from '../routes';
 
 describe('App', () => {
   it('navigates properly to existing routes', () => {
-    const { getByText, history } = renderWithRouter(<App />);
+    const { getByText, getAllByAltText, history } = renderWithRouter(<App />);
 
-    fireEvent.click(getByText('DKDB'));
+    fireEvent.click(getAllByAltText('DKDB logo')[0]);
     expect(history.location.pathname).toBe(ROUTE.HOME);
 
     fireEvent.click(getByText('Knihy'));

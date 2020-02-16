@@ -29,6 +29,9 @@ const Home = () => {
           <Alert variant="primary" className="text-center">
             <Row>
               <Col xs={12}>
+                <h1>Česká databáze duhových knih</h1>
+              </Col>
+              <Col xs={12}>
                 Celkem knih: <b>{booksInfo.totalBooks}</b>
               </Col>
               <Col xs={12}>
