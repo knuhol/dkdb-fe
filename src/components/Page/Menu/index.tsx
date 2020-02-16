@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Image, Nav, Navbar } from 'react-bootstrap';
 
 import { ROUTE } from '../../../App/routes';
-import logo from '../../../images/dkdb.svg';
+import logo from '../../../images/dkdb_full.svg';
 
 import './style.scss';
 
@@ -12,7 +12,6 @@ const Menu = () => (
   <Navbar collapseOnSelect bg="dark" variant="dark" expand="sm">
     <Navbar.Brand as={NavLink} to={ROUTE.HOME}>
       <Image src={logo} alt="DKDB logo" />
-      <span className="name">DKDB</span>
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">

@@ -3,12 +3,20 @@
 @import '~bootstrap/scss/mixins';
 
 #home {
+  h1 {
+    font-size: $font-size-base * 1.8;
+  }
+
   img {
     width: 100%;
     margin: $spacer * 2 0;
 
-    @include media-breakpoint-up(md) {
-      width: 70%;
+    @include media-breakpoint-up(sm) {
+      width: 80%;
+    }
+
+    @include media-breakpoint-up(lg) {
+      width: 50%;
     }
   }
 
@@ -27,9 +35,13 @@
     width: 100%;
     margin-bottom: $spacer * 1.5;
 
-    @include media-breakpoint-up(md) {
-      width: 30%;
+    @include media-breakpoint-up(sm) {
+      width: 50%;
       margin-bottom: $spacer * 2;
+    }
+
+    @include media-breakpoint-up(lg) {
+      width: 30%;
     }
   }
 }
