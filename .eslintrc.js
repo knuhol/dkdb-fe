@@ -17,6 +17,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'spaced-comment': ['error', 'always', { markers: ['/'] }],
+    'import/extensions': 'off'
   },
   settings: {
     'import/resolver': {
