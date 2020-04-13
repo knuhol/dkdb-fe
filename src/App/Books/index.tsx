@@ -15,7 +15,7 @@ import DesktopBooksLayout from './desktop';
 import EllipsisPagination from '../../components/EllipsisPagination';
 import { PARAMS, ROUTE } from '../routes';
 import { BooksParams, DEFAULT_BOOK_PARAMS, parseBooksParams, toBooksParams } from '../../utils/urlUtils';
-import { trackBooks, BOOKS_ACTION } from '../../utils/analytics';
+import { trackBooks, BOOKS_ACTION, FILTER_ACTION, trackFilterConfirmation } from '../../utils/analytics';
 
 import './style.scss';
 
@@ -95,7 +95,10 @@ const Books = () => {
     history.push(ROUTE.BOOK_BY_SLUG.replace(PARAMS.BOOK_DETAIL.SLUG, slug));
   };
   const onOpenFilterClick = () => setIsFilterOpen(!isFilterOpen);
-  const onReset = () => history.push(toBooksParams({}));
+  const onReset = () => {
+    trackFilterConfirmation(FILTER_ACTION.RESET_NO_RESULTS);
+    history.push(toBooksParams({}));
+  };
 
   if (books?.books == null || books?.total == null || booksFilterParams == null) {
     return <Page loading />;
