@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Col, Row, Image, Button, Alert } from 'react-bootstrap';
+import { Alert, Button, Col, Image, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 
 import Page from '../../components/Page';
@@ -8,6 +8,7 @@ import logo from '../../images/dkdb_full.svg';
 import { ROUTE } from '../routes';
 import { dateFormatter } from '../../utils/formatterUtils';
 import useBooksInfo from '../../hooks/useBooksInfo';
+import { HOME_ACTION, trackHome } from '../../utils/analytics';
 
 import './style.scss';
 
@@ -15,8 +16,14 @@ const Home = () => {
   const history = useHistory();
   const booksInfo = useBooksInfo();
 
-  const onBooksClick = () => history.push(ROUTE.BOOKS);
-  const onAboutClick = () => history.push(ROUTE.ABOUT);
+  const onBooksClick = () => {
+    trackHome(HOME_ACTION.BOOKS);
+    history.push(ROUTE.BOOKS);
+  };
+  const onAboutClick = () => {
+    trackHome(HOME_ACTION.ABOUT);
+    history.push(ROUTE.ABOUT);
+  };
 
   if (booksInfo == null) {
     return <Page loading />;

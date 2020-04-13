@@ -8,6 +8,7 @@ import terka from '../../images/terka.jpg';
 import knut from '../../images/knut.jpg';
 
 import './style.scss';
+import { EXTERNAL_LINK, trackExternalLink } from '../../utils/analytics';
 
 const About = () => (
   <Page id="about" title="O projektu" description="Jak se zrodila česká databáze duhových knih a co nás k tomu vedlo.">
@@ -60,7 +61,14 @@ const About = () => (
       <Col>
         <p>
           Chybí tu nějaká kniha, která by podle vás v databázi určitě být měla? Našli jste nějakou chybu? Budeme moc
-          rádi, když nám o tom <a href="mailto:info@dkdb.cz?subject=Připomínka k webu DKDB">dáte vědět</a>.
+          rádi, když nám o tom{' '}
+          <a
+            href="mailto:info@dkdb.cz?subject=Připomínka k webu DKDB"
+            onClick={trackExternalLink(EXTERNAL_LINK.MAIL_TO_INFO)}
+          >
+            dáte vědět
+          </a>
+          .
         </p>
       </Col>
     </Row>
@@ -73,8 +81,14 @@ const About = () => (
       <Col>
         <p>
           Celý projekt je open source pod licencí MIT a jeho zdrojové kódy můžete najít na GitHubu. Hlavním autorem{' '}
-          <a href="https://github.com/terhol/dkdb-be">backendu</a> je Tereza Holm a je napsaný v Javě. Hlavním autorem{' '}
-          <a href="https://github.com/knuhol/dkdb-fe">frontendu</a> je Knut Holm a je napsaný v TypeScriptu.
+          <a href="https://github.com/terhol/dkdb-be" onClick={trackExternalLink(EXTERNAL_LINK.DKDB_BE)}>
+            backendu
+          </a>{' '}
+          je Tereza Holm a je napsaný v Javě. Hlavním autorem{' '}
+          <a href="https://github.com/knuhol/dkdb-fe" onClick={trackExternalLink(EXTERNAL_LINK.DKDB_FE)}>
+            frontendu
+          </a>{' '}
+          je Knut Holm a je napsaný v TypeScriptu.
           <br />
           Projekt jsme napsali ve svém volném čase a jeho provoz zatím financujeme z vlastních prostředků. Pokud se jeho
           uživatelská základna rozroste a provoz bude více nákladný, zvážíme formu jeho financování na základě
@@ -92,7 +106,11 @@ const About = () => (
           <h3>Tereza Holm</h3>
         </div>
         <Image src={terka} roundedCircle thumbnail />
-        <Button variant="primary" href="https://www.linkedin.com/in/tereza-holm">
+        <Button
+          variant="primary"
+          href="https://www.linkedin.com/in/tereza-holm"
+          onClick={trackExternalLink(EXTERNAL_LINK.LINKED_IN_TEREZA)}
+        >
           <FontAwesomeIcon icon={faLinkedin} /> LinkedIn
         </Button>
       </Col>
@@ -101,7 +119,11 @@ const About = () => (
           <h3>Knut Holm</h3>
         </div>
         <Image src={knut} roundedCircle thumbnail />
-        <Button variant="primary" href="https://www.linkedin.com/in/knuhol">
+        <Button
+          variant="primary"
+          href="https://www.linkedin.com/in/knuhol"
+          onClick={trackExternalLink(EXTERNAL_LINK.LINKED_IN_KNUT)}
+        >
           <FontAwesomeIcon icon={faLinkedin} /> LinkedIn
         </Button>
       </Col>

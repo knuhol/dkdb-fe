@@ -8,6 +8,7 @@ import map from 'lodash/map';
 import { Order, OrderBy, PARAMS } from '../../routes';
 import { DEFAULT_BOOK_PARAMS, DefaultBookParam, parseBooksParams, toBooksParams } from '../../../utils/urlUtils';
 import { BooksFilterParams } from '../../../hooks/useBooksFilterParams';
+import { FILTER_ACTION, trackFilterChange, trackFilterConfirmation } from '../../../utils/analytics';
 
 import './style.scss';
 
@@ -38,22 +39,41 @@ const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
   const [bookSize, setBookSize] = useState(booksParams.bookSize);
   const history = useHistory();
 
-  const onOrderByChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
-    setOrderBy(invert(PARAMS.ORDER_BY)[event.target.value] as OrderBy);
-  const onOrderChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
-    setOrder(invert(PARAMS.ORDER)[event.target.value] as Order);
+  const onOrderByChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = invert(PARAMS.ORDER_BY)[event.target.value] as OrderBy;
+
+    trackFilterChange(FILTER_ACTION.ORDER_BY, value);
+    setOrderBy(value);
+  };
+  const onOrderChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = invert(PARAMS.ORDER)[event.target.value] as Order;
+
+    trackFilterChange(FILTER_ACTION.ORDER, value);
+    setOrder(value);
+  };
   const onPageSizeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setPageSize(parseInt(event.target.value, 10));
+    const value = parseInt(event.target.value, 10);
+
+    trackFilterChange(FILTER_ACTION.PAGE_SIZE, value);
+    setPageSize(value);
   };
   const onTagsChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newTags = map(event.target.selectedOptions, option => option.value);
+
+    trackFilterChange(FILTER_ACTION.TAGS, newTags.length === 0 ? 'NONE' : newTags.sort().join(', '));
     setTags(newTags.length === 0 ? undefined : newTags);
   };
   const onOriginalLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setOriginalLanguage(event.target.value === DEFAULT_VALUE ? undefined : event.target.value);
+    const value = event.target.value === DEFAULT_VALUE ? undefined : event.target.value;
+
+    trackFilterChange(FILTER_ACTION.ORIGINAL_LANGUAGE, value || 'ALL');
+    setOriginalLanguage(value);
   };
   const onBookSizeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setBookSize(event.target.value === DEFAULT_VALUE ? undefined : event.target.value);
+    const value = event.target.value === DEFAULT_VALUE ? undefined : event.target.value;
+
+    trackFilterChange(FILTER_ACTION.BOOK_SIZE, value || 'ALL');
+    setBookSize(value);
   };
 
   const onSubmit = () => {
@@ -63,10 +83,12 @@ const Filter = ({ setIsFilterOpen, filterParams }: FilterProps) => {
     );
 
     history.push(toBooksParams(nonDefaultBooksParams));
+    trackFilterConfirmation(FILTER_ACTION.APPLY, history.location);
     setIsFilterOpen(false);
   };
   const onReset = () => {
     history.push(toBooksParams({}));
+    trackFilterConfirmation(FILTER_ACTION.RESET_DEFAULT);
     setIsFilterOpen(false);
   };
 

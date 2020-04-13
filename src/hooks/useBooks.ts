@@ -4,6 +4,12 @@ import useFetch from './useFetch';
 import { GetBooksParams, getBooksUrl } from '../utils/fetchUtils';
 import { BooksParams } from '../utils/urlUtils';
 
+export type Tag = {
+  slug: string;
+  name: string;
+  color: 'red' | 'orange' | 'blue' | 'green' | 'yellow' | 'purple';
+};
+
 export type Book = {
   slug: string;
   title: string;
@@ -14,11 +20,7 @@ export type Book = {
   yearOfIssue: number;
   dateOfAddition: string;
   imageURL: string;
-  tags: Array<{
-    slug: string;
-    name: string;
-    color: 'red' | 'orange' | 'blue' | 'green' | 'yellow' | 'purple';
-  }>;
+  tags: Array<Tag>;
 };
 
 type Books = {

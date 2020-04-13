@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pagination } from 'react-bootstrap';
 import times from 'lodash/times';
+
+import { PAGINATION_ACTION, trackPagination } from '../../utils/analytics';
 
 import './style.scss';
 
@@ -8,7 +10,7 @@ type EllipsisPaginationProps = {
   total: number;
   active: number;
   maxWidth: number;
-  onPageClick: (arg0: number) => () => void;
+  onPageClick: (page: number) => void;
 };
 
 const EllipsisPagination = ({ total, active, maxWidth, onPageClick }: EllipsisPaginationProps) => {
@@ -20,6 +22,11 @@ const EllipsisPagination = ({ total, active, maxWidth, onPageClick }: EllipsisPa
   const [prevPartLength, setPrevPartLength] = useState(0);
   const [nextPartLength, setNextPartLength] = useState(0);
   const [pageItemWidth, setPageItemWidth] = useState(`${ITEM_WIDTH}px`);
+
+  const onPaginationClick = (page: number, action: PAGINATION_ACTION) => () => {
+    trackPagination(action, page);
+    onPageClick(page);
+  };
 
   useEffect(() => {
     if (maxWidth && total) {
@@ -71,16 +78,29 @@ const EllipsisPagination = ({ total, active, maxWidth, onPageClick }: EllipsisPa
   return (
     <Pagination className="ellipsis-pagination justify-content-center">
       {areArrowsVisible && (
-        <Pagination.Prev style={{ width: pageItemWidth }} onClick={onPageClick(active === 1 ? 1 : active - 1)} />
+        <Pagination.Prev
+          style={{ width: pageItemWidth }}
+          onClick={onPaginationClick(active === 1 ? 1 : active - 1, PAGINATION_ACTION.PREVIOUS)}
+        />
       )}
-      <Pagination.Item style={{ width: pageItemWidth }} active={active === 1} onClick={onPageClick(1)}>
+      <Pagination.Item
+        style={{ width: pageItemWidth }}
+        active={active === 1}
+        onClick={onPaginationClick(1, PAGINATION_ACTION.PAGE)}
+      >
         {1}
       </Pagination.Item>
       {times(totalPages, index => {
         if ((ellipsisOnBeginning && index === 0) || (ellipsisOnEnd && index === totalPages - 1)) {
           const pageIndex =
             ellipsisOnBeginning && index === 0 ? Math.ceil((1 + pagination) / 2) : Math.floor((pagination + total) / 2);
-          return <Pagination.Ellipsis style={{ width: pageItemWidth }} key={index} onClick={onPageClick(pageIndex)} />;
+          return (
+            <Pagination.Ellipsis
+              style={{ width: pageItemWidth }}
+              key={index}
+              onClick={onPaginationClick(pageIndex, PAGINATION_ACTION.MORE)}
+            />
+          );
         }
 
         const item = (
@@ -88,7 +108,7 @@ const EllipsisPagination = ({ total, active, maxWidth, onPageClick }: EllipsisPa
             style={{ width: pageItemWidth }}
             key={index}
             active={active === pagination}
-            onClick={onPageClick(pagination)}
+            onClick={onPaginationClick(pagination, PAGINATION_ACTION.PAGE)}
           >
             {pagination}
           </Pagination.Item>
@@ -98,14 +118,18 @@ const EllipsisPagination = ({ total, active, maxWidth, onPageClick }: EllipsisPa
         return item;
       })}
       {total > 1 && (
-        <Pagination.Item style={{ width: pageItemWidth }} active={active === total} onClick={onPageClick(total)}>
+        <Pagination.Item
+          style={{ width: pageItemWidth }}
+          active={active === total}
+          onClick={onPaginationClick(total, PAGINATION_ACTION.PAGE)}
+        >
           {total}
         </Pagination.Item>
       )}
       {areArrowsVisible && (
         <Pagination.Next
           style={{ width: pageItemWidth }}
-          onClick={onPageClick(active === total ? total : active + 1)}
+          onClick={onPaginationClick(active === total ? total : active + 1, PAGINATION_ACTION.NEXT)}
         />
       )}
     </Pagination>

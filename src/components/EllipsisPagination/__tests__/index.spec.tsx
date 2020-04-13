@@ -10,7 +10,7 @@ const MINIMAL_WIDTH = 290;
 const MINIMAL_ARROW_WIDTH = 390;
 
 let active = 1;
-const onPageClick = (pageNumber: number) => () => {
+const onPageClick = (pageNumber: number) => {
   active = pageNumber;
 };
 
