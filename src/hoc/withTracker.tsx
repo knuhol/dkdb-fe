@@ -1,30 +1,16 @@
 import React, { useEffect } from 'react';
-import ReactGA, { FieldsObject } from 'react-ga';
 import { RouteComponentProps } from 'react-router-dom';
 
-const { REACT_APP_GA_TRACKING_ID } = process.env;
-const isGaEnabled = REACT_APP_GA_TRACKING_ID != null;
+import { isGaEnabled, trackPageView } from '../utils/analytics';
 
-if (REACT_APP_GA_TRACKING_ID) {
-  ReactGA.initialize(REACT_APP_GA_TRACKING_ID);
-}
-
-const withTracker = <P extends RouteComponentProps>(
-  WrappedComponent: React.ComponentType<P>,
-  options: FieldsObject = {}
-) => {
-  const trackPage = (page: string) => {
-    ReactGA.set({ page, ...options });
-    ReactGA.pageview(page);
-  };
-
+const withTracker = <P extends RouteComponentProps>(WrappedComponent: React.ComponentType<P>) => {
   return (props: P) => {
     const { location } = props;
 
     if (isGaEnabled) {
       useEffect(() => {
-        trackPage(location.pathname);
-      }, [location.pathname]);
+        trackPageView(location);
+      }, [location]);
     }
 
     return <WrappedComponent {...props} />;
@@ -32,4 +18,3 @@ const withTracker = <P extends RouteComponentProps>(
 };
 
 export default withTracker;
-export { isGaEnabled };

@@ -8,6 +8,7 @@ import App from './App';
 import { register } from './serviceWorker';
 
 import './main.scss';
+import './utils/analytics';
 
 ReactDOM.render(
   <BrowserRouter>
