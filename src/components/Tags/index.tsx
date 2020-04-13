@@ -4,10 +4,11 @@ import { useHistory } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTag } from '@fortawesome/free-solid-svg-icons';
 
-import { Book } from '../../hooks/useBooks';
+import { Book, Tag } from '../../hooks/useBooks';
+import { toBooksParams } from '../../utils/urlUtils';
+import { trackTag } from '../../utils/analytics';
 
 import './style.scss';
-import { toBooksParams } from '../../utils/urlUtils';
 
 type TagsProps = {
   book: Book;
@@ -17,9 +18,10 @@ type TagsProps = {
 const Tags = ({ book, clickable }: TagsProps) => {
   const history = useHistory();
 
-  const onTagClick = (tag: string) => () => {
+  const onTagClick = (tag: Tag) => () => {
     if (clickable) {
-      history.push(toBooksParams({ tags: [tag] }));
+      trackTag(tag.name);
+      history.push(toBooksParams({ tags: [tag.slug] }));
     }
   };
 
@@ -30,7 +32,7 @@ const Tags = ({ book, clickable }: TagsProps) => {
           key={tag.slug}
           className={`${tag.color}${clickable ? ' clickable' : ''}`}
           variant="primary"
-          onClick={onTagClick(tag.slug)}
+          onClick={onTagClick(tag)}
         >
           <FontAwesomeIcon icon={faTag} /> {tag.name}
         </Badge>

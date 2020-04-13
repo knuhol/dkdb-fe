@@ -7,7 +7,7 @@ import omit from 'lodash/omit';
 import find from 'lodash/find';
 
 import Page from '../../components/Page';
-import useBooks from '../../hooks/useBooks';
+import useBooks, { Book } from '../../hooks/useBooks';
 import useBooksFilterParams, { BooksFilterParams } from '../../hooks/useBooksFilterParams';
 import Filter, { getBookSizeNumberOfPagesText } from './Filter';
 import MobileBooksLayout from './mobile';
@@ -15,6 +15,7 @@ import DesktopBooksLayout from './desktop';
 import EllipsisPagination from '../../components/EllipsisPagination';
 import { PARAMS, ROUTE } from '../routes';
 import { BooksParams, DEFAULT_BOOK_PARAMS, parseBooksParams, toBooksParams } from '../../utils/urlUtils';
+import { trackBooks, BOOKS_ACTION } from '../../utils/analytics';
 
 import './style.scss';
 
@@ -86,9 +87,13 @@ const Books = () => {
       setPageWidth(newPageWidth);
     }
   };
-  const onPageClick = (newPage: number) => () => history.push(toBooksParams({ ...bookParams, page: newPage }));
-  const onBookDetailClick = (slug: string) => () =>
+  const onPageClick = (newPage: number) => history.push(toBooksParams({ ...bookParams, page: newPage }));
+  const onBookDetailClick = (book: Book, action: BOOKS_ACTION) => () => {
+    const { slug, title } = book;
+
+    trackBooks(action, title);
     history.push(ROUTE.BOOK_BY_SLUG.replace(PARAMS.BOOK_DETAIL.SLUG, slug));
+  };
   const onOpenFilterClick = () => setIsFilterOpen(!isFilterOpen);
   const onReset = () => history.push(toBooksParams({}));
 

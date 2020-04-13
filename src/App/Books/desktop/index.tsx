@@ -4,15 +4,16 @@ import useDimensions from 'react-use-dimensions';
 
 import { Book } from '../../../hooks/useBooks';
 import { dateFormatter } from '../../../utils/formatterUtils';
-
-import './style.scss';
 import Tags from '../../../components/Tags';
 import BookCover from '../../../components/BookCover';
+import { BOOKS_ACTION } from '../../../utils/analytics';
+
+import './style.scss';
 
 type BooksDesktopLayoutProps = {
   books: Book[];
   onPageResize: (newPageWidth: number) => void;
-  onBookDetailClick: (slug: string) => () => void;
+  onBookDetailClick: (book: Book, action: BOOKS_ACTION) => () => void;
   active: number;
   pageSize: number;
 };
@@ -41,7 +42,11 @@ const BooksDesktopLayout = ({ books, onPageResize, onBookDetailClick, active, pa
           <tr key={book.slug}>
             <td>{bookIndex + 1 + (active - 1) * pageSize}</td>
             <td>
-              <BookCover book={book} onClick={onBookDetailClick(book.slug)} className="clickable" />
+              <BookCover
+                book={book}
+                onClick={onBookDetailClick(book, BOOKS_ACTION.BOOK_DETAIL_COVER)}
+                className="clickable"
+              />
             </td>
             <td>
               <div className="details">
@@ -49,7 +54,7 @@ const BooksDesktopLayout = ({ books, onPageResize, onBookDetailClick, active, pa
                   <h2>{book.title}</h2>
                 </div>
                 <Tags book={book} clickable />
-                <Button variant="outline-dark" onClick={onBookDetailClick(book.slug)}>
+                <Button variant="outline-dark" onClick={onBookDetailClick(book, BOOKS_ACTION.BOOK_DETAIL_BUTTON)}>
                   Více informací →
                 </Button>
               </div>

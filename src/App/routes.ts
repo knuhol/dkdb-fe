@@ -1,3 +1,4 @@
+// TODO: Refactor to enum
 const PARAMS = {
   BOOK_DETAIL: {
     SLUG: ':slug',

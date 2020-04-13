@@ -16,11 +16,13 @@ const getBooksFilterParamsUrl = () => {
   return '/api/books/filterParams';
 };
 
+// TODO: Refactor to enum
 const ORDER = {
   ASC: 'ASC',
   DESC: 'DESC',
 };
 
+// TODO: Refactor to enum
 const ORDER_BY = {
   TITLE: 'TITLE',
   DATE_OF_ADDITION: 'DATE_OF_ADDITION',

@@ -4,15 +4,16 @@ import useDimensions from 'react-use-dimensions';
 
 import { Book } from '../../../hooks/useBooks';
 import { dateFormatter } from '../../../utils/formatterUtils';
-
-import './style.scss';
 import Tags from '../../../components/Tags';
 import BookCover from '../../../components/BookCover';
+import { BOOKS_ACTION } from '../../../utils/analytics';
+
+import './style.scss';
 
 type BooksMobileLayoutProps = {
   books: Book[];
   onPageResize: (newPageWidth: number) => void;
-  onBookDetailClick: (slug: string) => () => void;
+  onBookDetailClick: (book: Book, action: BOOKS_ACTION) => () => void;
   active: number;
   pageSize: number;
 };
@@ -47,13 +48,17 @@ const BooksMobileLayout = ({ books, onPageResize, onBookDetailClick, active, pag
                   <h3>{book.authors.map(author => `${author.firstName} ${author.lastName}`.trim()).join(', ')}</h3>
                 </Col>
                 <Col xs={12}>
-                  <BookCover book={book} onClick={onBookDetailClick(book.slug)} className="clickable" />
+                  <BookCover
+                    book={book}
+                    onClick={onBookDetailClick(book, BOOKS_ACTION.BOOK_DETAIL_COVER)}
+                    className="clickable"
+                  />
                 </Col>
                 <Col xs={12}>
                   <Tags book={book} clickable />
                 </Col>
                 <Col xs={12}>
-                  <Button variant="outline-dark" onClick={onBookDetailClick(book.slug)}>
+                  <Button variant="outline-dark" onClick={onBookDetailClick(book, BOOKS_ACTION.BOOK_DETAIL_BUTTON)}>
                     Více informací →
                   </Button>
                 </Col>

@@ -7,11 +7,12 @@ import { BookWithDetails } from '../../hooks/useBook';
 import Tags from '../Tags';
 import { dateFormatter } from '../../utils/formatterUtils';
 import BookCover from '../BookCover';
+import { PARAMS, ROUTE } from '../../App/routes';
+import { BOOK_ACTION, BookDbLinkAction, trackBook } from '../../utils/analytics';
 
 import goodreads from '../../images/goodreads.svg';
 import cbdb from '../../images/cbdb.svg';
 import databazeKnih from '../../images/databaze-knih.svg';
-import { PARAMS, ROUTE } from '../../App/routes';
 
 import './style.scss';
 
@@ -27,6 +28,8 @@ const BookDetail = ({ book, buttonText, onButtonClick }: BookDetailProps) => {
   if (book == null) {
     return <Page loading />;
   }
+
+  const onDbLinkClick = (action: BookDbLinkAction) => () => trackBook(action, book.title);
 
   return (
     <Page id="book-detail" title={book.title} description={book.description?.split(NEW_LINE_REGEX)[0]}>
@@ -56,15 +59,25 @@ const BookDetail = ({ book, buttonText, onButtonClick }: BookDetailProps) => {
           <h2>{book.authors?.map(author => `${author.firstName} ${author.lastName}`.trim()).join(', ')}</h2>
         </Col>
         <Col className="links">
-          <Button variant="light" size="sm" href={book.links?.goodreads || '/#'}>
+          <Button
+            variant="light"
+            size="sm"
+            href={book.links?.goodreads || '/#'}
+            onClick={onDbLinkClick(BOOK_ACTION.GOODREADS)}
+          >
             <Image src={goodreads} alt="Logo Goodreads" />
             Goodreads
           </Button>
-          <Button variant="light" size="sm" href={book.links?.cbdb || '/#'}>
+          <Button variant="light" size="sm" href={book.links?.cbdb || '/#'} onClick={onDbLinkClick(BOOK_ACTION.CBDB)}>
             <Image src={cbdb} alt="Logo ČBDB" />
             ČBDB
           </Button>
-          <Button variant="light" size="sm" href={book.links?.databazeKnih || '/#'}>
+          <Button
+            variant="light"
+            size="sm"
+            href={book.links?.databazeKnih || '/#'}
+            onClick={onDbLinkClick(BOOK_ACTION.DATABAZE_KNIH)}
+          >
             <Image src={databazeKnih} alt="Logo Databáze knih" />
             Databáze knih
           </Button>
