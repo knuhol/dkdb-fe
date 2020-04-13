@@ -2,7 +2,7 @@
 
 const express = require('express');
 const path = require('path');
-const proxy = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const prerender = require('prerender-node');
 
 const PORT = process.env.PORT || 5000;
@@ -27,7 +27,7 @@ app.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN));
 app.use(express.static(path.resolve(__dirname, '../build')));
 
 // proxy api requests
-app.use('/api', proxy({ target: process.env.API_URL, changeOrigin: true }));
+app.use('/api', createProxyMiddleware({ target: process.env.API_URL, changeOrigin: true }));
 
 // all remaining requests return the React app, so it can handle routing
 app.get('*', (request, response) => {
