@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-
 export type ApiConfig = {
   protocol: string;
   domain: string;
@@ -14,4 +12,6 @@ const API: ApiConfig = {
   uri: process.env.REACT_APP_URI,
 };
 
-export { API };
+const GA_DEBUG_ALLOWED = false;
+
+export { API, GA_DEBUG_ALLOWED };
