@@ -1,6 +1,26 @@
-# Changelog
+Changelog
+## [1.0.0](https://github.com/knuhol/dkdb-fe/compare/v1.0.0-1...v1.0.0) (2020-06-14)
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### Features
+
+* add GA event for filter no results ([86177af](https://github.com/knuhol/dkdb-fe/commit/86177af8305ae4dca6047db84fc6168dd6bc5526))
+* express for heroku ([bad332e](https://github.com/knuhol/dkdb-fe/commit/bad332ea808bbb7fd8cdf680a27dabeaf041b138))
+* filter now reflects also searching parameters ([17bc4a4](https://github.com/knuhol/dkdb-fe/commit/17bc4a4cda02a3dd0d8a334025561a3f52a9471b))
+* filter UX improvement ([0aa3168](https://github.com/knuhol/dkdb-fe/commit/0aa3168bb2a99a8dc90132f35f37e58bd2bdb9b1))
+* google analytics ([9ae7158](https://github.com/knuhol/dkdb-fe/commit/9ae7158286af2e8aa92f14981c033edc148d9795))
+* implementation of GA events ([53c44bd](https://github.com/knuhol/dkdb-fe/commit/53c44bdc8775d13c2ca18fa7f99720a1e2ba565e))
+* improvment of SEO ([397a9e7](https://github.com/knuhol/dkdb-fe/commit/397a9e7927496ca3dfa550099fce7a0b5160045c))
+* logo design improvement ([2e5606c](https://github.com/knuhol/dkdb-fe/commit/2e5606c33b346e2a4bc8a940324a81a106b4d44d))
+* new GA event trackers ([ea150b3](https://github.com/knuhol/dkdb-fe/commit/ea150b3661b279a66fe33a33ca224e038be543f9))
+* offer reset filter button for no results ([e7ace61](https://github.com/knuhol/dkdb-fe/commit/e7ace61a38efb531463c30c74f0f0823da44eec5))
+* sitemap ([a52a33b](https://github.com/knuhol/dkdb-fe/commit/a52a33bf4808b85aa0f249eafef097ff2a7e83ee))
+
+
+### Bug Fixes
+
+* correct book detail canonical URL ([a7440d9](https://github.com/knuhol/dkdb-fe/commit/a7440d9826e68ae3db46b5acd175a28574501d16))
+* send params to API without defaults ([0b2cd0e](https://github.com/knuhol/dkdb-fe/commit/0b2cd0e34940768bcf99314284e667b37737d448))
 
 ## 1.0.0-1 (2020-02-05)
 
