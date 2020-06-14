@@ -16,13 +16,13 @@
 &nbsp;
 ![Coveralls](https://img.shields.io/coveralls/github/knuhol/dkdb-fe?logo=coveralls)
 &nbsp;
-![Website](https://img.shields.io/website?url=https%3A%2F%2Fdev.dkdb.cz&logo=heroku&label=Heroku)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fdkdb.cz&logo=heroku&label=Heroku)
 &nbsp;
 [![license](https://img.shields.io/github/license/knuhol/dkdb-fe)](https://github.com/knuhol/dkdb-fe/blob/master/LICENSE)
 
 [https://dkdb.cz](https://dkdb.cz)
 
-## Table of Contents
+## Table of Contents§
 
 - [About](#about)
 - [Development](#development)
@@ -38,8 +38,6 @@
     
 ## About
 We are LGBT couple Knut and Tereza Holm who have thought that there is no such place on Czech internet where you can find LGBT books in Czech language categorized by its sub genres - so we have created it.
-
-The project is still under heavy development phase but you can find a working version at [https://dev.dkdb.cz](https://dev.dkdb.cz). Please note that the web can be very unstable, which is alright and there is no need to report issues.
 
 ## Development
 
