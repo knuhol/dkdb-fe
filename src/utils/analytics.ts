@@ -1,13 +1,13 @@
 import ReactGA, { EventArgs } from 'react-ga';
 import { Location } from 'history';
 
-import { GA_DEBUG_ALLOWED } from '../config';
+import { GA_DEBUG_ENABLED } from '../config';
 
-const { REACT_APP_GA_TRACKING_ID: GA_TRACKING_ID } = process.env;
+const { REACT_APP_GA_TRACKING_ID: GA_TRACKING_ID, NODE_ENV } = process.env;
 const isGaEnabled = GA_TRACKING_ID != null;
 
 if (GA_TRACKING_ID) {
-  ReactGA.initialize(GA_TRACKING_ID, { debug: GA_DEBUG_ALLOWED, testMode: process.env.NODE_ENV === 'test' });
+  ReactGA.initialize(GA_TRACKING_ID, { debug: GA_DEBUG_ENABLED, testMode: NODE_ENV === 'test' });
 }
 
 enum CATEGORY {

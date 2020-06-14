@@ -12,6 +12,6 @@ const API: ApiConfig = {
   uri: process.env.REACT_APP_URI,
 };
 
-const GA_DEBUG_ALLOWED = false;
+const GA_DEBUG_ENABLED = false;
 
-export { API, GA_DEBUG_ALLOWED };
+export { API, GA_DEBUG_ENABLED };

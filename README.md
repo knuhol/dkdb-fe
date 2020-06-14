@@ -20,7 +20,7 @@
 &nbsp;
 [![license](https://img.shields.io/github/license/knuhol/dkdb-fe)](https://github.com/knuhol/dkdb-fe/blob/master/LICENSE)
 
-### BETA: [https://dev.dkdb.cz](https://dev.dkdb.cz)
+[https://dkdb.cz](https://dkdb.cz)
 
 ## Table of Contents
 
@@ -111,7 +111,7 @@ $ npm run mock-api
 ### Releases
 Releases are fully automated by GitHub CI. You only need to do this:
 
-1. Run `npm run release` (or `npm run release:release:prerelease` for prerelease) which will bump a version, generate changelog and create git tags.
+1. Run `npm run release` (or `npm run release:prerelease` for pre-release) which will bump a version, generate changelog and create git tags.
 2. Push the release commit to GitHub with `--follow-tags` flag.
 
 ### Contribution
