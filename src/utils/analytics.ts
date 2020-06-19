@@ -91,6 +91,7 @@ enum EXTERNAL_LINK {
   LINKED_IN_KNUT = 'LinkedIn - Knut Holm',
   LINKED_IN_TEREZA = 'LinkedIn - Tereza Holm',
   MAIL_TO_INFO = 'Mail To - Info',
+  FACEBOOK = 'facebook',
 }
 
 const locationToString = (location: Location) => {

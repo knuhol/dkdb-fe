@@ -80,7 +80,7 @@ const About = () => (
     <Row>
       <Col>
         <p>
-          Celý projekt je open source pod licencí MIT a jeho zdrojové kódy můžete najít na GitHubu. Hlavním autorem{' '}
+          Celý projekt je open source pod licencí MIT a jeho zdrojové kódy můžete najít na GitHubu. Hlavní autorkou{' '}
           <a href="https://github.com/terhol/dkdb-be" onClick={trackExternalLink(EXTERNAL_LINK.DKDB_BE)}>
             backendu
           </a>{' '}
