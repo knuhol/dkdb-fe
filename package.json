@@ -22,7 +22,7 @@
     "@types/react-dom": "^16.9.6",
     "@types/react-helmet": "^5.0.15",
     "@types/react-router-dom": "^5.1.4",
-    "bestzip": "^2.1.5",
+    "bestzip": "^2.1.7",
     "bootstrap": "^4.4.1",
     "chalk": "^4.0.0",
     "concurrently": "^5.1.0",
