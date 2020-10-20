@@ -62,7 +62,7 @@
     "rimraf": "^3.0.2",
     "sitemap": "^6.1.1",
     "slugify": "^1.4.0",
-    "standard-version": "^8.0.0",
+    "standard-version": "^8.0.1",
     "typescript": "^3.8.3"
   },
   "scripts": {
